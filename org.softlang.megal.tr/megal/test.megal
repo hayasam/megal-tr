@@ -1,0 +1,24 @@
+model test
+import Prelude
+
+Java : Language
+
+JavaClass < Fragment
+JavaInterface < Fragment
+JavaMethod < Fragment
+JavaAttribute < Fragment
+JavaAnnotation < Fragment
+
+partOf < JavaClass * File
+partOf < JavaInterface * File
+partOf < JavaMethod * JavaClass
+partOf < JavaAttribute * JavaClass
+
+javaFile : File
+javaFile elementOf Java
+javaFile = 'workspace:/org.softlang.sle1516.megal.ua/src/org/softlang/megal/tr/Foo.java'
+
+JavaFragmentizer : Plugin
+JavaFragmentizer realizationOf Java
+JavaFragmentizer partOf FileFragmentReasoner
+JavaFragmentizer = 'classpath:plugins.JavaFragmentizer'
