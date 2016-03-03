@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Test2
 Bundle-SymbolicName: org.softlang.megal.plugins
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.softlang.megal.tr.Activator
+Bundle-Activator: org.softlang.megal.plugins.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.common

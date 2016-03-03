@@ -5,16 +5,24 @@ import java.io.Reader;
 import java.util.List;
 import java.util.ArrayList;
 
+import static com.google.common.collect.Iterables.filter;
 import org.softlang.megal.mi2.api.Artifact;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseException;
+import com.github.javaparser.ast.TreeVisitor;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.*;
 
-public class JavaFragmentizer extends Fragmentizer {
+import plugins.FileFragmentReasoner.Fragmentizer;
+import plugins.FileFragmentReasoner.Fragment;
 
+public class JavaFragmentizer extends Fragmentizer {
+	
+	
+	
+	
 	@Override
 	public List<Fragment> getFragments (Artifact artifact) throws IOException {
 		
@@ -27,6 +35,7 @@ public class JavaFragmentizer extends Fragmentizer {
 		try {
 		
 			cunit = JavaParser.parse(s, false);
+			
 			
 			for (Node node : cunit.getChildrenNodes()) {
 				
@@ -41,6 +50,7 @@ public class JavaFragmentizer extends Fragmentizer {
 						f.setType("JavaClass");
 						result.add(f);
 						
+						
 					}
 					
 					for (Node child : node.getChildrenNodes()) {
@@ -54,7 +64,6 @@ public class JavaFragmentizer extends Fragmentizer {
 								Fragment f = new Fragment();
 								f.setName(v.toString());
 								f.setType("JavaAttribute");
-								f.setPartOf(c.getName());
 								result.add(f);
 								
 							}
@@ -70,7 +79,6 @@ public class JavaFragmentizer extends Fragmentizer {
 							Fragment f = new Fragment();
 							f.setName(m.getName());
 							f.setType("JavaMethod");
-							f.setPartOf(c.getName());
 							result.add(f);
 							
 						}

@@ -1,4 +1,4 @@
-package org.softlang.megal.tr;
+package org.softlang.megal.plugins;
 
 public class Foo {
 

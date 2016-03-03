@@ -1,4 +1,4 @@
-package org.softlang.megal.tr;
+package org.softlang.megal.plugins;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

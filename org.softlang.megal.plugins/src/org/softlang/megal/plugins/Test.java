@@ -1,4 +1,4 @@
-package org.softlang.megal.tr;
+package org.softlang.megal.plugins;
 
 import java.io.File;
 import java.io.IOException;

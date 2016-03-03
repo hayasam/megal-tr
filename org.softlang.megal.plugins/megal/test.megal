@@ -16,7 +16,7 @@ partOf < JavaAttribute * JavaClass
 
 javaFile : File
 javaFile elementOf Java
-javaFile = 'workspace:/org.softlang.sle1516.megal.ua/src/org/softlang/megal/tr/Foo.java'
+javaFile = 'workspace:/org.softlang.megal.plugins/src/org/softlang/megal/tr/Foo.java'
 
 JavaFragmentizer : Plugin
 JavaFragmentizer realizationOf Java
