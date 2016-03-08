@@ -37,6 +37,8 @@ Pair < Entity
 elementOf < Entity (+) * Set
 @Plugin 'PairElementWhenComputed'
 elementOf < Pair * Function
+@Plugin 'FileElementOfLanguage'
+elementOf < File (+) * Language
 
 subsetOf < Set * Set
 
@@ -79,8 +81,6 @@ deploysTo < Technology * Technology
 @Suppress 'notConsidered'
 realizationOf < Plugin * Entity
 
-@Plugin 'FileElementOfLanguage'
-elementOf < File (+) * Language
 
 firstOf < Entity (+) * Pair
 secondOf < Entity (+) * Pair
@@ -102,4 +102,4 @@ PartOfReasoner: Plugin
 PartOfReasoner = 'classpath:org.softlang.megal.plugins.prelude.PartOfReasoner'
 
 FileFragmentReasoner: Plugin
-FileFragmentReasoner = 'classpath:org.softlang.megal.plugins.prelude.FileFragmentReasoner'
+FileFragmentReasoner = 'classpath:org.softlang.megal.plugins.prelude.FileFragmentationReasoner'

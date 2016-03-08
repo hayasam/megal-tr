@@ -1,4 +1,4 @@
-package org.softlang.megal.plugins;
+package org.softlang.megal.plugins.api;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -13,8 +13,7 @@ import org.softlang.megal.mi2.EntityType;
 import org.softlang.megal.mi2.Relationship;
 import org.softlang.megal.mi2.RelationshipType;
 import org.softlang.megal.mi2.api.Artifact;
-
-import org.softlang.megal.plugins.GuidedExitException.Level;
+import org.softlang.megal.plugins.api.GuidedExitException.Level;
 
 public abstract class GuidedEvaluatorPlugin extends InjectedEvaluatorPlugin {
 	private final List<Closeable> closables;

@@ -1,5 +1,9 @@
 
 public class Foo {
+	
+	class Bar {
+		
+	}
 
 	private String bar;
 

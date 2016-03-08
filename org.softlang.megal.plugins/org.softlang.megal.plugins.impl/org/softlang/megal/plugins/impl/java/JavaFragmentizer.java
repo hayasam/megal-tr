@@ -1,40 +1,32 @@
-package org.softlang.megal.plugins.prelude;
+package org.softlang.megal.plugins.impl.java;
 
-import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 import java.util.ArrayList;
 
-import static com.google.common.collect.Iterables.filter;
-import org.softlang.megal.mi2.api.Artifact;
+import org.softlang.megal.plugins.api.FragmentationPlugin;
+import org.softlang.megal.plugins.util.fragmentation.Fragment;
+import org.softlang.megal.plugins.util.fragmentation.FragmentationException;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseException;
-import com.github.javaparser.ast.TreeVisitor;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.*;
 
-import org.softlang.megal.plugins.prelude.FileFragmentReasoner.Fragmentizer;
-import org.softlang.megal.plugins.prelude.FileFragmentReasoner.Fragment;
-
-public class JavaFragmentizer extends Fragmentizer {
-	
-	
-	
-	
+public class JavaFragmentizer extends FragmentationPlugin {
+		
 	@Override
-	public List<Fragment> getFragments (Artifact artifact) throws IOException {
+	public List<Fragment> getFragments (Reader r) throws FragmentationException {
 		
 		List<Fragment> result = new ArrayList<Fragment>();
 		
-		Reader s = artifact.getChars().openStream();
 		
 		CompilationUnit cunit;
 		
 		try {
 		
-			cunit = JavaParser.parse(s, false);
+			cunit = JavaParser.parse(r, false);
 			
 			
 			for (Node node : cunit.getChildrenNodes()) {

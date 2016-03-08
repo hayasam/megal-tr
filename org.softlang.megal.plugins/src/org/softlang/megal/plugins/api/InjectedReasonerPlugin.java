@@ -1,4 +1,4 @@
-package org.softlang.megal.plugins;
+package org.softlang.megal.plugins.api;
 
 import java.util.List;
 

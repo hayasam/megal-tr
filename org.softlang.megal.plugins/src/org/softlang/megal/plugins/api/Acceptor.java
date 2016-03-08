@@ -1,4 +1,4 @@
-package org.softlang.megal.plugins;
+package org.softlang.megal.plugins.api;
 
 import org.softlang.megal.mi2.api.AbstractPlugin;
 import org.softlang.megal.mi2.api.Artifact;

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.Acceptor;
+import org.softlang.megal.plugins.api.Acceptor;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseException;

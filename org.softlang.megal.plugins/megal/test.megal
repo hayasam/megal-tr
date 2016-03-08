@@ -4,8 +4,9 @@ import Prelude
 Java : Language
 
 JavaFragment < Fragment
-JavaClass < Fragment
 JavaInterface < Fragment
+JavaClass < Fragment
+JavaConstructor < Fragment
 JavaMethod < Fragment
 JavaField < Fragment
 JavaAnnotation < Fragment
@@ -22,4 +23,4 @@ javaFile = 'workspace:/org.softlang.megal.plugins/input/Foo.java'
 JavaFragmentizer : Plugin
 JavaFragmentizer realizationOf Java
 JavaFragmentizer partOf FileFragmentReasoner
-JavaFragmentizer = 'classpath:org.softlang.megal.plugins.prelude.JavaFragmentizer'
+JavaFragmentizer = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationPlugin'

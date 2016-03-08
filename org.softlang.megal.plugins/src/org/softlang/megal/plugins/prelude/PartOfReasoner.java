@@ -1,8 +1,7 @@
 package org.softlang.megal.plugins.prelude;
 
 import org.softlang.megal.mi2.Entity;
-
-import org.softlang.megal.plugins.GuidedReasonerPlugin;
+import org.softlang.megal.plugins.api.GuidedReasonerPlugin;
 
 public class PartOfReasoner extends GuidedReasonerPlugin {
 		

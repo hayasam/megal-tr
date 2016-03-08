@@ -13,9 +13,8 @@ import java.io.UnsupportedEncodingException;
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.Relationship;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.Acceptor;
-
-import org.softlang.megal.plugins.GuidedEvaluatorPlugin;
+import org.softlang.megal.plugins.api.Acceptor;
+import org.softlang.megal.plugins.api.GuidedEvaluatorPlugin;
 
 import com.google.common.base.Optional;
 import com.google.common.io.Files;
