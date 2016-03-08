@@ -3,7 +3,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="plugins"/>
+	<classpathentry kind="src" path="plugins.impl"/>
 	<classpathentry kind="src" path="input"/>
 	<classpathentry kind="lib" path="/home/darjeeling/Documents/sle1516-megal/eclipse/plugins/com.google.guava_15.0.0.v201403281430.jar"/>
 	<classpathentry kind="lib" path="lib/commons-csv-1.2.jar"/>
