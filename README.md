@@ -8,11 +8,11 @@ It is also related to the Software Ontology research of the [Softlang Working Gr
 This project aims to *recover* the low-level relationships between fragments of two artifacts.
 Lets say we declared a relationship between two files in MegaL:
 
-![img](img/intro1.png)
+![img](img/png/intro1.png)
 
 We want to recover the same relationship beween the low-level parts of those files:
 
-![img](img/intro2.png)
+![img](img/png/intro2.png)
 
 ## References
 
