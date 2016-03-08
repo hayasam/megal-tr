@@ -28,7 +28,15 @@ Fragment < Artifact
 Resource < Artifact
 Transient < Artifact
 
+@Suppress 'notConsidered'
+@Color '221,208,168'
+Plugin < Entity
+
+Pair < Entity
+
 elementOf < Entity (+) * Set
+@Plugin 'PairElementWhenComputed'
+elementOf < Pair * Function
 
 subsetOf < Set * Set
 
@@ -36,6 +44,9 @@ partOf < Artifact(+) * Artifact(+)
 partOf < Artifact(+) * Technology
 partOf < Technology * Technology
 partOf < Language * Technology
+partOf < Language * Language
+@Suppress 'notConsidered'
+partOf < Plugin * Plugin
 
 instanceOf < Entity * Concept
 isA < Concept * Concept
@@ -65,44 +76,30 @@ versionOf < Language * Language
 
 deploysTo < Technology * Technology
 
-partOf < Language * Language
-
-@Suppress 'notConsidered'
-@Color '221,208,168'
-Plugin < Entity
-
 @Suppress 'notConsidered'
 realizationOf < Plugin * Entity
-
-@Suppress 'notConsidered'
-partOf < Plugin * Plugin
 
 @Plugin 'FileElementOfLanguage'
 elementOf < File (+) * Language
 
-
-FileElementOfLanguage: Plugin
-FileElementOfLanguage = 'classpath:org.softlang.plugins.prelude.FileElementOfLanguage'
-
-Pair < Entity
 firstOf < Entity (+) * Pair
 secondOf < Entity (+) * Pair
-
-@Plugin 'PairElementWhenComputed'
-elementOf < Pair * Function
-
-PairElementWhenComputed: Plugin
-PairElementWhenComputed = 'classpath:org.softlang.plugins.prelude.PairElementWhenComputed'
 
 refersTo < Artifact (+) * Technology
 refersTo < Artifact (+) * Artifact (+)
 
+
+FileElementOfLanguage: Plugin
+FileElementOfLanguage = 'classpath:org.softlang.megal.plugins.prelude.FileElementOfLanguage'
+
+PairElementWhenComputed: Plugin
+PairElementWhenComputed = 'classpath:org.softlang.megal.plugins.prelude.PairElementWhenComputed'
+
 LanguageResolver: Plugin
-LanguageResolver = 'classpath:org.softlang.plugins.prelude.LanguageResolver'
+LanguageResolver = 'classpath:org.softlang.megal.plugins.prelude.LanguageResolver'
 
 PartOfReasoner: Plugin
-PartOfReasoner = 'classpath:org.softlang.plugins.prelude.PartOfReasoner'
-
+PartOfReasoner = 'classpath:org.softlang.megal.plugins.prelude.PartOfReasoner'
 
 FileFragmentReasoner: Plugin
-FileFragmentReasoner = 'classpath:org.softlang.plugins.prelude.FileFragmentReasoner'
+FileFragmentReasoner = 'classpath:org.softlang.megal.plugins.prelude.FileFragmentReasoner'

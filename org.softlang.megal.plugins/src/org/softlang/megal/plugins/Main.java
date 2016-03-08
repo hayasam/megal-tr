@@ -13,26 +13,30 @@ import org.softlang.megal.mi2.api.Result;
 import org.softlang.megal.mi2.api.resolution.LocalResolution;
 
 public class Main {
-
-	public static void main(String[] args) throws IOException {
-		System.out.println("start");
-		
-		
-		//MegalReasoning.prepareLocalResult(Megals.load(new File("megal/test.megal"), new File("megal/Prelude.megal")));
+	
+	private static LocalResolution getResolution () throws IOException  {
 		
 		File root = (new File("..")).getCanonicalFile();
 		
-		
-		ModelExecutor ex = new ModelExecutor();
-		Result r = ex.evaluate(new LocalResolution() {
+		return new LocalResolution() {
+			
 			@Override
 			protected File getRoot() {
 				return root;
 			}
-		}, MegamodelKB.loadAll(Megals.load(new File("megal/test.megal"), new File("megal/Prelude.megal"))));
+			
+		};
 		
-
-		KB kb = r.getOutput();
+	}
+	
+	public static void main(String[] args) throws IOException {
+		
+		System.out.println("start");
+		
+		KB kb = MegamodelKB.loadAll(Megals.load(new File("megal/test.megal"), new File("megal/Prelude.megal")));
+		ModelExecutor ex = new ModelExecutor();
+		
+		kb = ex.evaluate(getResolution(), kb).getOutput();
 		
 		for (Entity e : kb.getEntities()) {
 			
