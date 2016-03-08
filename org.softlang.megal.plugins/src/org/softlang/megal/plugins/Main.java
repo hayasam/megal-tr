@@ -22,6 +22,7 @@ public class Main {
 		
 		File root = (new File("..")).getCanonicalFile();
 		
+		
 		ModelExecutor ex = new ModelExecutor();
 		Result r = ex.evaluate(new LocalResolution() {
 			@Override

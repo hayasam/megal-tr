@@ -8,6 +8,7 @@
 	<classpathentry kind="lib" path="/home/darjeeling/Documents/sle1516-megal/eclipse/plugins/com.google.guava_15.0.0.v201403281430.jar"/>
 	<classpathentry kind="lib" path="lib/commons-csv-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/javaparser-core-2.1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/antlr-runtime-4.5.2.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.softlang.megal"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.softlang.megal.language"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.softlang.sourcesupport"/>

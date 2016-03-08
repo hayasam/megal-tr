@@ -6,13 +6,13 @@ import org.softlang.megal.mi2.api.Artifact;
 
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.any;
-import static plugins.util.Prelude.isElementOfLanguage;
+import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import plugins.prelude.GuidedReasonerPlugin;
+import org.softlang.megal.plugins.GuidedReasonerPlugin;
 
 public class FileFragmentReasoner extends GuidedReasonerPlugin {
 	

@@ -2,7 +2,7 @@ package org.softlang.megal.plugins.prelude;
 
 import org.softlang.megal.mi2.Entity;
 
-import plugins.prelude.GuidedReasonerPlugin;
+import org.softlang.megal.plugins.GuidedReasonerPlugin;
 
 public class LanguageResolver extends GuidedReasonerPlugin {
 

@@ -28,8 +28,6 @@ Fragment < Artifact
 Resource < Artifact
 Transient < Artifact
 
-
-
 elementOf < Entity (+) * Set
 
 subsetOf < Set * Set
@@ -38,10 +36,6 @@ partOf < Artifact(+) * Artifact(+)
 partOf < Artifact(+) * Technology
 partOf < Technology * Technology
 partOf < Language * Technology
-
-
-
-
 
 instanceOf < Entity * Concept
 isA < Concept * Concept
@@ -73,11 +67,9 @@ deploysTo < Technology * Technology
 
 partOf < Language * Language
 
-
 @Suppress 'notConsidered'
 @Color '221,208,168'
 Plugin < Entity
-
 
 @Suppress 'notConsidered'
 realizationOf < Plugin * Entity
@@ -90,7 +82,7 @@ elementOf < File (+) * Language
 
 
 FileElementOfLanguage: Plugin
-FileElementOfLanguage = 'classpath:plugins.root.elementof.FileElementOfLanguage'
+FileElementOfLanguage = 'classpath:org.softlang.plugins.prelude.FileElementOfLanguage'
 
 Pair < Entity
 firstOf < Entity (+) * Pair
@@ -100,17 +92,17 @@ secondOf < Entity (+) * Pair
 elementOf < Pair * Function
 
 PairElementWhenComputed: Plugin
-PairElementWhenComputed = 'classpath:plugins.root.elementof.PairElementWhenComputed'
+PairElementWhenComputed = 'classpath:org.softlang.plugins.prelude.PairElementWhenComputed'
 
 refersTo < Artifact (+) * Technology
 refersTo < Artifact (+) * Artifact (+)
 
 LanguageResolver: Plugin
-LanguageResolver = 'classpath:plugins.LanguageResolver'
+LanguageResolver = 'classpath:org.softlang.plugins.prelude.LanguageResolver'
 
 PartOfReasoner: Plugin
-PartOfReasoner = 'classpath:plugins.PartOfReasoner'
+PartOfReasoner = 'classpath:org.softlang.plugins.prelude.PartOfReasoner'
 
 
 FileFragmentReasoner: Plugin
-FileFragmentReasoner = 'classpath:plugins.FileFragmentReasoner'
+FileFragmentReasoner = 'classpath:org.softlang.plugins.prelude.FileFragmentReasoner'

@@ -10,7 +10,7 @@ import org.softlang.megal.mi2.Relationship;
 import org.softlang.megal.mi2.api.AbstractReasonerPlugin;
 import org.softlang.megal.mi2.api.context.Context;
 
-import plugins.util.Prelude;
+import org.softlang.megal.plugins.util.Prelude;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;

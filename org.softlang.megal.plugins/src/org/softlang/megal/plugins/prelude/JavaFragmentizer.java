@@ -15,8 +15,8 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.*;
 
-import plugins.FileFragmentReasoner.Fragmentizer;
-import plugins.FileFragmentReasoner.Fragment;
+import org.softlang.megal.plugins.prelude.FileFragmentReasoner.Fragmentizer;
+import org.softlang.megal.plugins.prelude.FileFragmentReasoner.Fragment;
 
 public class JavaFragmentizer extends Fragmentizer {
 	

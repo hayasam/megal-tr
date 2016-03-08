@@ -36,7 +36,7 @@ public class Megals {
 	public static MegalFile load(Charset charset, File source, File... imports) throws IOException {
 		CharSource csSource = Files.asCharSource(source, charset);
 		CharSource[] csImports = new CharSource[imports.length];
-
+		
 		for (int i = 0; i < imports.length; i++)
 			csImports[i] = Files.asCharSource(imports[i], charset);
 

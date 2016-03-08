@@ -4,7 +4,7 @@ import static com.google.common.collect.FluentIterable.from;
 import static com.google.common.collect.Iterables.any;
 import static com.google.common.collect.Iterables.filter;
 import static java.util.Collections.singleton;
-import static plugins.util.Prelude.isElementOfLanguage;
+import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -15,7 +15,7 @@ import org.softlang.megal.mi2.Relationship;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.Acceptor;
 
-import plugins.prelude.GuidedEvaluatorPlugin;
+import org.softlang.megal.plugins.GuidedEvaluatorPlugin;
 
 import com.google.common.base.Optional;
 import com.google.common.io.Files;

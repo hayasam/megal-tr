@@ -1,7 +1,7 @@
 package org.softlang.megal.plugins.util;
 
-import static plugins.util.Prelude.incomingFrom;
-import static plugins.util.Prelude.isInstance;
+import static org.softlang.megal.plugins.util.Prelude.incomingFrom;
+import static org.softlang.megal.plugins.util.Prelude.isInstance;
 
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.Relationship;
