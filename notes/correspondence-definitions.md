@@ -1,6 +1,8 @@
 # Correspondence
 
-## Language
+A survery on the usage of the term *correspondence* in related diciplines.
+
+## General Langauge
 ### Definition 1 : Oxford English Dictionary
 "A close similarity, connection, or equivalence" [1]
 
@@ -30,6 +32,8 @@ A correspondence from one set A into another set B is a mapping ![\phi](http://m
 ](http://mathurl.com/hczlslo.png)
 
 The usage of *correspondence* the definition of [6] seems to be similar to the OED definition.
+
+## Linguistics
 
 ## SoLaSoTe/MegaL
 ### CorrespondsTo VS RefersTo
