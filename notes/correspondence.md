@@ -6,6 +6,31 @@ A survery on the usage of the term *correspondence* in related diciplines.
 ### Definition 1 : Oxford English Dictionary
 "A close similarity, connection, or equivalence" [1]
 
+### Synonyms
+accord,
+analogy,
+coherence,
+coincidence,
+comparability,
+comparison,
+concurrence,
+conformity,
+congruity,
+consistency,
+correlation,
+equivalence,
+fitness,
+harmony,
+likeness,
+match,
+regularity,
+relation,
+resemblance,
+similarity,
+symmetry
+[9]
+
+
 ## Mathematics
 ### Definition 2 
 A correspondence from one set A into another set B is a mapping ![\phi](http://mathurl.com/6aabpw.png) from A into the power set of B: ![\phi : A \mapsto \mathfrak{P}(B)](http://mathurl.com/zh359af.png) [3]
@@ -48,3 +73,4 @@ The usage of *correspondence* the definition of [6] seems to be similar to the O
 6. [Wikipedia : Post Correspondence Problem](https://en.wikipedia.org/wiki/Post_correspondence_problem)
 7. [WolframMathWorld : One-to-One Correspondence](http://mathworld.wolfram.com/One-to-OneCorrespondence.html)
 8. [Encyclopedia of Mathematics : Correspondence](https://www.encyclopediaofmath.org/index.php/Correspondence)
+9. [Thesaurus : Correspondence](http://www.thesaurus.com/browse/correspondence?s=t)
