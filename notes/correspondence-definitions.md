@@ -1,18 +1,26 @@
 # Correspondence
 
-## Definition 1 : Oxford English Dictionary
+## Language
+### Definition 1 : Oxford English Dictionary
 "A close similarity, connection, or equivalence" [1]
 
-## Definition 2 : Mathematics
+## Mathematics
+### Definition 2 
 "Eine Korrespondenz von einer Menge A in eine Menge B ist eine Abbildung f von A in die Potenzmenge von B" [3]
 
-A correspondence from one set A into another set B is a mapping f from A into the power set of B
-```
-f : A -> P(B)
-```
+A correspondence from one set A into another set B is a mapping f from A into the power set of B: ![\phi : A \mapsto \mathfrak{P}(B)](http://mathurl.com/zh359af.png)
 
+### Post correspondence problem [6]
+Given
+- ```A``` an alphabet
+- ```a = a_1,...,a_N``` a list of words over A
+- ```b = b_1,...,b_N``` a list of words over A
 
-## CorrespondsTo VS RefersTo
+Solution:
+```(i), 0 < i < N```
+
+## SoLaSoTe/MegaL
+### CorrespondsTo VS RefersTo
 
 
 ## References
