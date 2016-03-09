@@ -8,15 +8,13 @@ public class Fragment {
 	private String name;
 	private String type;
 	private String link;
-	private List<Fragment> fragments;
+	private List<Fragment> children;
 	
 	public Fragment () {
 		
-		fragments = new ArrayList<Fragment>();
+		children = new ArrayList<Fragment>();
 		
 	}
-
-	
 	
 	public String getName() {
 		return name;
@@ -41,17 +39,35 @@ public class Fragment {
 	public void setLink(String link) {
 		this.link = link;
 	}
+			
+	public void addChild (Fragment child) {
+		
+		children.add(child);
+		
+	}
+	
+	public void removeChild (Fragment child) {
+		
+		children.remove(child);
+		
+	}
+	
+	public List<Fragment> getChildren() {
+		
+		return children;
+	}
 
-	public List<Fragment> getFragments() {
-		return fragments;
-	}
-	
-	public void addFragments (List<Fragment> fragments) {
+	public boolean hasChildren () {
 		
-		this.fragments.addAll(fragments);
+		return children.size() > 0;
 		
 	}
 	
+	public boolean isBlank () {
+		
+		return name == null || name.length() == 0;
+	}
+
 	public void accept (FragmentVisitor v) {
 		
 		v.visit(this);
