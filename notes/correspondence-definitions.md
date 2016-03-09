@@ -11,7 +11,8 @@
 A correspondence from one set A into another set B is a mapping ![\phi](http://mathurl.com/6aabpw.png) from A into the power set of B: ![\phi : A \mapsto \mathfrak{P}(B)](http://mathurl.com/zh359af.png)
 
 ### Post correspondence problem [6]
-![\noindent
+![
+\noindent
 \textbf{Input:}
 \newline
 \alpha_1,...,\alpha_N
@@ -26,7 +27,11 @@ A correspondence from one set A into another set B is a mapping ![\phi](http://m
 (i_k)_{1 < k < K} \text{ with } K > 1 \text{ and } i_k = 1,...,N
 \newline
 \text{such that } \alpha_{i_1},...,\alpha_{i_K} = \beta_{i_1},...,\beta_{i_K}
-](http://mathurl.com/jr28gu7.png)
+\newline
+\textbf{Does such a solution exist?}
+](http://mathurl.com/j3ns6q4.png)
+
+The usage of *correspondence* the definition of this problem seems to be similar to the OED definition.
 
 ## SoLaSoTe/MegaL
 ### CorrespondsTo VS RefersTo
