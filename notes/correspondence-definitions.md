@@ -6,9 +6,7 @@
 
 ## Mathematics
 ### Definition 2 
-"Eine Korrespondenz von einer Menge A in eine Menge B ist eine Abbildung f von A in die Potenzmenge von B" [3]
-
-A correspondence from one set A into another set B is a mapping ![\phi](http://mathurl.com/6aabpw.png) from A into the power set of B: ![\phi : A \mapsto \mathfrak{P}(B)](http://mathurl.com/zh359af.png)
+A correspondence from one set A into another set B is a mapping ![\phi](http://mathurl.com/6aabpw.png) from A into the power set of B: ![\phi : A \mapsto \mathfrak{P}(B)](http://mathurl.com/zh359af.png) [3]
 
 ### Post Correspondence Problem
 ![
@@ -29,7 +27,7 @@ A correspondence from one set A into another set B is a mapping ![\phi](http://m
 \text{such that } \alpha_{i_1},...,\alpha_{i_K} = \beta_{i_1},...,\beta_{i_K}
 \newline
 \textbf{Does such a solution exist?}
-](http://mathurl.com/hczlslo.png
+](http://mathurl.com/hczlslo.png)
 
 The usage of *correspondence* the definition of [6] seems to be similar to the OED definition.
 
