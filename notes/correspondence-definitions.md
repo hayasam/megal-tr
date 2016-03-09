@@ -11,13 +11,22 @@
 A correspondence from one set A into another set B is a mapping ![\phi](http://mathurl.com/6aabpw.png) from A into the power set of B: ![\phi : A \mapsto \mathfrak{P}(B)](http://mathurl.com/zh359af.png)
 
 ### Post correspondence problem [6]
-Given
-- some alphabet ![\mathfrac{A}](http://mathurl.com/hhmgwjz.png)
-- ![\alpha_1,...,\alpha_N](http://mathurl.com/j223th5.png) a list of words over ![\mathfrac{A}](http://mathurl.com/hhmgwjz.png)
-- ![\beta_1,...,\beta_N](http://mathurl.com/j6n2nnd.png) a list of words over ![\mathfrac{A}](http://mathurl.com/hhmgwjz.png)
-
-Solution:
-```(i), 0 < i < N```
+![\noindent
+\textbf{Input:}
+\newline
+\alpha_1,...,\alpha_N
+\text{ and }
+\beta_1,...,\beta_N
+\text{ as lists of words over some alphabet } \mathbb{A}
+\text{ with } N > 1
+\newline
+\textbf{Solution:}
+\newline
+\text{a sequence of indeces }
+(i_k)_{1 < k < K} \text{ with } K > 1 \text{ and } i_k = 1,...,N
+\newline
+\text{such that } \alpha_{i_1},...,\alpha_{i_K} = \beta_{i_1},...,\beta_{i_K}
+](http://mathurl.com/jr28gu7.png)
 
 ## SoLaSoTe/MegaL
 ### CorrespondsTo VS RefersTo
