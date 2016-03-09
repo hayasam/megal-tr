@@ -8,7 +8,7 @@
 ### Definition 2 
 "Eine Korrespondenz von einer Menge A in eine Menge B ist eine Abbildung f von A in die Potenzmenge von B" [3]
 
-A correspondence from one set A into another set B is a mapping f from A into the power set of B: ![\phi : A \mapsto \mathfrak{P}(B)](http://mathurl.com/zh359af.png)
+A correspondence from one set A into another set B is a mapping ![\phi](http://mathurl.com/6aabpw.png) from A into the power set of B: ![\phi : A \mapsto \mathfrak{P}(B)](http://mathurl.com/zh359af.png)
 
 ### Post correspondence problem [6]
 Given
