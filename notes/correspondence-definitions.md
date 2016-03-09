@@ -12,9 +12,9 @@ A correspondence from one set A into another set B is a mapping ![\phi](http://m
 
 ### Post correspondence problem [6]
 Given
-- ```A``` an alphabet
-- ```a = a_1,...,a_N``` a list of words over A
-- ```b = b_1,...,b_N``` a list of words over A
+- some alphabet ![\mathfrac{A}](http://mathurl.com/hhmgwjz.png)
+- ![\alpha_1,...,\alpha_N](http://mathurl.com/j223th5.png) a list of words over ![\mathfrac{A}](http://mathurl.com/hhmgwjz.png)
+- ![\beta_1,...,\beta_N](http://mathurl.com/j6n2nnd.png) a list of words over ![\mathfrac{A}](http://mathurl.com/hhmgwjz.png)
 
 Solution:
 ```(i), 0 < i < N```
