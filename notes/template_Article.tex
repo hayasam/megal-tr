@@ -1,0 +1,393 @@
+\documentclass[runningheads,a4paper]{llncs}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{listings, color}
+\usepackage[bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
+
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+
+
+\title{An Mereological and Algebraic Formalization of MegaL's Prelude}
+\author{Maximilian Meffert}
+%\institute{Universtiy of Koblenz-Landau}
+\date{\today}
+
+
+\newtheorem{axiom}{Axiom}
+%\newtheorem{definition}{Axiom}[section]
+
+
+\newcommand{\ENTITY}{\mathsf{ENTITY}}
+\newcommand{\RELATIONSHIP}{\mathsf{RELATIONSHIP}}
+\newcommand{\MEGA}{\mathsf{MEGA}}
+
+
+
+\begin{document}
+
+\maketitle
+
+{
+\Large
+\noindent 
+\textbf{Disclaimer:}
+\newline\noindent
+These notes are at draft level and may be very imperfect.
+\newline\noindent
+Copyright lies with the author.
+}
+
+\begin{abstract}
+...
+\end{abstract}
+
+\begin{keywords}
+megamodeling, 
+metamodeling, 
+mereology, 
+mereotopology,
+parthood, 
+conformance,
+correspondence,
+representation
+\end{keywords}
+
+\section{Introduction}
+...
+
+\section{A Mereological Formalization}
+
+\subsection{Parthood}
+
+
+A mereology focuses on the \textbf{parthood} predicate $\mathcal{P}$.  
+We read the $\mathcal{P}xy$ as \textit{"x is part of y"} for two arbitrary objects $x$ and $y$.
+\cite{DBLP:journals/dke/Varzi96}
+
+
+\begin{definition}[Parthood]
+Parthood is a binary predicate $\mathcal{P}$ between two entities x and y. We write
+\begin{align}
+\mathcal{P} x y
+\end{align}
+and read \textit{"x is part of y"}.
+\end{definition}
+
+\begin{axiom}[Parthood is Reflexive]
+\begin{align}
+\mathcal{P}xx
+\end{align}
+An object x is always part of itself.
+\end{axiom}
+Note that this opens the door for problems similar to Russel's antinomy for naive sets. 
+\begin{axiom}[Parthood is Antisymmetric]
+\begin{align}
+\mathcal{P}xy \wedge \mathcal{P}yx \Rightarrow x=y
+\end{align}
+If two objects are part of one another, we assume both objects to be identical.
+\end{axiom}
+\begin{axiom}[Parthood is Transitive]
+\begin{align}
+\mathcal{P}xy \wedge \mathcal{P}yz \Rightarrow \mathcal{P}xz
+\end{align}
+We assume parthood to be transitive in the sense of object composition.
+If one object is part of  a second object, which in turn is part of a third object, the first is considered to be also a part of the latter one.
+\end{axiom}
+
+\subsubsection{Specializations of Parthood}
+We define the following specializations of parthood:
+
+\begin{definition}[Proper Part]
+\begin{align}
+\mathcal{PP}xy := \mathcal{P}xy \wedge \neg \mathcal{P}yx
+\end{align}
+\end{definition}
+
+\begin{definition}[Overlap]
+\begin{align}
+\mathcal{O}xy := \exists z (\mathcal{P}zx \wedge \mathcal{P}zy)
+\end{align}
+\end{definition}
+
+\begin{definition}[Underlap]
+\begin{align}
+\mathcal{U}xy := \exists z (\mathcal{P}xz \wedge \mathcal{P}yz)
+\end{align}
+\end{definition}
+
+
+\subsection{Correspondence}
+
+
+Correspondence in the sense that two objects are similar to one another.
+
+
+\begin{definition}[Correspondence]
+Correspondence is a binary predicate $\mathcal{K}$ between two entities x and y. We write
+\begin{align}
+\mathcal{K} x y
+\end{align}
+and read \textit{"x corresponds to y"}.
+\end{definition}
+
+\begin{axiom}[Correspondence is Reflexive]
+\begin{align}
+\mathcal{K} x x
+\end{align}
+\end{axiom}
+
+
+\begin{axiom}[Correspondence is Symmetric]
+\begin{align}
+\mathcal{K} x y \Rightarrow \mathcal{K} y x
+\end{align}
+\end{axiom}
+
+\begin{axiom}[Correspondence and Parthood]
+\begin{align}
+\mathcal{K} e_1 e_2 
+\Rightarrow \exists p_1,p_2(\mathcal{P} p_1 e_1 \wedge \mathcal{P} p_2 e_2 \wedge \mathcal{K} p_1 p_2)
+\end{align}
+\end{axiom}
+
+\subsection{Conformance}
+
+\begin{definition}[Conformance]
+Conformance is a binary predicate $\mathcal{C}$ between two entities x and y. We write
+\begin{align}
+\mathcal{C} x y
+\end{align}
+and read \textit{"x conforms to y"}.
+\end{definition}
+
+
+\begin{axiom}[Conformance and Parthood]
+\begin{align}
+\mathcal{C} x y \Rightarrow \forall u \exists v (\mathcal{P}uy \wedge \mathcal{P}vx \Rightarrow \mathcal{C} u v) 
+\end{align}
+\end{axiom}
+
+
+\subsection{Representation}
+
+
+\begin{definition}[Representation]
+Representation is a binary predicate $\mathcal{K}$ between two entities x and y. We write
+\begin{align}
+\mathcal{R} x y
+\end{align}
+and read \textit{"x is a representation of y"}.
+\end{definition}
+
+\newpage
+
+\section{An Algebraic Formalization}
+
+\begin{definition}[Entities]
+\begin{align}
+\ENTITY := \text{"Set of all entities"}
+\end{align}
+\end{definition}
+
+\begin{definition}[Relationships]
+\begin{align}
+\RELATIONSHIP := \ENTITY \times \ENTITY
+\end{align}
+Set of all binary relationships between entities
+\end{definition}
+
+\begin{definition}[Megamodel]
+A megamodel is a four-tuple
+\begin{align}
+M := (ET, E, RT, R)
+\end{align}
+with:
+\begin{itemize}
+
+\item A set of \textbf{Entity-Types}
+\begin{align}
+ET \subseteq \{ X \subseteq \ENTITY \}
+\end{align}
+
+\item A set of \textbf{Entities} (also called instances)
+\begin{align}
+E \subseteq \ENTITY
+\end{align}
+
+\item A set of \textbf{Relationship-Types}
+\begin{align}
+RT \subseteq \{ X \subseteq \RELATIONSHIP \}
+\end{align}
+
+\item A set of \textbf{Relationships}
+\begin{align}
+R \subseteq \RELATIONSHIP
+\end{align}
+
+\end{itemize}
+\end{definition}
+
+\begin{definition}[The Empty Megamodel]
+\begin{align}
+0 := (\emptyset,\emptyset,\emptyset,\emptyset)
+\end{align}
+\end{definition}
+
+\begin{definition}[The Set of All Megamodels]
+\begin{align}
+\MEGA := \{ (ET,E,RT,R) \}
+\end{align}
+\end{definition}
+
+\begin{definition}[Megamodel Inclusion]
+\begin{align}
+\begin{split}
+& + : \MEGA \times \MEGA \rightarrow \MEGA
+\\ & M_1 + M_2 := (ET_1 \cup ET_2, E_1 \cup E_2, RT_1 \cup RT_2, R_1 \cup R_2)
+\end{split}
+\end{align}
+\end{definition}
+
+\begin{proposition}[Megamodel Inclusion is Commutative]
+\label{prop:mega-inc-com}
+\begin{align}
+\forall M_1,M_2 \in \MEGA : M_1 + M_2 = M_2 + M_1 
+\end{align}
+\textbf{Proof:}
+\begin{equation}
+\begin{split}
+& M_1 + M_2 
+\\ & = (ET_1 \cup ET_2, E_1 \cup E_2, RT_1 \cup RT_2, R_1 \cup R_2)
+\\ & = (ET_2 \cup ET_1, E_2 \cup E_1, RT_2 \cup RT_1, R_2 \cup R_1)
+\\ & = M_2 + M_1
+\end{split}
+\end{equation}
+\end{proposition}
+
+\begin{proposition}[Megamodel Inclusion is Associative]
+\label{prop:mega-inc-ass}
+\begin{align}
+\forall M_1,M_2,M_3 \in \MEGA : M_1 + (M_2 + M_3) = (M_1 + M_2) + M_3
+\end{align}
+\textbf{Proof:}
+\begin{equation}
+\begin{split}
+& M_1 + (M_2 + M_3)
+\\ & = (ET_1,E_1,RT_1,R_1) + ((ET_2,E_2,RT_2,R_2) + (ET_3,E_3,RT_3,R_3))
+\\ & = (ET_1,E_1,RT_1,R_1) + (ET_2 \cup ET_3, E_2 \cup E_3, RT_2 \cup RT_3, R_2 \cup R_3)
+\\ & = (ET_1 \cup (ET_2 \cup ET_3), E_1 \cup (E_2 \cup E_3),RT_1 \cup (RT_2 \cup RT_3), R_1 \cup (R_2 \cup R_3))
+\\ & = ((ET_1 \cup ET_2) \cup ET_3, (E_1 \cup E_2) \cup E_3,(RT_1 \cup RT_2) \cup RT_3, (R_1 \cup R_2) \cup R_3)
+\\ & = (ET_1 \cup ET_2, E_1 \cup E_2, RT_1 \cup RT_2, R_1 \cup R_2) + (ET_3,E_3,RT_3,R_3)
+\\ & = ((ET_1,E_1,RT_1,R_1) + (ET_2,E_2,RT_2,R_2)) + (ET_3,E_3,RT_3,R_3)
+\\ & = (M_1 + M_2) + M_3
+\end{split}
+\end{equation}
+\end{proposition}
+
+\begin{proposition}[Megamodel Inclusion Identity]
+\label{prop:mega-inc-zero}
+\begin{align}
+\forall M \in \MEGA : M + 0 = 0 + M = M
+\end{align}
+\textbf{Proof:}
+\begin{equation}
+\begin{split}
+M + 0
+& = (ET,E,RT,R) + (\emptyset,\emptyset,\emptyset,\emptyset)
+\\ & = (ET \cup \emptyset,E \cup \emptyset,RT \cup \emptyset,R \cup \emptyset)
+\\ & = (ET,E,RT,R) = M
+\end{split}
+\end{equation}
+$M + 0 = 0 + M$ follows directly from proposition \ref{prop:mega-inc-com}.
+\end{proposition}
+
+\begin{proposition}[Megamodel Inclusion Semigroup]
+\label{prop:mega-inc-semigroup}
+\begin{align}
+(\MEGA,+) \text{ is a Semigroup}
+\end{align}
+\textbf{Proof:}
+Follows directly from proposition \ref{prop:mega-inc-ass}.
+\end{proposition}
+
+
+\begin{proposition}[Megamodel Inclusion Abelian Semigroup]
+\label{prop:mega-inc-abelian-semigroup}
+\begin{align}
+(\MEGA,+) \text{ is an Abelian Semigroup}
+\end{align}
+\textbf{Proof:}
+Follows directly from propositions \ref{prop:mega-inc-semigroup} and \ref{prop:mega-inc-com}.
+\end{proposition}
+
+\begin{proposition}[Megamodel Inclusion Abelian Monoid]
+\label{prop:mega-inc-abelian-monoid}
+\begin{align}
+(\MEGA,+,0) \text{ is an Abelian Monoid}
+\end{align}
+\textbf{Proof:}
+Follows directly from propositions \ref{prop:mega-inc-abelian-semigroup} and \ref{prop:mega-inc-zero}.
+\end{proposition}
+
+\section{Other Stuff}
+
+\subsubsection{A Mereology for Naive Sets}
+Let $A,B$ be sets.
+\begin{axiom}[Element Parthood]
+\begin{align}
+a \in A \Rightarrow \mathcal{P} a A
+\end{align}
+\end{axiom}
+
+\begin{axiom}[Subset Parthood]
+\begin{align}
+A \subseteq B \Rightarrow \mathcal{P} A B
+\end{align}
+\end{axiom}
+
+\begin{axiom}[Proper Subset Parthood]
+\begin{align}
+A \subset B \Rightarrow \mathcal{PP} A B
+\end{align}
+\end{axiom}
+
+
+\subsubsection{A Mereology for Tuples}
+Let $p = (a,b) \in A \times B$
+
+\subsubsection{A Mereology for Formal Languages}
+
+\subsection{The Parthood Relationship}
+
+\begin{align}
+\begin{split}
+& (.)  \subset \RELATIONSHIP
+\\ & (.) := \{ (e_1,e_2) \in \RELATIONSHIP ~|~ \mathcal{P} e_1 e_2 \}
+\end{split}
+\end{align}
+
+\begin{align}
+\forall e \in \ENTITY : e . e
+\end{align}
+
+\begin{align}
+\forall x,y \in \ENTITY : x . y \wedge y . x \Rightarrow x = y
+\end{align}
+
+\begin{align}
+\forall x,y,z \in \ENTITY : x . y \wedge y . z \Rightarrow x . z
+\end{align}
+
+
+
+
+\bibliographystyle{splncs}
+\bibliography{template_Article}{}
+
+\end{document}
