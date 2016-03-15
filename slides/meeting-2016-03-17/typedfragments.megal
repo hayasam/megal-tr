@@ -1,0 +1,63 @@
+
+File < Entity
+Fragment < Entity
+Set < Entity
+Language < Set
+
+
+isA < Entity * Entity
+
+partOf < Fragment * File
+partOf < Fragment * Fragment
+
+Java : Language
+
+JavaFile < File
+JavaFragment < Fragment				// problem: we cannot state JavaFragment elementOf Java 
+JavaClass < JavaFragment
+JavaField < JavaFragment
+JavaMethod < JavaFragment
+
+partOf < JavaFragment * JavaFile		// forall (x,y) in JavaFragment*JavaFile : partOf(x,y)
+partOf < JavaClass * JavaClass
+partOf < JavaField * JavaClass
+partOf < JavaMethod * JavaClass
+
+
+XML : Language
+XSD : Language
+XSD subsetOf XML
+
+XSDFile < File
+XMLFragmet < Fragment
+XMLElement < XMLFramgent
+XSDComplexType < XMLElement 
+
+correspondsTo < JavaClass * XSDComplexType
+
+
+CompanyJavaFile : JavaFile
+CompanyJavaFile = "..."
+
+CompanyXSDFile : XSDFile
+CompanyXSDFile = "..."
+
+-----------------------------------------------------------
+Fragmentation Result:
+-----------------------------------------------------------
+
+CompanyJavaFile.Company : JavaClass
+CompanyJavaFile.Company = "..."
+CompanyJavaFile.Company.name : JavaField
+CompanyJavaFile.Company.name = "..."
+CompanyJavaFile.Company.getName : JavaMethod
+CompanyJavaFile.Company.getName = "..."
+
+CompanyXSDFile.Company : XSDComplexType
+CompanyXSDFile.Company = "..."
+
+-----------------------------------------------------------
+Recovery Result:
+-----------------------------------------------------------
+
+CompanyJavaFile.Company correspondsTo CompanyXSDFile.Company

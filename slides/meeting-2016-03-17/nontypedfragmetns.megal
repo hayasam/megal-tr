@@ -1,0 +1,64 @@
+
+File < Entity
+Fragment < Entity
+Set < Entity
+Language < Set
+
+
+isA < Entity * Entity
+
+partOf < Fragment * File
+partOf < Fragment * Fragment
+
+Java : Language
+
+JavaFile : File
+
+JavaClass : Fragment
+JavaClass elementOf Java
+JavaClass partOf JavaFile
+JavaClass partOf JavaClass
+JavaClass isA DomainModel
+
+JavaClass.JavaField : Fragment
+JavaClass.JavaField elementOf Java
+
+JavaClass.JavaMethod : Fragment
+JavaClass.JavaMethod elementOf Java
+
+XML : Language
+XSD : Language
+XSD subsetOf XML
+
+XSDDocument : File
+
+XMLElement : Framgent
+XMLElement elementOf XML
+XMLElement partOf XMLElement
+XMLElement isA DomainModel
+
+XSDComplexType : Fragment
+XSDComplexType isA XMLElement 
+
+JavaClass correspondsTo XSDComplexType
+
+JavaFile = "..."
+XSDDocument = "..."
+
+-----------------------------------------------------------
+Recovery Result:
+-----------------------------------------------------------
+
+JavaFile.Company : Fragment
+JavaFile.Company isA JavaClass
+
+JavaFile.Company.name : Fragment
+JavaFile.Company.name isA JavaField
+
+JavaFile.Company.getName : Fragment
+JavaFile.Company.getName isA JavaMethod
+
+XSDDocument.Company : Fragment
+XSDDocument.Company isA XSDComplexType
+
+
