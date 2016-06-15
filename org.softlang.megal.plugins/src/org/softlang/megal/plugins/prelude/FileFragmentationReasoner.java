@@ -18,7 +18,7 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin implements F
 	
 	@Override
 	protected void guidedDerive(Entity entity) throws Throwable {
-		
+		System.out.println("asdf");
 		for (FragmentationPlugin plugin : filter(getParts(), FragmentationPlugin.class)) {
 			
 			if (!any(plugin.getRealization(), lang -> isElementOfLanguage(entity, lang))) {
@@ -28,7 +28,7 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin implements F
 			}
 			
 			try {
-			
+				
 				Artifact artifact = artifactOf(entity);
 				URI location = artifact.getLocation();
 				

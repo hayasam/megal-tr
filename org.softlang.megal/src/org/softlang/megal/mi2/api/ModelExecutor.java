@@ -172,7 +172,7 @@ public class ModelExecutor {
 				for (;;) {
 					// Evaluate all the elements
 					for (Element element : current.getElements()) {
-
+						
 						// Compose a local context
 						Context context = createContext(origin, element);
 

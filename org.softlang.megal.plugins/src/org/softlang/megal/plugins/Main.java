@@ -31,10 +31,12 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		
-		System.out.println("start");
+		System.out.println("Start.");
 		
 		KB kb = MegamodelKB.loadAll(Megals.load(new File("megal/test.megal"), new File("megal/Prelude.megal")));
 		ModelExecutor ex = new ModelExecutor();
+		
+		System.out.println("KB loaded.");
 		
 		kb = ex.evaluate(getResolution(), kb).getOutput();
 		

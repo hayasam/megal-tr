@@ -3,6 +3,7 @@ package org.softlang.megal.plugins.util.fragmentation;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class FragmentGraph {
 
 	static private class Edge {
