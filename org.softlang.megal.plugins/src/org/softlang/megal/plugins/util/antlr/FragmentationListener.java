@@ -4,7 +4,7 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.softlang.megal.plugins.api.FragmentationPlugin;
-import org.softlang.megal.plugins.util.antlr.Fragment;
+import org.softlang.megal.plugins.api.FragmentationPlugin.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,25 +14,24 @@ import org.antlr.v4.runtime.ParserRuleContext;
 
 public class FragmentationListener implements ParseTreeListener {
 
-	private List<FragmentationRule<ParserRuleContext>> rules = new ArrayList<FragmentationRule<ParserRuleContext>>();
+	private List<FragmentationRule> rules = new ArrayList<FragmentationRule>();
 	private Stack<FragmentationPlugin.Fragment> fragments = new Stack<FragmentationPlugin.Fragment>();
 	
 	public List<FragmentationPlugin.Fragment> getFragments() {
 		return fragments;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public <C extends ParserRuleContext> void addFragmentationRule (FragmentationRule<C> rule) {
-		rules.add( (FragmentationRule<ParserRuleContext>) rule);
+	public void addFragmentationRule (FragmentationRule rule) {
+		rules.add(rule);
 	}
 	
 	public void exitEveryRule (ParserRuleContext context) {
 		
-		for (FragmentationRule<ParserRuleContext> rule : rules) {
+		for (FragmentationRule rule : rules) {
 			
 			if (rule.test(context)) {
 				
-				Fragment<ParserRuleContext> fragment = rule.create(context);
+				Fragment fragment = rule.create((ParserRuleContext)context);
 				
 				while(rule.hasParts() && !fragments.isEmpty()) {
 					
@@ -50,20 +49,17 @@ public class FragmentationListener implements ParseTreeListener {
 
 	@Override
 	public void enterEveryRule(ParserRuleContext arg0) {
-		// TODO Auto-generated method stub
-		
+		// do nothing		
 	}
 
 	@Override
 	public void visitErrorNode(ErrorNode arg0) {
-		// TODO Auto-generated method stub
-		
+		// do nothing
 	}
 
 	@Override
 	public void visitTerminal(TerminalNode arg0) {
-		// TODO Auto-generated method stub
-		
+		// do nothing
 	}
 	
 	

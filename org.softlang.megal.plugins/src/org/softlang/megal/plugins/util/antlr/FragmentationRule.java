@@ -1,14 +1,16 @@
 package org.softlang.megal.plugins.util.antlr;
 
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.softlang.megal.plugins.util.antlr.Fragment;
+import org.softlang.megal.plugins.api.FragmentationPlugin.Fragment;
 
-public interface FragmentationRule<C extends ParserRuleContext> {
+public abstract class FragmentationRule {
 
-	public boolean hasParts ();
+	abstract public boolean test (ParserRuleContext context);
+	abstract public Fragment create (ParserRuleContext context);
 	
-	public boolean test (ParserRuleContext context);
+	public boolean hasParts () {
+		return false;
+	}
 	
-	public Fragment<C> create (C context);
 	
 }

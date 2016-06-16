@@ -48,7 +48,7 @@ public class Main {
 
 		System.out.println();
 		
-		for (EntityType et :kb.getEntityTypes().stream().sorted( (a,b) -> a.getName().compareTo(b.getName()) ).collect(Collectors.toList())) {
+		for (EntityType et :kb.getEntityTypes().stream().sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) ).collect(Collectors.toList())) {
 			
 			System.out.println(et);
 			
@@ -56,7 +56,7 @@ public class Main {
 		
 		System.out.println();
 		
-		for (RelationshipType rt : kb.getRelationshipTypes().stream().sorted( (a,b) -> a.getName().compareTo(b.getName()) ).collect(Collectors.toList())) {
+		for (RelationshipType rt : kb.getRelationshipTypes().stream().sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) ).collect(Collectors.toList())) {
 			
 			System.out.println(rt);	
 			
@@ -64,7 +64,7 @@ public class Main {
 		
 		System.out.println();
 		
-		for (Entity e : kb.getEntities().stream().sorted( (a,b) -> a.getName().compareTo(b.getName()) ).collect(Collectors.toList())) {
+		for (Entity e : kb.getEntities().stream().sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) ).collect(Collectors.toList())) {
 			
 			System.out.println(e);
 			
@@ -75,6 +75,7 @@ public class Main {
 			}
 			
 		}
+		
 		
 		
 		
