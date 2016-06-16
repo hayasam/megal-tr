@@ -1,12 +1,13 @@
 package org.softlang.megal.plugins.impl.java;
 
+import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.MethodDeclarationContext;
-import org.softlang.megal.plugins.util.antlr.Fragment;
+import org.softlang.megal.plugins.util.antlr.ParseTreeFragment;
 
-public class JavaMethodFragment extends Fragment<MethodDeclarationContext> {
+public class JavaMethodFragment extends ParseTreeFragment<MethodDeclarationContext> {
 
-	public JavaMethodFragment(MethodDeclarationContext context) {
-		super(context);
+	public JavaMethodFragment(Artifact artifact, MethodDeclarationContext context) {
+		super(artifact, context);
 	}
 	
 	@Override
@@ -19,9 +20,6 @@ public class JavaMethodFragment extends Fragment<MethodDeclarationContext> {
 		return getContext().Identifier().getText();
 	}
 
-	@Override
-	public String getLink() {
-		return "";
-	}
+	
 
 }

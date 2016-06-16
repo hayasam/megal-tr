@@ -16,11 +16,12 @@ partOf < JavaInterface * File
 partOf < JavaMethod * JavaClass
 partOf < JavaField * JavaClass
 
-javaFile : File
-javaFile elementOf Java
-javaFile = 'workspace:/org.softlang.megal.plugins/input/Foo.java'
 
-JavaFragmentizer : Plugin
-JavaFragmentizer realizationOf Java
-JavaFragmentizer partOf FileFragmentReasoner
-JavaFragmentizer = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationPlugin'
+aJavaFile : File
+aJavaFile elementOf Java
+aJavaFile = 'workspace:/org.softlang.megal.plugins/input/Foo.java'
+
+JavaFragmentReasoner : Plugin
+JavaFragmentReasoner realizationOf Java
+JavaFragmentReasoner partOf FileFragmentReasoner
+JavaFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationPlugin'

@@ -3,6 +3,7 @@ package org.softlang.megal.plugins;
 import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.softlang.megal.language.*;
@@ -34,18 +35,8 @@ public class Main {
 		
 	}
 	
-	public static void main(String[] args) throws IOException {
+	private static void printTypes (KB kb) {
 		
-		System.out.println("Start.");
-		
-		KB kb = MegamodelKB.loadAll(Megals.load(new File("megal/test.megal"), new File("megal/Prelude.megal")));
-		ModelExecutor ex = new ModelExecutor();
-		
-		System.out.println("KB loaded.");
-		
-		kb = ex.evaluate(getResolution(), kb).getOutput();
-		
-
 		System.out.println();
 		
 		for (EntityType et :kb.getEntityTypes().stream().sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) ).collect(Collectors.toList())) {
@@ -62,9 +53,18 @@ public class Main {
 			
 		}
 		
+	}
+	
+	private static void printInstances (KB kb) {
+		
 		System.out.println();
 		
-		for (Entity e : kb.getEntities().stream().sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) ).collect(Collectors.toList())) {
+		List<Entity> es = kb.getEntities().stream()
+				.filter( e -> !e.getType().getName().equals("Plugin")  )
+				//.sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) )
+				.collect(Collectors.toList());
+		
+		for (Entity e : es) {
 			
 			System.out.println(e);
 			
@@ -74,11 +74,29 @@ public class Main {
 				
 			}
 			
+			if (e.getBinding() != null) {
+				System.out.println(e.getName() + " = " + e.getBinding());
+			}
+			
+			System.out.println();
+			
 		}
 		
+	}
+	
+	public static void main(String[] args) throws IOException {
 		
+		System.out.println("Start.");
 		
+		KB kb = MegamodelKB.loadAll(Megals.load(new File("megal/test.megal"), new File("megal/Prelude.megal")));
+		ModelExecutor ex = new ModelExecutor();
 		
+		System.out.println("KB loaded.");
+		
+		kb = ex.evaluate(getResolution(), kb).getOutput();
+		
+		printInstances(kb);
+			
 		
 	}
 
