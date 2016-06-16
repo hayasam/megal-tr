@@ -1,7 +1,6 @@
 package org.softlang.megal.plugins.impl.java;
 
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,9 +12,9 @@ import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.api.FragmentationPlugin;
 import org.softlang.megal.plugins.impl.java.antlr.JavaLexer;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser;
+import org.softlang.megal.plugins.util.Fragments.Fragment;
 import org.softlang.megal.plugins.util.antlr.ParseTreeFragmentationListener;
 import org.softlang.megal.plugins.util.antlr.ParseTreeFragmentationRule;
-import org.softlang.megal.plugins.util.antlr.old.FragmentationException;
 
 public class JavaFragmentationPlugin extends FragmentationPlugin {
 	
@@ -54,7 +53,9 @@ public class JavaFragmentationPlugin extends FragmentationPlugin {
 
 		@Override
 		public Fragment create(Artifact artifact, ParserRuleContext context) {
+			
 			return new JavaClassFragment(artifact, (JavaParser.ClassDeclarationContext)context);
+			
 		}
 		
 	};
@@ -98,7 +99,7 @@ public class JavaFragmentationPlugin extends FragmentationPlugin {
 	
 	
 	@Override
-	public List<Fragment> getFragments(Artifact artifact) throws FragmentationException {
+	public List<Fragment> getFragments(Artifact artifact) {
 		
 		ParseTreeFragmentationListener listener = new ParseTreeFragmentationListener(artifact, rules);
 		

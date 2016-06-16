@@ -1,8 +1,10 @@
 package org.softlang.megal.plugins.util.antlr;
 
+import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.misc.Interval;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.FragmentationPlugin;
+import org.softlang.megal.plugins.util.Fragments.Fragment;
 
 /**
  * Abstract class for fragments wrapped around an ANTLR parser rule context.
@@ -10,7 +12,7 @@ import org.softlang.megal.plugins.api.FragmentationPlugin;
  *
  * @param <C> The wrapped parser rule context class
  */
-public abstract class ParseTreeFragment<C extends ParserRuleContext> extends FragmentationPlugin.Fragment {
+public abstract class ParseTreeFragment<C extends ParserRuleContext> extends Fragment {
 	
 	/**
 	 * The wrapped parser rule context
@@ -30,8 +32,20 @@ public abstract class ParseTreeFragment<C extends ParserRuleContext> extends Fra
 	 * Gets the wrapped parser rule context
 	 * @return The wrapped parser rule context
 	 */
-	public C getContext () {
+	final public C getContext () {
 		return context;
+	}
+	
+	@Override
+	final public String getText() {
+		
+		int a = getContext().start.getStartIndex();
+	    int b = getContext().stop.getStopIndex();
+	    Interval interval = new Interval(a,b);
+		CharStream stream = getContext().start.getInputStream();
+		
+		return stream.getText(interval);
+		
 	}
 	
 }

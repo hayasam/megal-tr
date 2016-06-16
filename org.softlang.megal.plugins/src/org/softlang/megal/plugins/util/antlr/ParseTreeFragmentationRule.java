@@ -2,7 +2,7 @@ package org.softlang.megal.plugins.util.antlr;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.FragmentationPlugin.Fragment;
+import org.softlang.megal.plugins.util.Fragments.Fragment;
 
 /**
  * Abstract class for ANTLR parse tree fragmentation rules

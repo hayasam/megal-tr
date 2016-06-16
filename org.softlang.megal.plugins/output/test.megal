@@ -1,0 +1,140 @@
+
+JavaInterface < Fragment
+JavaField < Fragment
+JavaClass < Fragment
+JavaFragment < Fragment
+JavaMethod < Fragment
+JavaAnnotation < Fragment
+JavaConstructor < Fragment
+Concept < Entity
+Set < Entity
+Resource < Artifact
+Folder < Artifact
+Fragment < Artifact
+Artifact < Entity
+Function < Entity
+Language < Set
+Technology < Entity
+Transient < Artifact
+File < Artifact
+Plugin < Entity
+Pair < Entity
+Entity
+
+partOf< JavaClass * File
+elementOf< Pair * Function
+partOf< Technology * Technology
+dependsOn< Technology * Technology
+deploysTo< Technology * Technology
+dependsOn< Technology * Language
+refersTo< Artifact * Artifact+
+partOf< Artifact * Artifact+
+transformedIn< Artifact * Artifact+
+dependsOn< Artifact * Artifact+
+correspondsTo< Artifact * Artifact+
+conformsTo< Artifact * Artifact+
+refersTo< Artifact * Technology
+partOf< Artifact * Technology
+defines< Artifact * Language
+refersTo< Artifact * Artifact
+partOf< Artifact * Artifact
+transformedIn< Artifact * Artifact
+dependsOn< Artifact * Artifact
+correspondsTo< Artifact * Artifact
+conformsTo< Artifact * Artifact
+realizationOf< Artifact * Function
+defines< Artifact * Function
+partOf< Language * Technology
+partOf< Language * Language
+transformedIn< Language * Language
+variantOf< Language * Language
+transformableIn< Language * Language
+versionOf< Language * Language
+linksTo< File * File+
+elementOf< File * Language
+linksTo< File * File
+instanceOf< Entity * Concept
+firstOf< Entity * Pair
+secondOf< Entity * Pair
+elementOf< Entity * Set
+linksTo< File+ * File+
+elementOf< File+ * Language
+linksTo< File+ * File
+dependsOn< Function * Technology
+partOf< JavaField * JavaClass
+subsetOf< Set * Set
+realizationOf< Plugin * Entity
+partOf< Plugin * Plugin
+partOf< JavaMethod * JavaClass
+partOf< JavaInterface * File
+firstOf< Entity+ * Pair
+secondOf< Entity+ * Pair
+elementOf< Entity+ * Set
+refersTo< Artifact+ * Artifact+
+partOf< Artifact+ * Artifact+
+transformedIn< Artifact+ * Artifact+
+dependsOn< Artifact+ * Artifact+
+correspondsTo< Artifact+ * Artifact+
+conformsTo< Artifact+ * Artifact+
+refersTo< Artifact+ * Technology
+partOf< Artifact+ * Technology
+defines< Artifact+ * Language
+refersTo< Artifact+ * Artifact
+partOf< Artifact+ * Artifact
+transformedIn< Artifact+ * Artifact
+dependsOn< Artifact+ * Artifact
+correspondsTo< Artifact+ * Artifact
+conformsTo< Artifact+ * Artifact
+realizationOf< Artifact+ * Function
+defines< Artifact+ * Function
+isA< Concept * Concept
+
+Java: Language
+
+aJavaFile: File
+aJavaFile elementOf Java
+aJavaFile = workspace:/org.softlang.megal.plugins/input/Foo.java
+
+JavaFragmentReasoner: Plugin
+JavaFragmentReasoner realizationOf Java
+JavaFragmentReasoner partOf FileFragmentReasoner
+JavaFragmentReasoner = classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationPlugin
+
+PairElementWhenComputed: Plugin
+PairElementWhenComputed = classpath:org.softlang.megal.plugins.prelude.PairElementWhenComputed
+
+LanguageResolver: Plugin
+LanguageResolver = classpath:org.softlang.megal.plugins.prelude.LanguageResolver
+
+FileFragmentReasoner: Plugin
+FileFragmentReasoner = classpath:org.softlang.megal.plugins.prelude.FileFragmentationReasoner
+
+FileElementOfLanguage: Plugin
+FileElementOfLanguage = classpath:org.softlang.megal.plugins.prelude.FileElementOfLanguage
+
+PartOfReasoner: Plugin
+PartOfReasoner = classpath:org.softlang.megal.plugins.prelude.PartOfReasoner
+
+Foo: JavaClass
+Foo = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo
+
+Foo.bar: JavaField
+Foo.bar partOf Foo
+Foo.bar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaField/bar
+
+Foo.Bar: JavaClass
+Foo.Bar partOf Foo
+Foo.Bar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaClass/Bar
+
+Foo.setBar: JavaMethod
+Foo.setBar partOf Foo
+Foo.setBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaMethod/setBar
+
+Foo.Bar.getBar: JavaMethod
+Foo.Bar.getBar partOf Foo.Bar
+Foo.Bar.getBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaClass/Bar/JavaMethod/getBar
+
+Foo.getBar: JavaMethod
+Foo.getBar partOf Foo
+Foo.getBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaMethod/getBar
+

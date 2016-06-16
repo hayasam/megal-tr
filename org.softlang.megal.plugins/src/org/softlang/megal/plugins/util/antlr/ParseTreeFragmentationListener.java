@@ -4,10 +4,8 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.FragmentationPlugin;
-import org.softlang.megal.plugins.api.FragmentationPlugin.Fragment;
+import org.softlang.megal.plugins.util.Fragments.Fragment;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
@@ -31,7 +29,7 @@ public class ParseTreeFragmentationListener implements ParseTreeListener {
 	/**
 	 * Stack for collected fragments
 	 */
-	private Stack<FragmentationPlugin.Fragment> fragments = new Stack<FragmentationPlugin.Fragment>();
+	private Stack<Fragment> fragments = new Stack<Fragment>();
 	
 	public ParseTreeFragmentationListener (Artifact artifact, Collection<ParseTreeFragmentationRule> rules) {
 		this.artifact = artifact;
@@ -42,7 +40,7 @@ public class ParseTreeFragmentationListener implements ParseTreeListener {
 	 * Getter for collected fragments
 	 * @return The list of collected fragments
 	 */
-	public List<FragmentationPlugin.Fragment> getFragments() {
+	public List<Fragment> getFragments() {
 		return fragments;
 	}
 	

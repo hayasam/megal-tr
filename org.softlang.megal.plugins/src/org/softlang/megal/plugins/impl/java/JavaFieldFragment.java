@@ -20,5 +20,6 @@ public class JavaFieldFragment extends ParseTreeFragment<VariableDeclaratorConte
 		return getContext().getText();
 	}
 	
+	
 
 }
