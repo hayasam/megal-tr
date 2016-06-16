@@ -3,28 +3,18 @@ package org.softlang.megal.plugins.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.softlang.megal.plugins.util.fragmentation.Fragment;
+import org.softlang.megal.plugins.api.FragmentationPlugin.Fragment;
+
 
 public abstract class Fragments {
 	
-	static public List<Fragment> create () {
 		
-		return new ArrayList<Fragment>();
-		
-	}
-	
-	static public Fragment newFragment () {
-		
-		return new Fragment();
-		
-	}
-	
 		
 	static public List<Fragment> decendants (Fragment fragment) {
 		
 		List<Fragment> result = new ArrayList<Fragment>();
 		
-		for (Fragment child : fragment.getChildren()) {
+		for (Fragment child : fragment.getParts()) {
 			
 			result.add(child);
 			result.addAll(decendants(child));
@@ -37,7 +27,7 @@ public abstract class Fragments {
 	
 	static private String indent (int size) {
 		
-		String str = "";
+		String str = "-";
 		
 		for (int i=0; i < size; i++) {
 			
@@ -59,9 +49,9 @@ public abstract class Fragments {
 	
 	static private void print (Fragment fragment, int indent) {
 		
-		System.out.println(indent(indent) + " " + fragment);
+		System.out.println(indent(indent) + fragment);
 		
-		for (Fragment f : fragment.getChildren()) {
+		for (Fragment f : fragment.getParts()) {
 			
 			print(f, indent+1);
 			

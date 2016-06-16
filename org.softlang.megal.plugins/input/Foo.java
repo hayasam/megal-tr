@@ -3,6 +3,10 @@ public class Foo {
 	
 	class Bar {
 		
+		private void lala () {
+			
+		}
+		
 	}
 
 	private String bar;

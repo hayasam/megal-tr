@@ -8,17 +8,15 @@ import static com.google.common.collect.Iterables.any;
 import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 
 import java.net.URI;
-
 import org.softlang.megal.plugins.api.FragmentationPlugin;
+import org.softlang.megal.plugins.api.FragmentationPlugin.Fragment;
 import org.softlang.megal.plugins.api.GuidedReasonerPlugin;
-import org.softlang.megal.plugins.util.fragmentation.Fragment;
-import org.softlang.megal.plugins.util.fragmentation.FragmentVisitor;
 
-public class FileFragmentationReasoner extends GuidedReasonerPlugin implements FragmentVisitor {
+public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 	
 	@Override
 	protected void guidedDerive(Entity entity) throws Throwable {
-		System.out.println("asdf");
+		
 		for (FragmentationPlugin plugin : filter(getParts(), FragmentationPlugin.class)) {
 			
 			if (!any(plugin.getRealization(), lang -> isElementOfLanguage(entity, lang))) {
@@ -32,9 +30,8 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin implements F
 				Artifact artifact = artifactOf(entity);
 				URI location = artifact.getLocation();
 				
-				plugin
-					.getFragments(artifact.getChars().openStream())
-					.forEach(f -> f.accept(this));
+				for(Fragment f : plugin.getFragments(artifact.getChars().openStream()))
+					derive(f);
 				
 			} 
 			catch(Exception e) {
@@ -46,12 +43,20 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin implements F
 		}
 		
 	}
-
-	@Override
-	public void visit(Fragment fragment) {
+	
+	private void derive (Fragment f) {
 		
-		entity(fragment.getName(), fragment.getType());
+		entity(f.getName(), f.getType());
+		
+		for (Fragment part : f.getParts()) {
+			
+			derive(part);
+			relationship(part.getName(), f.getName(), "partOf");
+			
+		}
 		
 	}
+	
+	
 	
 }

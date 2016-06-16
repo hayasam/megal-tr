@@ -1,4 +1,4 @@
-package org.softlang.megal.plugins.util.fragmentation;
+package org.softlang.megal.plugins.util.antlr.old;
 
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+@Deprecated
 public abstract class ANTLRFragmentationVisitor implements ParseTreeVisitor<Fragment> {
 
 	abstract public Fragment createFragment (RuleContext context);
