@@ -2,6 +2,7 @@ model test
 import Prelude
 
 Java : Language
+XML: Language
 
 JavaFragment < Fragment
 JavaInterface < Fragment
@@ -26,3 +27,14 @@ JavaFragmentReasoner : Plugin
 JavaFragmentReasoner realizationOf Java
 JavaFragmentReasoner partOf FileFragmentReasoner
 JavaFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationReasoner'
+
+XMLElement < Fragment
+
+xmlFile: File
+xmlFile elementOf XML
+xmlFile = 'workspace:/org.softlang.megal.plugins/input/Foo.xml'
+
+XMLFragmentReasoner : Plugin
+XMLFragmentReasoner realizationOf XML
+XMLFragmentReasoner partOf FileFragmentReasoner
+XMLFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.xml.XMLFragmentationReasoner'

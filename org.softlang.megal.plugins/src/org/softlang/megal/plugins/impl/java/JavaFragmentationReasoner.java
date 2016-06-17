@@ -63,8 +63,8 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 
 		@Override
 		public boolean test(ParserRuleContext context) {
-			return context instanceof JavaParser.ClassDeclarationContext;
-//					&& context.getParent() instanceof JavaParser.TypeDeclarationContext;
+			return context instanceof JavaParser.ClassDeclarationContext
+					&& context.getParent() instanceof JavaParser.TypeDeclarationContext;
 		}
 
 		@Override
@@ -151,6 +151,9 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 		
 	};
 	
+	/**
+	 * 
+	 */
 	@Override
 	public Collection<FragmentationListenerRule> getRules() {
 		
@@ -163,6 +166,10 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 		return rules;
 		
 	}
+	
+	/**
+	 * 
+	 */
 	@Override
 	public ParseTree getParseTree(CharStream input) {
 		
