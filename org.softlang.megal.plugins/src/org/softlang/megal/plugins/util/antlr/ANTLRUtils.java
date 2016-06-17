@@ -4,7 +4,7 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.Interval;
 
-public abstract class ParserRuleContexts {
+public abstract class ANTLRUtils {
 
 	static public String originalText (ParserRuleContext context) {
 		

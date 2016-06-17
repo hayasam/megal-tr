@@ -18,6 +18,7 @@ import org.softlang.megal.mi2.api.ModelExecutor;
 import org.softlang.megal.mi2.api.resolution.LocalResolution;
 import org.softlang.megal.plugins.util.Fragments;
 
+@SuppressWarnings("unused")
 public class Main {
 	
 	private static LocalResolution getResolution () throws IOException  {
@@ -60,6 +61,10 @@ public class Main {
 		out.println();
 		
 		List<Entity> es = kb.getEntities().stream()
+//				.filter( e -> {
+//					System.out.println(e.getType());
+//					return true;
+//				})
 				.filter( e -> !e.getType().getName().equals("Plugin")  )
 				//.sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) )
 				.collect(Collectors.toList());
@@ -107,7 +112,7 @@ public class Main {
 		printTypes(kb,output);
 		printInstances(kb,output);
 		output.close();
-			
+		
 		
 	}
 

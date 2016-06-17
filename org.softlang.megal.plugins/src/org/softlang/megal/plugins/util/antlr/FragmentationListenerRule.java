@@ -11,7 +11,7 @@ import org.softlang.megal.plugins.util.Fragments.Fragment;
  * @author maxmeffert
  *
  */
-public abstract class ParseTreeFragmentationRule {
+public abstract class FragmentationListenerRule {
 
 	/**
 	 * Tests whether the rule is applicable to the current parser rule context

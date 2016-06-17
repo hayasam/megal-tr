@@ -6,6 +6,7 @@ Java : Language
 JavaFragment < Fragment
 JavaInterface < Fragment
 JavaClass < Fragment
+JavaInnerClass < Fragment
 JavaConstructor < Fragment
 JavaMethod < Fragment
 JavaField < Fragment

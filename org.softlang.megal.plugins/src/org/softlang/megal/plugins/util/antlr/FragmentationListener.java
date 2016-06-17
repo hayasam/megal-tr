@@ -18,7 +18,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
  * @author maxmeffert
  *
  */
-public class ParseTreeFragmentationListener implements ParseTreeListener {
+public class FragmentationListener implements ParseTreeListener {
 
 	/**
 	 * 
@@ -33,14 +33,14 @@ public class ParseTreeFragmentationListener implements ParseTreeListener {
 	/**
 	 * A List of fragmentation rules
 	 */
-	private Collection<ParseTreeFragmentationRule> rules;
+	private Collection<FragmentationListenerRule> rules;
 	
 	/**
 	 * Stack for collected fragments
 	 */
 	private Stack<Fragment> fragments = new Stack<Fragment>();
 	
-	public ParseTreeFragmentationListener (Entity entity, Artifact artifact, Collection<ParseTreeFragmentationRule> rules) {
+	public FragmentationListener (Entity entity, Artifact artifact, Collection<FragmentationListenerRule> rules) {
 		this.entity = entity;
 		this.artifact = artifact;
 		this.rules = rules;
@@ -62,7 +62,7 @@ public class ParseTreeFragmentationListener implements ParseTreeListener {
 	public void exitEveryRule (ParserRuleContext context) {
 		
 		// for each fragmentation rule
-		for (ParseTreeFragmentationRule rule : rules) {
+		for (FragmentationListenerRule rule : rules) {
 
 			// if the rule is applicable
 			if (rule.test(context)) {

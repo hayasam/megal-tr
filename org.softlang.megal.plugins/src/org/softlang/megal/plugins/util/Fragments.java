@@ -3,6 +3,8 @@ package org.softlang.megal.plugins.util;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +12,7 @@ import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * 
@@ -29,10 +32,6 @@ public abstract class Fragments {
 	}
 	
 	static final public class Fragment {
-		
-//		abstract public String getType();
-//		abstract public String getName();
-//		abstract public String getText();
 		
 		private String type;
 		private Entity entity;
@@ -84,12 +83,11 @@ public abstract class Fragments {
 			return getEntity().getName() + "." + getName();
 		}
 		
-		public List<Fragment> getParts() {
+		public Collection<Fragment> getParts() {
 			return parts;
 		}
 		
-		@Deprecated
-		public void addPart(Fragment part) {
+		public void addPart (Fragment part) {
 			part.parent = this;
 			parts.add(part);
 		}
@@ -122,7 +120,7 @@ public abstract class Fragments {
 		
 	}
 	
-	static private List<Fragment> fb = new ArrayList<Fragment>();
+	static private Set<Fragment> fb = new HashSet<Fragment>();
 	
 	static public Fragment create (String type, Entity entity, Artifact artifact, FactProvider facts) {
 		

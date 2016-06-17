@@ -1,5 +1,6 @@
 
 JavaInterface < Fragment
+JavaInnerClass < Fragment
 JavaField < Fragment
 JavaClass < Fragment
 JavaFragment < Fragment
@@ -111,11 +112,15 @@ aJavaFile.Foo.getBar: JavaMethod
 aJavaFile.Foo.getBar partOf aJavaFile.Foo
 aJavaFile.Foo.getBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaMethod/getBar
 
-aJavaFile.Foo.Bar.getBar: JavaMethod
-aJavaFile.Foo.Bar.getBar partOf aJavaFile.Foo.Bar
-aJavaFile.Foo.Bar.getBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaClass/Bar/JavaMethod/getBar
+aJavaFile.Foo.Bar.Bar: JavaInnerClass
+aJavaFile.Foo.Bar.Bar partOf aJavaFile.Foo.Bar
+aJavaFile.Foo.Bar.Bar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaClass/Bar/JavaInnerClass/Bar
 
 aJavaFile.Foo: JavaClass
 aJavaFile.Foo partOf aJavaFile
 aJavaFile.Foo = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo
+
+aJavaFile.Foo.Bar.Bar.getBar: JavaMethod
+aJavaFile.Foo.Bar.Bar.getBar partOf aJavaFile.Foo.Bar.Bar
+aJavaFile.Foo.Bar.Bar.getBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaClass/Bar/JavaInnerClass/Bar/JavaMethod/getBar
 
