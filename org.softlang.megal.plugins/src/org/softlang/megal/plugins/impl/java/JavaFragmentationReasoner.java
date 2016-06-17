@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.api.FragmentationPlugin;
 import org.softlang.megal.plugins.impl.java.antlr.JavaLexer;
@@ -16,7 +17,7 @@ import org.softlang.megal.plugins.util.Fragments.Fragment;
 import org.softlang.megal.plugins.util.antlr.ParseTreeFragmentationListener;
 import org.softlang.megal.plugins.util.antlr.ParseTreeFragmentationRule;
 
-public class JavaFragmentationPlugin extends FragmentationPlugin {
+public class JavaFragmentationReasoner extends FragmentationPlugin {
 	
 	final static private ParseTreeFragmentationRule ruleJavaInnerClass = new ParseTreeFragmentationRule(){
 
@@ -32,8 +33,8 @@ public class JavaFragmentationPlugin extends FragmentationPlugin {
 		}
 
 		@Override
-		public Fragment create(Artifact artifact, ParserRuleContext context) {
-			return new JavaClassFragment(artifact, (JavaParser.ClassDeclarationContext)context);
+		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
+			return new JavaClassFragment(entity, artifact, (JavaParser.ClassDeclarationContext)context);
 		}
 		
 	};
@@ -52,9 +53,9 @@ public class JavaFragmentationPlugin extends FragmentationPlugin {
 		}
 
 		@Override
-		public Fragment create(Artifact artifact, ParserRuleContext context) {
+		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
 			
-			return new JavaClassFragment(artifact, (JavaParser.ClassDeclarationContext)context);
+			return new JavaClassFragment(entity, artifact, (JavaParser.ClassDeclarationContext)context);
 			
 		}
 		
@@ -68,8 +69,8 @@ public class JavaFragmentationPlugin extends FragmentationPlugin {
 		}
 
 		@Override
-		public Fragment create(Artifact artifact, ParserRuleContext context) {
-			return new JavaMethodFragment(artifact, (JavaParser.MethodDeclarationContext)context);
+		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
+			return new JavaMethodFragment(entity, artifact, (JavaParser.MethodDeclarationContext)context);
 		}
 		
 	};
@@ -83,8 +84,8 @@ public class JavaFragmentationPlugin extends FragmentationPlugin {
 		}
 
 		@Override
-		public Fragment create(Artifact artifact, ParserRuleContext context) {
-			return new JavaFieldFragment(artifact, (JavaParser.VariableDeclaratorContext)context);
+		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
+			return new JavaFieldFragment(entity, artifact, (JavaParser.VariableDeclaratorContext)context);
 		}
 		
 	};
@@ -99,9 +100,9 @@ public class JavaFragmentationPlugin extends FragmentationPlugin {
 	
 	
 	@Override
-	public List<Fragment> getFragments(Artifact artifact) {
+	public List<Fragment> getFragments(Entity entity, Artifact artifact) {
 		
-		ParseTreeFragmentationListener listener = new ParseTreeFragmentationListener(artifact, rules);
+		ParseTreeFragmentationListener listener = new ParseTreeFragmentationListener(entity, artifact, rules);
 		
 		
 		try {

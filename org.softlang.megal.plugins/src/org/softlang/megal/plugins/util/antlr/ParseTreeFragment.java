@@ -3,6 +3,7 @@ package org.softlang.megal.plugins.util.antlr;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.Interval;
+import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.util.Fragments.Fragment;
 
@@ -23,8 +24,8 @@ public abstract class ParseTreeFragment<C extends ParserRuleContext> extends Fra
 	 * Constructs a new parser tree fragment
 	 * @param context The wrapped parser rule context
 	 */
-	public ParseTreeFragment(Artifact artifact, C context) {
-		super(artifact);
+	public ParseTreeFragment(Entity entity, Artifact artifact, C context) {
+		super(entity,artifact);
 		this.context = context;
 	}
 	

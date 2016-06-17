@@ -1,6 +1,7 @@
 package org.softlang.megal.plugins.util.antlr;
 
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.util.Fragments.Fragment;
 
@@ -26,7 +27,7 @@ public abstract class ParseTreeFragmentationRule {
 	 * @param context The parser rule context from which the fragment is created
 	 * @return A new fragment
 	 */
-	abstract public Fragment create (Artifact artifact, ParserRuleContext context);
+	abstract public Fragment create (Entity entity, Artifact artifact, ParserRuleContext context);
 	
 	/**
 	 * Whether the rule is for 'compound' fragments which contains further fragment parts.

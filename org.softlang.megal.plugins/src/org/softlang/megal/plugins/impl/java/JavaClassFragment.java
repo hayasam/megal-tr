@@ -1,13 +1,14 @@
 package org.softlang.megal.plugins.impl.java;
 
+import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.ClassDeclarationContext;
 import org.softlang.megal.plugins.util.antlr.ParseTreeFragment;
 
 public class JavaClassFragment extends ParseTreeFragment<ClassDeclarationContext> {
 
-	public JavaClassFragment(Artifact artifact, ClassDeclarationContext context) {
-		super(artifact, context);
+	public JavaClassFragment(Entity entity, Artifact artifact, ClassDeclarationContext context) {
+		super(entity, artifact, context);
 	}
 	
 	@Override

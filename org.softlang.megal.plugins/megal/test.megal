@@ -24,4 +24,4 @@ aJavaFile = 'workspace:/org.softlang.megal.plugins/input/Foo.java'
 JavaFragmentReasoner : Plugin
 JavaFragmentReasoner realizationOf Java
 JavaFragmentReasoner partOf FileFragmentReasoner
-JavaFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationPlugin'
+JavaFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationReasoner'

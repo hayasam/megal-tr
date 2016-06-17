@@ -95,46 +95,27 @@ aJavaFile: File
 aJavaFile elementOf Java
 aJavaFile = workspace:/org.softlang.megal.plugins/input/Foo.java
 
-JavaFragmentReasoner: Plugin
-JavaFragmentReasoner realizationOf Java
-JavaFragmentReasoner partOf FileFragmentReasoner
-JavaFragmentReasoner = classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationPlugin
+aJavaFile.Foo.bar: JavaField
+aJavaFile.Foo.bar partOf aJavaFile.Foo
+aJavaFile.Foo.bar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaField/bar
 
-PairElementWhenComputed: Plugin
-PairElementWhenComputed = classpath:org.softlang.megal.plugins.prelude.PairElementWhenComputed
+aJavaFile.Foo.Bar: JavaClass
+aJavaFile.Foo.Bar partOf aJavaFile.Foo
+aJavaFile.Foo.Bar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaClass/Bar
 
-LanguageResolver: Plugin
-LanguageResolver = classpath:org.softlang.megal.plugins.prelude.LanguageResolver
+aJavaFile.Foo.setBar: JavaMethod
+aJavaFile.Foo.setBar partOf aJavaFile.Foo
+aJavaFile.Foo.setBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaMethod/setBar
 
-FileFragmentReasoner: Plugin
-FileFragmentReasoner = classpath:org.softlang.megal.plugins.prelude.FileFragmentationReasoner
+aJavaFile.Foo.getBar: JavaMethod
+aJavaFile.Foo.getBar partOf aJavaFile.Foo
+aJavaFile.Foo.getBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaMethod/getBar
 
-FileElementOfLanguage: Plugin
-FileElementOfLanguage = classpath:org.softlang.megal.plugins.prelude.FileElementOfLanguage
+aJavaFile.Foo.Bar.getBar: JavaMethod
+aJavaFile.Foo.Bar.getBar partOf aJavaFile.Foo.Bar
+aJavaFile.Foo.Bar.getBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaClass/Bar/JavaMethod/getBar
 
-PartOfReasoner: Plugin
-PartOfReasoner = classpath:org.softlang.megal.plugins.prelude.PartOfReasoner
-
-Foo: JavaClass
-Foo = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo
-
-Foo.bar: JavaField
-Foo.bar partOf Foo
-Foo.bar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaField/bar
-
-Foo.Bar: JavaClass
-Foo.Bar partOf Foo
-Foo.Bar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaClass/Bar
-
-Foo.setBar: JavaMethod
-Foo.setBar partOf Foo
-Foo.setBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaMethod/setBar
-
-Foo.Bar.getBar: JavaMethod
-Foo.Bar.getBar partOf Foo.Bar
-Foo.Bar.getBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaClass/Bar/JavaMethod/getBar
-
-Foo.getBar: JavaMethod
-Foo.getBar partOf Foo
-Foo.getBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaMethod/getBar
+aJavaFile.Foo: JavaClass
+aJavaFile.Foo partOf aJavaFile
+aJavaFile.Foo = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo
 

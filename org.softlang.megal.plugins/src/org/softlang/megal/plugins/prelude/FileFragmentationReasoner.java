@@ -13,6 +13,26 @@ import org.softlang.megal.plugins.util.Fragments.Fragment;
 
 public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 	
+	private void deriveFragments (Iterable<Fragment> fs) {
+		
+		for (Fragment f : fs) {
+			
+			deriveFragments(f);
+			
+		}
+		
+	}
+	
+	private void deriveFragments (Fragment f) {
+		
+		entity(f.getFullName(), f.getType());
+		binding(f.getFullName(), f.getURI());
+		deriveFragments(f.getParts());
+		
+	}
+	
+	
+	
 	@Override
 	protected void guidedDerive(Entity entity) throws Throwable {
 		
@@ -28,11 +48,7 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 				
 				for(Artifact artifact : artifactsOf(entity)) {
 					
-					for(Fragment f : plugin.getFragments(artifact)) {
-						
-						derive(f);
-						
-					}
+					deriveFragments(plugin.getFragments(entity, artifact));
 					
 				}
 				
@@ -48,18 +64,7 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 		
 	}
 	
-	private void derive (Fragment f) {
-		
-		entity(f.getFullName(), f.getType());
-		binding(f.getFullName(), f.getURI());
-			
-		for (Fragment part : f.getParts()) {
-		
-			derive(part);
-			
-		}
-		
-	}
+	
 	
 	
 	

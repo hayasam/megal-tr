@@ -29,13 +29,19 @@ public abstract class Fragments {
 		abstract public String getName();
 		abstract public String getText();
 		
+		private Entity entity;
 		private Artifact artifact;
 		private Fragment parent;
 		private List<Fragment> parts = new ArrayList<Fragment>();
 		
-		public Fragment (Artifact artifact) {
+		public Fragment (Entity entity, Artifact artifact) {
+			this.entity = entity;
 			this.artifact = artifact;
 			fb.add(this);
+		}
+		
+		final public Entity getEntity () {
+			return entity;
 		}
 		
 		final public Artifact getArtifact() {
@@ -55,7 +61,7 @@ public abstract class Fragments {
 			if (hasParent())
 				return getParent().getFullName() + "." + getName();
  			
-			return getName();
+			return getEntity().getName() + "." + getName();
 		}
 		
 		final public List<Fragment> getParts() {

@@ -60,7 +60,7 @@ public class Main {
 		out.println();
 		
 		List<Entity> es = kb.getEntities().stream()
-				//.filter( e -> !e.getType().getName().equals("Plugin")  )
+				.filter( e -> !e.getType().getName().equals("Plugin")  )
 				//.sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) )
 				.collect(Collectors.toList());
 		

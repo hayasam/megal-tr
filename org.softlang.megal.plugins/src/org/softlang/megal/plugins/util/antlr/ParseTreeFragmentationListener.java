@@ -3,6 +3,7 @@ package org.softlang.megal.plugins.util.antlr;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.util.Fragments.Fragment;
 
@@ -19,6 +20,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
  */
 public class ParseTreeFragmentationListener implements ParseTreeListener {
 
+	private Entity entity;
 	private Artifact artifact;
 	
 	/**
@@ -31,7 +33,8 @@ public class ParseTreeFragmentationListener implements ParseTreeListener {
 	 */
 	private Stack<Fragment> fragments = new Stack<Fragment>();
 	
-	public ParseTreeFragmentationListener (Artifact artifact, Collection<ParseTreeFragmentationRule> rules) {
+	public ParseTreeFragmentationListener (Entity entity, Artifact artifact, Collection<ParseTreeFragmentationRule> rules) {
+		this.entity = entity;
 		this.artifact = artifact;
 		this.rules = rules;
 	}
@@ -58,7 +61,7 @@ public class ParseTreeFragmentationListener implements ParseTreeListener {
 			if (rule.test(context)) {
 				
 				// create a fragment from the parser rule context
-				Fragment fragment = rule.create(artifact, (ParserRuleContext)context);
+				Fragment fragment = rule.create(entity, artifact, (ParserRuleContext)context);
 				
 				// if the rule is for 'compound' fragment, add previously collected fragments as parts
 				// previously collected fragments are children of the AST nodes of the current fragment
