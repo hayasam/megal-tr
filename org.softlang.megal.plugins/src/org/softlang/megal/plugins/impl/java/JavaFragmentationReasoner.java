@@ -21,8 +21,8 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 	static private class InnerClassRule extends FragmentationListenerRule {
 
 		@Override
-		public boolean hasParts() {
-			return true;
+		public boolean isLeaf(ParserRuleContext context) {
+			return false;
 		}
 
 		@Override
@@ -57,8 +57,8 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 	static private class ClassRule extends FragmentationListenerRule {
 
 		@Override
-		public boolean hasParts() {
-			return true;
+		public boolean isLeaf(ParserRuleContext context) {
+			return false;
 		}
 
 		@Override
@@ -87,12 +87,19 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 			});
 			
 		}
+
+		
 		
 	};
 	
 	
 	static private class MethodRule extends FragmentationListenerRule {
 
+		@Override
+		public boolean isLeaf(ParserRuleContext context) {
+			return true;
+		}
+		
 		@Override
 		public boolean test(ParserRuleContext context) {
 			return context instanceof JavaParser.MethodDeclarationContext;
@@ -123,6 +130,11 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 	
 	static private class FieldRule extends FragmentationListenerRule {
 
+		@Override
+		public boolean isLeaf(ParserRuleContext context) {
+			return true;
+		}
+		
 		@Override
 		public boolean test(ParserRuleContext context) {
 			return context instanceof JavaParser.VariableDeclaratorContext

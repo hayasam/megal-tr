@@ -13,6 +13,15 @@ import org.softlang.megal.plugins.util.Fragments.Fragment;
  */
 public abstract class FragmentationListenerRule {
 
+	
+	/**
+	 * Whether the rule is for 'compound' fragments which contains further fragment parts.
+	 * Defaults to false.
+	 * 
+	 * @return Whether the rule is for 'compound' fragments
+	 */
+	abstract public boolean isLeaf (ParserRuleContext context);
+	
 	/**
 	 * Tests whether the rule is applicable to the current parser rule context
 	 * 
@@ -28,16 +37,6 @@ public abstract class FragmentationListenerRule {
 	 * @return A new fragment
 	 */
 	abstract public Fragment create (Entity entity, Artifact artifact, ParserRuleContext context);
-	
-	/**
-	 * Whether the rule is for 'compound' fragments which contains further fragment parts.
-	 * Defaults to false.
-	 * 
-	 * @return Whether the rule is for 'compound' fragments
-	 */
-	public boolean hasParts () {
-		return false;
-	}
 	
 	
 }

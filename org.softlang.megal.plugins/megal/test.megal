@@ -29,6 +29,7 @@ JavaFragmentReasoner partOf FileFragmentReasoner
 JavaFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationReasoner'
 
 XMLElement < Fragment
+XMLAttribute < Fragment
 
 xmlFile: File
 xmlFile elementOf XML

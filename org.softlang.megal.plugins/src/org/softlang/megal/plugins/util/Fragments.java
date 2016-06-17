@@ -74,13 +74,22 @@ public abstract class Fragments {
 		public Fragment getParent() {
 			return parent;
 		}
+		
+		public int getIndex () {
+			if (hasParent()) {
+				return getParent().parts.indexOf(this);
+			}
+			return 0;
+		}
 				
 		public String getFullName () {
 			
+			String name = getName() + "$" + getIndex();
+			
 			if (hasParent())
-				return getParent().getFullName() + "." + getName();
+				return getParent().getFullName() + "." + name;
  			
-			return getEntity().getName() + "." + getName();
+			return getEntity().getName() + "." + name;
 		}
 		
 		public Collection<Fragment> getParts() {
@@ -96,7 +105,7 @@ public abstract class Fragments {
 			
 			try {
 			
-				String path = "/" + getType() + "/" + getName();
+				String path = "/" + getType() + "/" + getName() + "/" + getIndex();
 				
 				if (hasParent()) {
 				

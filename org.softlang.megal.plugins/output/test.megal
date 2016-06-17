@@ -3,6 +3,7 @@ JavaInterface < Fragment
 JavaInnerClass < Fragment
 JavaField < Fragment
 JavaClass < Fragment
+XMLAttribute < Fragment
 JavaFragment < Fragment
 JavaMethod < Fragment
 JavaAnnotation < Fragment
@@ -103,39 +104,43 @@ xmlFile: File
 xmlFile elementOf XML
 xmlFile = workspace:/org.softlang.megal.plugins/input/Foo.xml
 
-aJavaFile.Foo.bar: JavaField
-aJavaFile.Foo.bar partOf aJavaFile.Foo
-aJavaFile.Foo.bar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaField/bar
+aJavaFile.Foo$0: JavaClass
+aJavaFile.Foo$0 partOf aJavaFile
+aJavaFile.Foo$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0
 
-aJavaFile.Foo.Bar: JavaInnerClass
-aJavaFile.Foo.Bar partOf aJavaFile.Foo
-aJavaFile.Foo.Bar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaInnerClass/Bar
+aJavaFile.Foo$0.getBar$2: JavaMethod
+aJavaFile.Foo$0.getBar$2 partOf aJavaFile.Foo$0
+aJavaFile.Foo$0.getBar$2 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0/JavaMethod/getBar/2
 
-aJavaFile.Foo.setBar: JavaMethod
-aJavaFile.Foo.setBar partOf aJavaFile.Foo
-aJavaFile.Foo.setBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaMethod/setBar
+aJavaFile.Foo$0.Bar$0.getBar$0: JavaMethod
+aJavaFile.Foo$0.Bar$0.getBar$0 partOf aJavaFile.Foo$0.Bar$0
+aJavaFile.Foo$0.Bar$0.getBar$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0/JavaInnerClass/Bar/0/JavaMethod/getBar/0
 
-aJavaFile.Foo.getBar: JavaMethod
-aJavaFile.Foo.getBar partOf aJavaFile.Foo
-aJavaFile.Foo.getBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaMethod/getBar
+aJavaFile.Foo$0.setBar$3: JavaMethod
+aJavaFile.Foo$0.setBar$3 partOf aJavaFile.Foo$0
+aJavaFile.Foo$0.setBar$3 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0/JavaMethod/setBar/3
 
-aJavaFile.Foo.Bar.getBar: JavaMethod
-aJavaFile.Foo.Bar.getBar partOf aJavaFile.Foo.Bar
-aJavaFile.Foo.Bar.getBar = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/JavaInnerClass/Bar/JavaMethod/getBar
+aJavaFile.Foo$0.Bar$0: JavaInnerClass
+aJavaFile.Foo$0.Bar$0 partOf aJavaFile.Foo$0
+aJavaFile.Foo$0.Bar$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0/JavaInnerClass/Bar/0
 
-aJavaFile.Foo: JavaClass
-aJavaFile.Foo partOf aJavaFile
-aJavaFile.Foo = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo
+aJavaFile.Foo$0.bar$1: JavaField
+aJavaFile.Foo$0.bar$1 partOf aJavaFile.Foo$0
+aJavaFile.Foo$0.bar$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0/JavaField/bar/1
 
-xmlFile.lulu1: XMLElement
-xmlFile.lulu1 partOf xmlFile
-xmlFile.lulu1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/XMLElement/lulu1
+xmlFile.lala$0.lulu$1: XMLElement
+xmlFile.lala$0.lulu$1 partOf xmlFile.lala$0
+xmlFile.lala$0.lulu$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/XMLElement/lala/0/XMLElement/lulu/1
 
-xmlFile.lala0: XMLElement
-xmlFile.lala0 partOf xmlFile
-xmlFile.lala0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/XMLElement/lala0
+xmlFile.lala$0: XMLElement
+xmlFile.lala$0 partOf xmlFile
+xmlFile.lala$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/XMLElement/lala/0
 
-xmlFile.lulu3: XMLElement
-xmlFile.lulu3 partOf xmlFile
-xmlFile.lulu3 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/XMLElement/lulu3
+xmlFile.lala$0.lulu$0.bar$0: XMLAttribute
+xmlFile.lala$0.lulu$0.bar$0 partOf xmlFile.lala$0.lulu$0
+xmlFile.lala$0.lulu$0.bar$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/XMLElement/lala/0/XMLElement/lulu/0/XMLAttribute/bar/0
+
+xmlFile.lala$0.lulu$0: XMLElement
+xmlFile.lala$0.lulu$0 partOf xmlFile.lala$0
+xmlFile.lala$0.lulu$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/XMLElement/lala/0/XMLElement/lulu/0
 

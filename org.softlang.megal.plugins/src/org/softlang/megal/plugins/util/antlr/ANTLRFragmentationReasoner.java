@@ -2,7 +2,6 @@ package org.softlang.megal.plugins.util.antlr;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
@@ -19,7 +18,7 @@ public abstract class ANTLRFragmentationReasoner extends FragmentationPlugin {
 	abstract public ParseTree getParseTree (CharStream input);
 	
 	@Override
-	public List<Fragment> getFragments(Entity entity, Artifact artifact) {
+	public Collection<Fragment> getFragments(Entity entity, Artifact artifact) {
 		
 		FragmentationListener listener = new FragmentationListener(entity, artifact, getRules());
 		

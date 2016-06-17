@@ -8,9 +8,8 @@ import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.util.Fragments.Fragment;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Stack;
-
+import java.util.LinkedList;
+import java.util.Queue;
 import org.antlr.v4.runtime.ParserRuleContext;
 
 /**
@@ -38,7 +37,7 @@ public class FragmentationListener implements ParseTreeListener {
 	/**
 	 * Stack for collected fragments
 	 */
-	private Stack<Fragment> fragments = new Stack<Fragment>();
+	private Queue<Fragment> fragments = new LinkedList<Fragment>();
 	
 	public FragmentationListener (Entity entity, Artifact artifact, Collection<FragmentationListenerRule> rules) {
 		this.entity = entity;
@@ -50,7 +49,7 @@ public class FragmentationListener implements ParseTreeListener {
 	 * Getter for collected fragments
 	 * @return The list of collected fragments
 	 */
-	public List<Fragment> getFragments() {
+	public Collection<Fragment> getFragments() {
 		return fragments;
 	}
 	
@@ -72,14 +71,14 @@ public class FragmentationListener implements ParseTreeListener {
 				
 				// if the rule is for 'compound' fragment, add previously collected fragments as parts
 				// previously collected fragments are children of the AST nodes of the current fragment
-				while(rule.hasParts() && !fragments.isEmpty()) {
+				while(!rule.isLeaf(context) && !fragments.isEmpty()) {
 					
-					fragment.addPart(fragments.pop());
+					fragment.addPart(fragments.remove());
 					
 				}
 				
 				// push the current fragment onto the stack
-				fragments.push(fragment);
+				fragments.add(fragment);
 				
 			}
 			
