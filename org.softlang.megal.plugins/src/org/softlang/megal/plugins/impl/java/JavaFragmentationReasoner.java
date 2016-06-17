@@ -13,9 +13,11 @@ import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.api.FragmentationPlugin;
 import org.softlang.megal.plugins.impl.java.antlr.JavaLexer;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser;
+import org.softlang.megal.plugins.util.Fragments;
 import org.softlang.megal.plugins.util.Fragments.Fragment;
 import org.softlang.megal.plugins.util.antlr.ParseTreeFragmentationListener;
 import org.softlang.megal.plugins.util.antlr.ParseTreeFragmentationRule;
+import org.softlang.megal.plugins.util.antlr.ParserRuleContexts;
 
 public class JavaFragmentationReasoner extends FragmentationPlugin {
 	
@@ -34,7 +36,23 @@ public class JavaFragmentationReasoner extends FragmentationPlugin {
 
 		@Override
 		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
-			return new JavaClassFragment(entity, artifact, (JavaParser.ClassDeclarationContext)context);
+			
+			JavaParser.ClassDeclarationContext classContext = (JavaParser.ClassDeclarationContext)context;
+			
+			return Fragments.create("JavaClass", entity, artifact, new Fragments.FactProvider() {
+				
+				@Override
+				public String getText() {
+					return ParserRuleContexts.originalText(classContext);
+				}
+				
+				@Override
+				public String getName() {
+					return classContext.Identifier().getText();
+				}
+				
+			});
+			
 		}
 		
 	};
@@ -55,7 +73,21 @@ public class JavaFragmentationReasoner extends FragmentationPlugin {
 		@Override
 		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
 			
-			return new JavaClassFragment(entity, artifact, (JavaParser.ClassDeclarationContext)context);
+			JavaParser.ClassDeclarationContext classContext = (JavaParser.ClassDeclarationContext)context;
+			
+			return Fragments.create("JavaClass", entity, artifact, new Fragments.FactProvider() {
+				
+				@Override
+				public String getText() {
+					return ParserRuleContexts.originalText(classContext);
+				}
+				
+				@Override
+				public String getName() {
+					return classContext.Identifier().getText();
+				}
+				
+			});
 			
 		}
 		
@@ -70,7 +102,23 @@ public class JavaFragmentationReasoner extends FragmentationPlugin {
 
 		@Override
 		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
-			return new JavaMethodFragment(entity, artifact, (JavaParser.MethodDeclarationContext)context);
+			
+			JavaParser.MethodDeclarationContext methodContext = (JavaParser.MethodDeclarationContext)context;
+			
+			return Fragments.create("JavaMethod", entity, artifact, new Fragments.FactProvider() {
+				
+				@Override
+				public String getText() {
+					return ParserRuleContexts.originalText(methodContext);
+				}
+				
+				@Override
+				public String getName() {
+					return methodContext.Identifier().getText();
+				}
+				
+			});
+			
 		}
 		
 	};
@@ -85,7 +133,22 @@ public class JavaFragmentationReasoner extends FragmentationPlugin {
 
 		@Override
 		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
-			return new JavaFieldFragment(entity, artifact, (JavaParser.VariableDeclaratorContext)context);
+			
+			JavaParser.VariableDeclaratorContext fieldContext = (JavaParser.VariableDeclaratorContext)context;
+			
+			return Fragments.create("JavaField", entity, artifact, new Fragments.FactProvider() {
+				
+				@Override
+				public String getText() {
+					return ParserRuleContexts.originalText(fieldContext);
+				}
+				
+				@Override
+				public String getName() {
+					return fieldContext.getText();
+				}
+				
+			});
 		}
 		
 	};

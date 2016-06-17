@@ -20,7 +20,14 @@ import org.antlr.v4.runtime.ParserRuleContext;
  */
 public class ParseTreeFragmentationListener implements ParseTreeListener {
 
+	/**
+	 * 
+	 */
 	private Entity entity;
+	
+	/**
+	 * 
+	 */
 	private Artifact artifact;
 	
 	/**
@@ -61,7 +68,7 @@ public class ParseTreeFragmentationListener implements ParseTreeListener {
 			if (rule.test(context)) {
 				
 				// create a fragment from the parser rule context
-				Fragment fragment = rule.create(entity, artifact, (ParserRuleContext)context);
+				Fragment fragment = rule.create(entity, artifact, context);
 				
 				// if the rule is for 'compound' fragment, add previously collected fragments as parts
 				// previously collected fragments are children of the AST nodes of the current fragment

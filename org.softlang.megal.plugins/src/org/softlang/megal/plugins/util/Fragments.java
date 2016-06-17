@@ -21,42 +21,62 @@ import java.util.Optional;
  */
 public abstract class Fragments {
 	
-	static private List<Fragment> fb = new ArrayList<Fragment>();
+	static public interface FactProvider {
+		
+		String getName();
+		String getText();
+		
+	}
 	
-	static public abstract class Fragment {
+	static final public class Fragment {
 		
-		abstract public String getType();
-		abstract public String getName();
-		abstract public String getText();
+//		abstract public String getType();
+//		abstract public String getName();
+//		abstract public String getText();
 		
+		private String type;
 		private Entity entity;
 		private Artifact artifact;
+		private FactProvider facts;
 		private Fragment parent;
 		private List<Fragment> parts = new ArrayList<Fragment>();
 		
-		public Fragment (Entity entity, Artifact artifact) {
+		private Fragment (String type, Entity entity, Artifact artifact, FactProvider facts) {
+			this.type = type;
 			this.entity = entity;
 			this.artifact = artifact;
-			fb.add(this);
+			this.facts = facts;
 		}
 		
-		final public Entity getEntity () {
+		public String getType () {
+			return type;
+		}
+		
+		public Entity getEntity () {
 			return entity;
 		}
 		
-		final public Artifact getArtifact() {
+		public Artifact getArtifact() {
 			return artifact;
 		}
 		
-		final public boolean hasParent () {
+		public String getName () {
+			return facts.getName();
+		}
+		
+		public String getText () {
+			return facts.getText();
+		}
+		
+		public boolean hasParent () {
 			return parent != null;
 		}
 		
-		final public Fragment getParent() {
+		public Fragment getParent() {
 			return parent;
 		}
 				
-		final public String getFullName () {
+		public String getFullName () {
 			
 			if (hasParent())
 				return getParent().getFullName() + "." + getName();
@@ -64,16 +84,17 @@ public abstract class Fragments {
 			return getEntity().getName() + "." + getName();
 		}
 		
-		final public List<Fragment> getParts() {
+		public List<Fragment> getParts() {
 			return parts;
 		}
 		
-		final public void addPart(Fragment part) {
+		@Deprecated
+		public void addPart(Fragment part) {
 			part.parent = this;
 			parts.add(part);
 		}
 		
-		final public URI getURI () {
+		public URI getURI () {
 			
 			try {
 			
@@ -98,6 +119,18 @@ public abstract class Fragments {
 		final public String toString () {
 			return getURI().toString();
 		}
+		
+	}
+	
+	static private List<Fragment> fb = new ArrayList<Fragment>();
+	
+	static public Fragment create (String type, Entity entity, Artifact artifact, FactProvider facts) {
+		
+		Fragment f = new Fragment(type, entity, artifact, facts);
+		
+		fb.add(f);
+		
+		return f;
 		
 	}
 	
