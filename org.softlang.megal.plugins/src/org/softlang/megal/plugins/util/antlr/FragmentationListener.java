@@ -20,12 +20,12 @@ import org.antlr.v4.runtime.ParserRuleContext;
 public class FragmentationListener implements ParseTreeListener {
 
 	/**
-	 * 
+	 * The containing entity of the fragments to collect
 	 */
 	private Entity entity;
 	
 	/**
-	 * 
+	 * The containing artifact of the fragments to collect
 	 */
 	private Artifact artifact;
 	
@@ -39,6 +39,12 @@ public class FragmentationListener implements ParseTreeListener {
 	 */
 	private Queue<Fragment> fragments = new LinkedList<Fragment>();
 	
+	/**
+	 * Constructs a new FragmentationListener
+	 * @param entity
+	 * @param artifact
+	 * @param rules
+	 */
 	public FragmentationListener (Entity entity, Artifact artifact, Collection<FragmentationListenerRule> rules) {
 		this.entity = entity;
 		this.artifact = artifact;
@@ -52,7 +58,6 @@ public class FragmentationListener implements ParseTreeListener {
 	public Collection<Fragment> getFragments() {
 		return fragments;
 	}
-	
 	
 	/**
 	 * Collects fragments depending on fragmentation rules
@@ -69,20 +74,20 @@ public class FragmentationListener implements ParseTreeListener {
 				// create a fragment from the parser rule context
 				Fragment fragment = rule.create(entity, artifact, context);
 				
-				// if the rule is for 'compound' fragment, add previously collected fragments as parts
-				// previously collected fragments are children of the AST nodes of the current fragment
+				// check whether the rule is for a leaf fragment
+				boolean isLeaf = rule.isLeaf(context);
 				
-				boolean isLeaf = !rule.isLeaf(context);
-				
-				while(isLeaf && !fragments.isEmpty()) {
+				// while the rule is not for a leaf fragment, 
+				while(!isLeaf && !fragments.isEmpty()) {
 					
+					// add previously collected fragments as parts 
+					// (previously collected fragments are children of the AST nodes of the current fragment)
 					fragment.addPart(fragments.remove());
 					
 				}
 				
 				// push the current fragment onto the stack
 				fragments.add(fragment);
-//				System.out.println(fragments);
 				
 			}
 			
