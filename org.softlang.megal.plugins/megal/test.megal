@@ -1,8 +1,11 @@
 model test
 import Prelude
+import XML
 
 Java : Language
 XML: Language
+XSD: Language
+XSD subsetOf XML
 
 JavaFragment < Fragment
 JavaInterface < Fragment
@@ -28,14 +31,30 @@ JavaFragmentReasoner realizationOf Java
 JavaFragmentReasoner partOf FileFragmentReasoner
 JavaFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationReasoner'
 
-XMLElement < Fragment
-XMLAttribute < Fragment
+XMLFragmentReasoner : Plugin
+XMLFragmentReasoner realizationOf XML
+XMLFragmentReasoner partOf FileFragmentReasoner
+XMLFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.xml.XMLFragmentationReasoner'
+
+
+XSDFragmentResolver : Plugin
+XSDFragmentResolver = 'classpath:org.softlang.megal.plugins.impl.xsd.XSDFragmentResolver'
+
+
+@Plugin 'XSDFragmentResolver'
+XMLFragment < Fragment
+
+XMLElement < XMLFragment
+XMLAttribute < XMLFragment
+XMLNSAttribute < XMLAttribute
+
+XSDFragment < XMLFragment
+XSDSchema < XSDFragment
 
 xmlFile: File
 xmlFile elementOf XML
 xmlFile = 'workspace:/org.softlang.megal.plugins/input/Foo.xml'
 
-XMLFragmentReasoner : Plugin
-XMLFragmentReasoner realizationOf XML
-XMLFragmentReasoner partOf FileFragmentReasoner
-XMLFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.xml.XMLFragmentationReasoner'
+xsdFile: File
+xsdFile elementOf XSD
+xsdFile = 'workspace:/org.softlang.megal.plugins/input/Foo.xsd'

@@ -6,6 +6,7 @@ JavaClass < Fragment
 XMLAttribute < Fragment
 JavaFragment < Fragment
 JavaMethod < Fragment
+XMLNSAttribute < XMLAttribute
 JavaAnnotation < Fragment
 XMLElement < Fragment
 JavaConstructor < Fragment
@@ -96,51 +97,131 @@ Java: Language
 
 XML: Language
 
+XSD: Language
+XSD subsetOf XML
+
 aJavaFile: File
 aJavaFile elementOf Java
-aJavaFile = workspace:/org.softlang.megal.plugins/input/Foo.java
 
 xmlFile: File
 xmlFile elementOf XML
-xmlFile = workspace:/org.softlang.megal.plugins/input/Foo.xml
+
+xsdFile: File
+xsdFile elementOf XSD
 
 aJavaFile.Foo$0: JavaClass
 aJavaFile.Foo$0 partOf aJavaFile
-aJavaFile.Foo$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0
+aJavaFile.Foo$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass
 
 aJavaFile.Foo$0.getBar$2: JavaMethod
 aJavaFile.Foo$0.getBar$2 partOf aJavaFile.Foo$0
-aJavaFile.Foo$0.getBar$2 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0/JavaMethod/getBar/2
+aJavaFile.Foo$0.getBar$2 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/2/getBar/JavaMethod
 
 aJavaFile.Foo$0.Bar$0.getBar$0: JavaMethod
 aJavaFile.Foo$0.Bar$0.getBar$0 partOf aJavaFile.Foo$0.Bar$0
-aJavaFile.Foo$0.Bar$0.getBar$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0/JavaInnerClass/Bar/0/JavaMethod/getBar/0
+aJavaFile.Foo$0.Bar$0.getBar$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/0/Bar/JavaInnerClass/0/getBar/JavaMethod
 
 aJavaFile.Foo$0.setBar$3: JavaMethod
 aJavaFile.Foo$0.setBar$3 partOf aJavaFile.Foo$0
-aJavaFile.Foo$0.setBar$3 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0/JavaMethod/setBar/3
+aJavaFile.Foo$0.setBar$3 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/3/setBar/JavaMethod
 
 aJavaFile.Foo$0.Bar$0: JavaInnerClass
 aJavaFile.Foo$0.Bar$0 partOf aJavaFile.Foo$0
-aJavaFile.Foo$0.Bar$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0/JavaInnerClass/Bar/0
+aJavaFile.Foo$0.Bar$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/0/Bar/JavaInnerClass
 
 aJavaFile.Foo$0.bar$1: JavaField
 aJavaFile.Foo$0.bar$1 partOf aJavaFile.Foo$0
-aJavaFile.Foo$0.bar$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/JavaClass/Foo/0/JavaField/bar/1
+aJavaFile.Foo$0.bar$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/1/bar/JavaField
 
 xmlFile.lala$0.lulu$1: XMLElement
 xmlFile.lala$0.lulu$1 partOf xmlFile.lala$0
-xmlFile.lala$0.lulu$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/XMLElement/lala/0/XMLElement/lulu/1
+xmlFile.lala$0.lulu$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/1/lulu/XMLElement
 
 xmlFile.lala$0: XMLElement
 xmlFile.lala$0 partOf xmlFile
-xmlFile.lala$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/XMLElement/lala/0
+xmlFile.lala$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement
 
-xmlFile.lala$0.lulu$0.bar$0: XMLAttribute
-xmlFile.lala$0.lulu$0.bar$0 partOf xmlFile.lala$0.lulu$0
-xmlFile.lala$0.lulu$0.bar$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/XMLElement/lala/0/XMLElement/lulu/0/XMLAttribute/bar/0
+xmlFile.lala$0.name$0: XMLAttribute
+xmlFile.lala$0.name$0 partOf xmlFile.lala$0
+xmlFile.lala$0.name$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/0/name/XMLAttribute
 
-xmlFile.lala$0.lulu$0: XMLElement
-xmlFile.lala$0.lulu$0 partOf xmlFile.lala$0
-xmlFile.lala$0.lulu$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/XMLElement/lala/0/XMLElement/lulu/0
+xmlFile.lala$0.lulu$1.lulu$0: XMLElement
+xmlFile.lala$0.lulu$1.lulu$0 partOf xmlFile.lala$0.lulu$1
+xmlFile.lala$0.lulu$1.lulu$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/1/lulu/XMLElement/0/lulu/XMLElement
+
+xmlFile.lala$0.lulu$1.lulu$0.bar$0: XMLAttribute
+xmlFile.lala$0.lulu$1.lulu$0.bar$0 partOf xmlFile.lala$0.lulu$1.lulu$0
+xmlFile.lala$0.lulu$1.lulu$0.bar$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/1/lulu/XMLElement/0/lulu/XMLElement/0/bar/XMLAttribute
+
+xsdFile.xs:schema$0.xmlns:xs$0: XMLNSAttribute
+xsdFile.xs:schema$0.xmlns:xs$0 partOf xsdFile.xs:schema$0
+xsdFile.xs:schema$0.xmlns:xs$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/0/xmlns:xs/XMLNSAttribute
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.name$0: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.name$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.name$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/0/xs:element/XMLElement/0/name/XMLAttribute
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.type$1: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.type$1 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.type$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/0/xs:element/XMLElement/1/type/XMLAttribute
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.name$0: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.name$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.name$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/1/xs:element/XMLElement/0/name/XMLAttribute
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.type$1: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.type$1 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.type$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/1/xs:element/XMLElement/1/type/XMLAttribute
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.name$0: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.name$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.name$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/2/xs:element/XMLElement/0/name/XMLAttribute
+
+xsdFile.xs:schema$0: XMLElement
+xsdFile.xs:schema$0 partOf xsdFile
+xsdFile.xs:schema$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/2/xs:element/XMLElement
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/3/xs:element/XMLElement
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/0/xs:element/XMLElement
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/1/xs:element/XMLElement
+
+xsdFile.xs:schema$0.xs:element$1.name$0: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.name$0 partOf xsdFile.xs:schema$0.xs:element$1
+xsdFile.xs:schema$0.xs:element$1.name$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/0/name/XMLAttribute
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.name$0: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.name$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.name$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/3/xs:element/XMLElement/0/name/XMLAttribute
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.type$1: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.type$1 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.type$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/2/xs:element/XMLElement/1/type/XMLAttribute
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.type$1: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.type$1 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.type$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/3/xs:element/XMLElement/1/type/XMLAttribute
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement
+
+xsdFile.xs:schema$0.xs:element$1: XMLElement
+xsdFile.xs:schema$0.xs:element$1 partOf xsdFile.xs:schema$0
+xsdFile.xs:schema$0.xs:element$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement
+
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1 partOf xsdFile.xs:schema$0.xs:element$1
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1 = file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement
 

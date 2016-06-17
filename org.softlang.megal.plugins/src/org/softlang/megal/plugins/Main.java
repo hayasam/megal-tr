@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,12 +62,8 @@ public class Main {
 		out.println();
 		
 		List<Entity> es = kb.getEntities().stream()
-//				.filter( e -> {
-//					System.out.println(e.getType());
-//					return true;
-//				})
-				.filter( e -> !e.getType().getName().equals("Plugin")  )
-				//.sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) )
+//				.filter( e -> !e.getType().getName().equals("Plugin")  )
+//				.sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) )
 				.collect(Collectors.toList());
 		
 		for (Entity e : es) {
@@ -93,6 +90,17 @@ public class Main {
 			
 		}
 		
+//		List<Relationship> rels = kb.getRelationships().stream()
+//				.filter( r -> !r.getLeft().getType().getName().equals("Plugin")  )
+//				.sorted( (a,b) -> a.getLeft().getName().compareToIgnoreCase(b.getLeft().getName()) )
+//				.collect(Collectors.toList());
+//		
+//		for (Relationship rel : rels) {
+//			
+//			out.println(rel);
+//			
+//		}
+		
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -100,15 +108,15 @@ public class Main {
 		System.out.println("Start.");
 		
 		KB kb = MegamodelKB.loadAll(Megals.load(new File("megal/test.megal"), new File("megal/Prelude.megal")));
-		ModelExecutor ex = new ModelExecutor();
 		
 		System.out.println("KB loaded.");
 		
+		ModelExecutor ex = new ModelExecutor();
 		kb = ex.evaluate(getResolution(), kb).getOutput();
 		
 		printInstances(kb, System.out);
 		
-		PrintStream output = new PrintStream(new FileOutputStream("output/test.megal"));
+		PrintStream output = new PrintStream(new FileOutputStream("output/out.megal"));
 		printTypes(kb,output);
 		printInstances(kb,output);
 		output.close();

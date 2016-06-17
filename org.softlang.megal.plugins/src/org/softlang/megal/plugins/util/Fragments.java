@@ -24,22 +24,73 @@ import java.util.Set;
  */
 public abstract class Fragments {
 	
+	/**
+	 * Interface fragment fact providers
+	 * @author maxmeffert
+	 *
+	 */
 	static public interface FactProvider {
 		
-		String getName();
-		String getText();
+		/**
+		 * Provides the short name of the fragment
+		 * @return The short name of the fragment
+		 */
+		public String getName();
+		
+		/**
+		 * Provides the text of the fragment
+		 * @return The text of the fragment
+		 */
+		public String getText();
 		
 	}
 	
+	/**
+	 * 
+	 * @author maxmeffert
+	 *
+	 */
 	static final public class Fragment {
 		
+		
+		/**
+		 * The entity type name of the fragment
+		 */
 		private String type;
+		
+		/**
+		 * The containing entity of the fragment
+		 */
 		private Entity entity;
+		
+		/**
+		 * The containing artifact of the fragment
+		 */
 		private Artifact artifact;
+		
+		/**
+		 * The fact provider of the fragment
+		 */
 		private FactProvider facts;
+		
+		/**
+		 * The parent of the fragment
+		 */
 		private Fragment parent;
+		
+		/**
+		 * The Collection of fragment parts
+		 */
 		private List<Fragment> parts = new ArrayList<Fragment>();
 		
+		/**
+		 * Constructs a new fragment
+		 * 
+		 * @param type
+		 * @param entity
+		 * @param artifact
+		 * @param facts
+		 */
 		private Fragment (String type, Entity entity, Artifact artifact, FactProvider facts) {
 			this.type = type;
 			this.entity = entity;
@@ -47,72 +98,145 @@ public abstract class Fragments {
 			this.facts = facts;
 		}
 		
+		/**
+		 * Gets the type of the fragment
+		 * @return
+		 */
 		public String getType () {
 			return type;
 		}
-		
+
+		/**
+		 * Gets the containing entity of the fragment
+		 * @return
+		 */
 		public Entity getEntity () {
 			return entity;
 		}
 		
+		/**
+		 * Gets the containing artifact of the fragment
+		 * @return
+		 */
 		public Artifact getArtifact() {
 			return artifact;
 		}
 		
+		/**
+		 * Gets the name of the fragment
+		 * @return
+		 */
 		public String getName () {
 			return facts.getName();
 		}
 		
+		/**
+		 * Gets the text of the fragment
+		 * @return
+		 */
 		public String getText () {
 			return facts.getText();
 		}
 		
+		/**
+		 * Whether the fragment has a parent or is a child
+		 * @return
+		 */
 		public boolean hasParent () {
 			return parent != null;
 		}
 		
+		/**
+		 * Gets the parent of the fragment
+		 * @return
+		 */
 		public Fragment getParent() {
 			return parent;
 		}
 		
+		/**
+		 * Gets the index of the fragment
+		 * @return
+		 */
 		public int getIndex () {
+			
+			// If the fragment has a parent
 			if (hasParent()) {
-				return getParent().parts.indexOf(this);
-			}
-			return 0;
-		}
 				
-		public String getFullName () {
+				// Get the index of the fragment from its parent parts
+				return getParent().parts.indexOf(this);
+				
+			}
 			
-			String name = getName() + "$" + getIndex();
+			// Return 0 by default
+			return 0;
 			
-			if (hasParent())
-				return getParent().getFullName() + "." + name;
- 			
-			return getEntity().getName() + "." + name;
 		}
 		
+		/**
+		 * Gets the qualified name of the fragment
+		 * @return
+		 */
+		public String getFullName () {
+			
+			// The qualified name of the fragment
+			String name = getName() + "#" + getIndex();
+			
+			// If the fragment has parent
+			if (hasParent()) {
+				
+				// Return the qualified name of the fragment appended to its parent's qualified name
+				return getParent().getFullName() + "." + name;
+				
+			}
+ 			
+			// Return the qualified name of the fragment appended to its containing entity's name
+			return getEntity().getName() + "." + name;
+			
+		}
+		
+		/**
+		 * Get the collection of parts of the fragment
+		 * @return
+		 */
 		public Collection<Fragment> getParts() {
 			return parts;
 		}
 		
-		public void addPart (Fragment part) {
-			part.parent = this;
-			parts.add(part);
+		/**
+		 * Add a new part to the fragment
+		 * @param part
+		 */
+		public void addPart (Fragment child) {
+			
+			// Associate the child with its new parent 
+			child.parent = this;
+			
+			// Add the child to the collection of parts
+			parts.add(child);
+			
 		}
 		
+		/**
+		 * Gets the URI of the fragment
+		 * @return
+		 */
 		public URI getURI () {
 			
 			try {
 			
-				String path = "/" + getType() + "/" + getName() + "/" + getIndex();
+				// The 'path' of the fragment
+				String path = "/" + getIndex() + "/" + getName() + "/" + getType();
 				
+				// If the fragment has a parent
 				if (hasParent()) {
 				
+					// Return the path of the fragment appended to its parent's URI
 					return new URI(getParent().getURI() + path);
 					
 				}
 			
+				// Return the path of the fragment as fragment segment of its artifact's location
 				return new URI(getArtifact().getLocation() + "#" + path);
 			
 			} catch (URISyntaxException e) {
@@ -123,68 +247,138 @@ public abstract class Fragments {
 			
 		}
 		
+		/**
+		 * Gets the string representation of the artifact.
+		 * Returns the URI of the fragment as string.
+		 */
 		final public String toString () {
 			return getURI().toString();
 		}
 		
 	}
 	
+	/**
+	 * The fragment KB 
+	 */
 	static private Set<Fragment> fb = new HashSet<Fragment>();
 	
+	/**
+	 * Factory method for fragments.
+	 * Creates a new fragment. 
+	 * 
+	 * @param type
+	 * @param entity
+	 * @param artifact
+	 * @param facts
+	 * @return
+	 */
 	static public Fragment create (String type, Entity entity, Artifact artifact, FactProvider facts) {
 		
+		// Create a new fragment
 		Fragment f = new Fragment(type, entity, artifact, facts);
 		
+		// Add fragment to the fragment KB
 		fb.add(f);
 		
 		return f;
 		
 	}
 	
+	/**
+	 * Checks whether a fragment with a given URI was created.
+	 * @param uri
+	 * @return
+	 */
 	static public boolean exists (URI uri) {
 		return fb.stream()
 				.anyMatch( f -> f.getURI().equals(uri) );
 	}
 	
+	/**
+	 * Checks whether a fragment for a given artifact was created.
+	 * @param artifact
+	 * @return
+	 */
 	static public boolean hasFragment (Artifact artifact) {
 		return fb.stream()
 				.anyMatch( f -> f.getArtifact().equals(artifact) );
 	}
 	
+	/**
+	 * Checks whether a fragment for a given entity was created.
+	 * @param entity
+	 * @return
+	 */
 	static public boolean hasFragment (Entity entity) {
 		return entity.hasBinding() 
 				&& exists((URI)entity.getBinding());
 	}
 	
+	/**
+	 * Gets the first fragment for a given URI.
+	 * @param uri
+	 * @return
+	 */
 	static public Optional<Fragment> fragmentOf (URI uri) {
 		return fb.stream()
 				.filter( f -> f.getURI().equals(uri) )
 				.findFirst();
 	}
 	
+	/**
+	 * Gets the first fragment for a given artifact.
+	 * @param artifact
+	 * @return
+	 */
 	static public Optional<Fragment> fragmentOf (Artifact artifact) {
 		return fb.stream()
 				.filter( f -> f.getArtifact().equals(artifact) )
 				.findFirst();
 	}
 	
+	/**
+	 * Gets the first fragment for a given entity.
+	 * @param entity
+	 * @return
+	 */
 	static public Optional<Fragment> fragmentOf (Entity entity) {
 		
-		if (entity.getBinding() instanceof URI)
+		// If the entity is bound to an URI instance
+		if (entity.getBinding() instanceof URI) {
+			
+			// Return the first fragment for the URI
 			return fragmentOf((URI)entity.getBinding());
+			
+		}
 		
+		// Return the first fragment where the string representation of the URI equals the binding
 		return fb.stream()
 				.filter( f -> f.getURI().toString().equals(entity.getBinding()))
 				.findFirst();
 		
 	}
 	
+	/**
+	 * Gets all fragments for a given artifact.
+	 * @param artifact
+	 * @return
+	 */
 	static public List<Fragment> fragmentsOf (Artifact artifact) {
 		return fb.stream()
 				.filter( f -> f.getArtifact().equals(artifact) )
 				.collect(Collectors.toList());
 	}
 	
+	/**
+	 * Gets all frgaments for a given entity.
+	 * @param entity
+	 * @return
+	 */
+	static public List<Fragment> fragmentsOf (Entity entity) {
+		return fb.stream()
+				.filter( f -> f.getEntity().equals(entity) )
+				.collect(Collectors.toList());
+	}
 	
 	
 }

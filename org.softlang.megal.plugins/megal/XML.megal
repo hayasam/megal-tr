@@ -4,12 +4,12 @@ import Prelude
 XML: Language
 XSD: Language
 XSD subsetOf XML
-xsdFiles: File+
-xsdFiles elementOf XSD
+// xsdFiles: File+
+// xsdFiles elementOf XSD
 
 xmlFile: File
 xmlFile elementOf XML
-xmlFile conformsTo xsdFiles
+// xmlFile conformsTo xsdFiles
 
 @Plugin 'XSDConformance'
 conformsTo < Artifact(+) * Artifact(+)
@@ -27,5 +27,5 @@ XSDAcceptor realizationOf XSD
 XSDAcceptor = 'classpath:plugins.jaxb.AcceptXSD'
 XSDAcceptor partOf FileElementOfLanguage
 
-xmlFile = 'workspace:/org.softlang.megal.examples/inputs/sampleCompany.xml'
-xsdFiles = 'workspace:/org.softlang.megal.examples/inputs/Company.xsd_file'
+// xmlFile = 'workspace:/org.softlang.megal.examples/inputs/sampleCompany.xml'
+// xsdFiles = 'workspace:/org.softlang.megal.examples/inputs/Company.xsd_file'

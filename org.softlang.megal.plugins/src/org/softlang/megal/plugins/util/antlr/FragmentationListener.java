@@ -35,7 +35,7 @@ public class FragmentationListener implements ParseTreeListener {
 	private Collection<FragmentationListenerRule> rules;
 	
 	/**
-	 * Stack for collected fragments
+	 * Queue for collected fragments
 	 */
 	private Queue<Fragment> fragments = new LinkedList<Fragment>();
 	
@@ -71,7 +71,10 @@ public class FragmentationListener implements ParseTreeListener {
 				
 				// if the rule is for 'compound' fragment, add previously collected fragments as parts
 				// previously collected fragments are children of the AST nodes of the current fragment
-				while(!rule.isLeaf(context) && !fragments.isEmpty()) {
+				
+				boolean isLeaf = !rule.isLeaf(context);
+				
+				while(isLeaf && !fragments.isEmpty()) {
 					
 					fragment.addPart(fragments.remove());
 					
@@ -79,6 +82,7 @@ public class FragmentationListener implements ParseTreeListener {
 				
 				// push the current fragment onto the stack
 				fragments.add(fragment);
+//				System.out.println(fragments);
 				
 			}
 			
