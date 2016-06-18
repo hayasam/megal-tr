@@ -11,6 +11,7 @@ import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.api.FragmentationPlugin;
 import org.softlang.megal.plugins.util.Fragments.Fragment;
+import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationListener.FragmentationRule;
 
 /**
  * Abstract base class for ANTLR base fragmentation reasoners
@@ -23,7 +24,7 @@ public abstract class ANTLRFragmentationReasoner extends FragmentationPlugin {
 	 * Gets the collection for fragmentation rules
 	 * @return
 	 */
-	abstract public Collection<FragmentationListenerRule> getRules ();
+	abstract public Collection<FragmentationRule> getRules ();
 	
 	/**
 	 * Gets the parse tree of a given input char stream
@@ -39,7 +40,7 @@ public abstract class ANTLRFragmentationReasoner extends FragmentationPlugin {
 	public Collection<Fragment> getFragments(Entity entity, Artifact artifact) {
 		
 		// Create a new fragmentation listener
-		FragmentationListener listener = new FragmentationListener(entity, artifact, getRules());
+		ANTLRFragmentationListener listener = new ANTLRFragmentationListener(entity, artifact, getRules());
 		
 		// Create a new parse tree walker
 		ParseTreeWalker walker = new ParseTreeWalker();

@@ -17,8 +17,45 @@ import org.antlr.v4.runtime.ParserRuleContext;
  * @author maxmeffert
  *
  */
-public class FragmentationListener implements ParseTreeListener {
+public class ANTLRFragmentationListener implements ParseTreeListener {
 
+	/**
+	 * Interface for ANTLR parse tree fragmentation rules
+	 * 
+	 * @author maxmeffert
+	 *
+	 */
+	static public interface FragmentationRule {
+
+		
+		/**
+		 * Whether the rule is for 'compound' fragments which contains further fragment parts.
+		 * Defaults to false.
+		 * 
+		 * @return Whether the rule is for 'compound' fragments
+		 */
+		public boolean isLeaf (ParserRuleContext context);
+		
+		/**
+		 * Tests whether the rule is applicable to the current parser rule context
+		 * 
+		 * @param context The parser rule context to test 
+		 * @return Whether the rule is applicable to the current parser rule context
+		 */
+		public boolean test (ParserRuleContext context);
+		
+		/**
+		 * Creates a new fragment from a parser rule context
+		 * 
+		 * @param context The parser rule context from which the fragment is created
+		 * @return A new fragment
+		 */
+		public Fragment create (Entity entity, Artifact artifact, ParserRuleContext context);
+		
+		
+	}
+
+	
 	/**
 	 * The containing entity of the fragments to collect
 	 */
@@ -32,7 +69,7 @@ public class FragmentationListener implements ParseTreeListener {
 	/**
 	 * A List of fragmentation rules
 	 */
-	private Collection<FragmentationListenerRule> rules;
+	private Collection<FragmentationRule> rules;
 	
 	/**
 	 * Queue for collected fragments
@@ -45,7 +82,7 @@ public class FragmentationListener implements ParseTreeListener {
 	 * @param artifact
 	 * @param rules
 	 */
-	public FragmentationListener (Entity entity, Artifact artifact, Collection<FragmentationListenerRule> rules) {
+	public ANTLRFragmentationListener (Entity entity, Artifact artifact, Collection<FragmentationRule> rules) {
 		this.entity = entity;
 		this.artifact = artifact;
 		this.rules = rules;
@@ -66,7 +103,7 @@ public class FragmentationListener implements ParseTreeListener {
 	public void exitEveryRule (ParserRuleContext context) {
 		
 		// for each fragmentation rule
-		for (FragmentationListenerRule rule : rules) {
+		for (FragmentationRule rule : rules) {
 
 			// if the rule is applicable
 			if (rule.test(context)) {

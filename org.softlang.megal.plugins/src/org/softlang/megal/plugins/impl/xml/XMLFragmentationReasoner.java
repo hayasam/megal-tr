@@ -13,8 +13,8 @@ import org.softlang.megal.plugins.impl.xml.antlr.XMLParser;
 import org.softlang.megal.plugins.util.Fragments;
 import org.softlang.megal.plugins.util.Fragments.Fragment;
 import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationReasoner;
+import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationListener.FragmentationRule;
 import org.softlang.megal.plugins.util.antlr.ANTLRUtils;
-import org.softlang.megal.plugins.util.antlr.FragmentationListenerRule;
 
 /**
  * Disassembles every XML artifact into XML fragments, that is XMLElement and XMLAttribute.
@@ -30,7 +30,7 @@ public class XMLFragmentationReasoner extends ANTLRFragmentationReasoner {
 	 * @author maxmeffert
 	 *
 	 */
-	static private class ElementRule extends FragmentationListenerRule {
+	static private class ElementRule implements FragmentationRule {
 		
 		/**
 		 * Tests whether the current context is an ElementContext
@@ -126,9 +126,9 @@ public class XMLFragmentationReasoner extends ANTLRFragmentationReasoner {
 	 * Gets the collection of XML fragmentation rules
 	 */
 	@Override
-	public Collection<FragmentationListenerRule> getRules() {
+	public Collection<FragmentationRule> getRules() {
 		
-		Collection<FragmentationListenerRule> rules = new ArrayList<FragmentationListenerRule>();
+		Collection<FragmentationRule> rules = new ArrayList<FragmentationRule>();
 		rules.add(new ElementRule());
 		
 		return rules;

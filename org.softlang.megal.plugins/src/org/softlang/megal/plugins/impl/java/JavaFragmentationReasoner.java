@@ -12,7 +12,7 @@ import org.softlang.megal.plugins.impl.java.antlr.JavaLexer;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser;
 import org.softlang.megal.plugins.util.Fragments;
 import org.softlang.megal.plugins.util.Fragments.Fragment;
-import org.softlang.megal.plugins.util.antlr.FragmentationListenerRule;
+import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationListener.FragmentationRule;
 import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationReasoner;
 import org.softlang.megal.plugins.util.antlr.ANTLRUtils;
 
@@ -30,7 +30,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 	 * @author maxmeffert
 	 *
 	 */
-	static private class InnerClassRule extends FragmentationListenerRule {
+	static private class InnerClassRule implements FragmentationRule {
 
 		/**
 		 * Tests whether the current context is a ClassDeclarationContext and its parent is a MemberDeclarationContext
@@ -84,7 +84,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 	 * @author maxmeffert
 	 *
 	 */
-	static private class ClassRule extends FragmentationListenerRule {
+	static private class ClassRule implements FragmentationRule {
 
 		/**
 		 * Tests whether the current context is a ClassDeclarationContext and its parent is a TypeDeclarationContext
@@ -140,7 +140,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 	 * @author maxmeffert
 	 *
 	 */
-	static private class MethodRule extends FragmentationListenerRule {
+	static private class MethodRule implements FragmentationRule {
 		
 		/**
 		 * Tests whether the current context is a MethodDeclarationContext
@@ -193,7 +193,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 	 * @author maxmeffert
 	 *
 	 */
-	static private class FieldRule extends FragmentationListenerRule {
+	static private class FieldRule implements FragmentationRule {
 		
 		/**
 		 * Tests whether the current context is a VariableDeclaratorContext and its grandparent is a FieldDeclarationContext
@@ -244,9 +244,9 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 	 * Gets the collection of Java fragmentation rules
 	 */
 	@Override
-	public Collection<FragmentationListenerRule> getRules() {
+	public Collection<FragmentationRule> getRules() {
 		
-		Collection<FragmentationListenerRule> rules = new ArrayList<FragmentationListenerRule>();
+		Collection<FragmentationRule> rules = new ArrayList<FragmentationRule>();
 		rules.add(new InnerClassRule());
 		rules.add(new ClassRule());
 		rules.add(new MethodRule());
