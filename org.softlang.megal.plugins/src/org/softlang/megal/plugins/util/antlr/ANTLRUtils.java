@@ -19,8 +19,8 @@ public abstract class ANTLRUtils {
 	static public String originalText (ParserRuleContext context) {
 		
 		int a = context.getStart().getStartIndex();
-	    int b = context.getStop().getStopIndex();
-	    Interval interval = new Interval(a,b);
+		int b = context.getStop().getStopIndex();
+		Interval interval = new Interval(a,b);
 		CharStream stream = context.getStart().getInputStream();
 		
 		return stream.getText(interval);
