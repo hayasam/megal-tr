@@ -17,7 +17,6 @@ import org.softlang.megal.plugins.util.Fragments.Fragment;
 import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationReasoner;
 import org.softlang.megal.plugins.util.antlr.ANTLRParserRuleContextFactProvider;
 import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationListener.FragmentationRule;
-import org.softlang.megal.plugins.util.antlr.ANTLRUtils;
 
 /**
  * Disassembles every XML artifact into XML fragments, that is XMLElement and XMLAttribute.
@@ -36,6 +35,9 @@ public class XMLFragmentationReasoner extends ANTLRFragmentationReasoner {
 
 		@Override
 		public String getName() {
+			if (getContext().Name().isEmpty()) {
+				throw new IllegalStateException("ElementContext does not provide a name!");
+			}
 			return getContext().Name(0).toString();
 		}
 		
