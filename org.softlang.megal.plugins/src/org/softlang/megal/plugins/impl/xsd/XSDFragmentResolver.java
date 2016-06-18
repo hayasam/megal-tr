@@ -120,7 +120,7 @@ public class XSDFragmentResolver extends GuidedReasonerPlugin {
 		nsPrefix = matcher.group(1);
 		
 		
-		resolveXSDFragments(fragmentsOf(fragmentOf(entity).get().getEntity()));
+//		resolveXSDFragments(fragmentsOf(fragmentOf(entity).get().getEntity()));
 		
 		
 //		System.out.println(nsPrefix);

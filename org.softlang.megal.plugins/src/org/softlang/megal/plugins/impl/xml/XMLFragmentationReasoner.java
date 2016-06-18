@@ -81,7 +81,7 @@ public class XMLFragmentationReasoner extends ANTLRFragmentationReasoner {
 			
 			XMLParser.ElementContext elementContext = (XMLParser.ElementContext)context;
 						
-			return elementContext.content() == null;
+			return elementContext.content() == null || elementContext.content().element().isEmpty();
 			
 		}
 
