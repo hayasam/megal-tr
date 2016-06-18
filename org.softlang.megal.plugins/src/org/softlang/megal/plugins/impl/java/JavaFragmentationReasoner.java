@@ -24,6 +24,11 @@ import org.softlang.megal.plugins.util.antlr.ANTLRUtils;
  */
 public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 	
+	/*
+	 * TODO
+	 * Extract Fact providers into private static classes extending ANTLRParseRuleContextFactProvider
+	 */
+	
 	/**
 	 * Fragmentation rule for inner classes
 	 * 

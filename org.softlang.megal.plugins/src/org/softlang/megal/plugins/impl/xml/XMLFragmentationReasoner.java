@@ -25,6 +25,11 @@ import org.softlang.megal.plugins.util.antlr.ANTLRUtils;
  */
 public class XMLFragmentationReasoner extends ANTLRFragmentationReasoner {
 
+	/*
+	 * TODO
+	 * Extract Fact providers into private static classes extending ANTLRParseRuleContextFactProvider
+	 */
+	
 	/**
 	 * Fragmentation rule for XMLElements and XMLAttributes
 	 * @author maxmeffert
