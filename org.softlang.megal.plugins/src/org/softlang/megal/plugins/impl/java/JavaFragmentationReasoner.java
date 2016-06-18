@@ -10,11 +10,14 @@ import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.impl.java.antlr.JavaLexer;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser;
+import org.softlang.megal.plugins.impl.java.antlr.JavaParser.ClassDeclarationContext;
+import org.softlang.megal.plugins.impl.java.antlr.JavaParser.MethodDeclarationContext;
+import org.softlang.megal.plugins.impl.java.antlr.JavaParser.VariableDeclaratorContext;
 import org.softlang.megal.plugins.util.Fragments;
 import org.softlang.megal.plugins.util.Fragments.Fragment;
 import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationListener.FragmentationRule;
 import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationReasoner;
-import org.softlang.megal.plugins.util.antlr.ANTLRUtils;
+import org.softlang.megal.plugins.util.antlr.ANTLRParserRuleContextFactProvider;
 
 /**
  * Disassembles a Java artifact into its fragments.
@@ -24,10 +27,44 @@ import org.softlang.megal.plugins.util.antlr.ANTLRUtils;
  */
 public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 	
-	/*
-	 * TODO
-	 * Extract Fact providers into private static classes extending ANTLRParseRuleContextFactProvider
-	 */
+	static private class ClassDeclarationContextFactProvider extends ANTLRParserRuleContextFactProvider<JavaParser.ClassDeclarationContext> {
+
+		public ClassDeclarationContextFactProvider(ClassDeclarationContext context) {
+			super(context);
+		}
+
+		@Override
+		public String getName() {
+			return getContext().Identifier().getText();
+		}
+		
+	}
+	
+	static private class MethodDeclarationContextFactProvider extends ANTLRParserRuleContextFactProvider<JavaParser.MethodDeclarationContext> {
+
+		public MethodDeclarationContextFactProvider(MethodDeclarationContext context) {
+			super(context);
+		}
+
+		@Override
+		public String getName() {
+			return getContext().Identifier().getText();
+		}
+		
+	}
+	
+	static private class FieldDeclarationContextFactProvider extends ANTLRParserRuleContextFactProvider<JavaParser.VariableDeclaratorContext> {
+
+		public FieldDeclarationContextFactProvider(VariableDeclaratorContext context) {
+			super(context);
+		}
+
+		@Override
+		public String getName() {
+			return getContext().getText();
+		}
+		
+	}
 	
 	/**
 	 * Fragmentation rule for inner classes
@@ -63,21 +100,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 			JavaParser.ClassDeclarationContext classContext = (JavaParser.ClassDeclarationContext)context;
 			
 			// Create a new JavaInnerClass fragment
-			return Fragments.create("JavaInnerClass", entity, artifact, new Fragments.FactProvider() {
-				
-				// Get the original text from the parser context object
-				@Override
-				public String getText() {
-					return ANTLRUtils.originalText(classContext);
-				}
-				
-				// Get the name of the class declaration
-				@Override
-				public String getName() {
-					return classContext.Identifier().getText();
-				}
-				
-			});
+			return Fragments.create("JavaInnerClass", entity, artifact, new ClassDeclarationContextFactProvider(classContext));
 			
 		}
 		
@@ -117,27 +140,11 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 			JavaParser.ClassDeclarationContext classContext = (JavaParser.ClassDeclarationContext)context;
 			
 			// Create a new JavaClass fragment
-			return Fragments.create("JavaClass", entity, artifact, new Fragments.FactProvider() {
-				
-				// Get the original text from the parser context object
-				@Override
-				public String getText() {
-					return ANTLRUtils.originalText(classContext);
-				}
-				
-				// Get the name of the class declaration
-				@Override
-				public String getName() {
-					return classContext.Identifier().getText();
-				}
-				
-			});
+			return Fragments.create("JavaClass", entity, artifact, new ClassDeclarationContextFactProvider(classContext));
 			
 		}
 		
 	};
-	
-	
 	
 	/**
 	 * Fragmentation rule for methods
@@ -172,21 +179,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 			JavaParser.MethodDeclarationContext methodContext = (JavaParser.MethodDeclarationContext)context;
 			
 			// Create a new JavaMethod fragment
-			return Fragments.create("JavaMethod", entity, artifact, new Fragments.FactProvider() {
-				
-				// Get the original text from the parser context object
-				@Override
-				public String getText() {
-					return ANTLRUtils.originalText(methodContext);
-				}
-				
-				// Get the name of the class declaration
-				@Override
-				public String getName() {
-					return methodContext.Identifier().getText();
-				}
-				
-			});
+			return Fragments.create("JavaMethod", entity, artifact, new MethodDeclarationContextFactProvider(methodContext));
 			
 		}
 		
@@ -226,21 +219,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentationReasoner {
 			JavaParser.VariableDeclaratorContext fieldContext = (JavaParser.VariableDeclaratorContext)context;
 			
 			// Create a new JavaField fragment
-			return Fragments.create("JavaField", entity, artifact, new Fragments.FactProvider() {
-				
-				// Get the original text from the parser context object
-				@Override
-				public String getText() {
-					return ANTLRUtils.originalText(fieldContext);
-				}
-				
-				// Get the name of the class declaration
-				@Override
-				public String getName() {
-					return fieldContext.getText();
-				}
-				
-			});
+			return Fragments.create("JavaField", entity, artifact, new FieldDeclarationContextFactProvider(fieldContext));
 		}
 		
 	};

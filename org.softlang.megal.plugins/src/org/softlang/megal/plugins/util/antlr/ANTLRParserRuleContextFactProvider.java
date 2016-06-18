@@ -3,11 +3,11 @@ package org.softlang.megal.plugins.util.antlr;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.softlang.megal.plugins.util.Fragments.FactProvider;
 
-public abstract class ANTLRParseRuleContextFactProvider<C extends ParserRuleContext> implements FactProvider {
+public abstract class ANTLRParserRuleContextFactProvider<C extends ParserRuleContext> implements FactProvider {
 
 	private C context;
 	
-	public ANTLRParseRuleContextFactProvider (C context) {
+	public ANTLRParserRuleContextFactProvider (C context) {
 		this.context = context;
 	}
 	

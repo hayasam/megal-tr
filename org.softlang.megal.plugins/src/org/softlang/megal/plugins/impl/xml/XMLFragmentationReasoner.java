@@ -10,9 +10,12 @@ import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLLexer;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLParser;
+import org.softlang.megal.plugins.impl.xml.antlr.XMLParser.AttributeContext;
+import org.softlang.megal.plugins.impl.xml.antlr.XMLParser.ElementContext;
 import org.softlang.megal.plugins.util.Fragments;
 import org.softlang.megal.plugins.util.Fragments.Fragment;
 import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationReasoner;
+import org.softlang.megal.plugins.util.antlr.ANTLRParserRuleContextFactProvider;
 import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationListener.FragmentationRule;
 import org.softlang.megal.plugins.util.antlr.ANTLRUtils;
 
@@ -25,10 +28,31 @@ import org.softlang.megal.plugins.util.antlr.ANTLRUtils;
  */
 public class XMLFragmentationReasoner extends ANTLRFragmentationReasoner {
 
-	/*
-	 * TODO
-	 * Extract Fact providers into private static classes extending ANTLRParseRuleContextFactProvider
-	 */
+	static private class ElementContextFactProvider extends ANTLRParserRuleContextFactProvider<XMLParser.ElementContext> {
+
+		public ElementContextFactProvider(ElementContext context) {
+			super(context);
+		}
+
+		@Override
+		public String getName() {
+			return getContext().Name(0).toString();
+		}
+		
+	}
+	
+	static private class AttributeContextFactProvider extends ANTLRParserRuleContextFactProvider<XMLParser.AttributeContext> {
+
+		public AttributeContextFactProvider(AttributeContext context) {
+			super(context);
+		}
+
+		@Override
+		public String getName() {
+			return getContext().Name().toString();
+		}
+		
+	}
 	
 	/**
 	 * Fragmentation rule for XMLElements and XMLAttributes
@@ -68,42 +92,13 @@ public class XMLFragmentationReasoner extends ANTLRFragmentationReasoner {
 			XMLParser.ElementContext elementContext = (XMLParser.ElementContext)context;
 			
 			// Create a new XMLElement fragment
-			Fragment f = Fragments.create("XMLElement", entity, artifact, new Fragments.FactProvider() {
-				
-				// Get the original text from the parser context object
-				@Override
-				public String getText() {
-					return ANTLRUtils.originalText(elementContext);
-				}
-				
-				// Get the name of the XML element
-				@Override
-				public String getName() {
-					
-					return elementContext.Name(0).toString();
-					
-				}
-				
-			});
+			Fragment f = Fragments.create("XMLElement", entity, artifact, new ElementContextFactProvider(elementContext));
 			
 			// For all attribute context objects
 			for (XMLParser.AttributeContext attributeContext : elementContext.attribute()) {
 				
 				// Create a new fact provider for the attribute context object
-				Fragments.FactProvider facts = new Fragments.FactProvider() {
-					
-					// Get the original text of the parser context object
-					@Override
-					public String getText() {
-						return ANTLRUtils.originalText(attributeContext);
-					}
-					
-					// Get the name of the XML attribute
-					@Override
-					public String getName() {
-						return attributeContext.Name().toString();
-					}
-				};
+				Fragments.FactProvider facts = new AttributeContextFactProvider(attributeContext);
 				
 				// If the attribute is a XML namespace attribute
 				if (attributeContext.Name().toString().toLowerCase().startsWith("xmlns:")) {
