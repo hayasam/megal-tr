@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.softlang.megal.language.*;
@@ -62,11 +63,25 @@ public class Main {
 		out.println();
 		
 		List<Entity> es = kb.getEntities().stream()
-				.filter( e -> !e.getType().getName().equals("Plugin")  )
+//				.filter( e -> e.getType() != null && !e.getType().getName().equals("Plugin")  )
 				.sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) )
 				.collect(Collectors.toList());
 		
 		for (Entity e : es) {
+			
+			if (e.getBinding() instanceof URI) {
+				
+				Optional<Fragments.Fragment> f = Fragments.fragmentOf((URI)e.getBinding());
+			
+				if (f.isPresent()) {
+					
+					out.println("/*");
+					out.println(f.get().getText());
+					out.println("*/");
+					
+				}
+				
+			}
 			
 			out.println(e);
 			
@@ -76,15 +91,16 @@ public class Main {
 				
 			}
 			
+			
+			
+			
+			
 			if (e.getBinding() != null) {
-				out.println(e.getName() + " = " + e.getBinding());
+				out.println(e.getName() + " = '" + e.getBinding() + "'");
 			}
 			
 			
-//			if (Fragments.fragmentOf(e).isPresent()) {
-//				out.println(e);
-//				out.println(Fragments.fragmentOf(e).get().getText());
-//			}
+			
 			
 			out.println();
 			
@@ -117,7 +133,7 @@ public class Main {
 		printInstances(kb, System.out);
 		
 		PrintStream output = new PrintStream(new FileOutputStream("output/out.megal"));
-		printTypes(kb,output);
+//		printTypes(kb,output);
 		printInstances(kb,output);
 		output.close();
 		
