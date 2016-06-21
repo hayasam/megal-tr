@@ -77,6 +77,7 @@ public class Main {
 					
 					out.println("/*");
 					out.println(f.get().getText());
+					Fragments.print(f.get(), out);
 					out.println("*/");
 					
 				}

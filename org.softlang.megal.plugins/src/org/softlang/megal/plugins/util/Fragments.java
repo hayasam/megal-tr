@@ -1,5 +1,6 @@
 package org.softlang.megal.plugins.util;
 
+import java.io.PrintStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.stream.Collectors;
 
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
+
+import com.google.common.collect.TreeTraverser;
 
 import java.util.Optional;
 import java.util.Set;
@@ -247,11 +250,29 @@ public abstract class Fragments {
 			
 		}
 		
+		public boolean isRoot () {
+			return !hasParent();
+		}
+		
+		public boolean isLeaf () {
+			return getParts().isEmpty();
+		}
+		
+		public int depth () {
+			
+			if (hasParent()) {
+				return getParent().depth() + 1;
+			}
+			
+			return 0;
+			
+		}
+		
 		/**
 		 * Gets the string representation of the artifact.
 		 * Returns the URI of the fragment as string.
 		 */
-		final public String toString () {
+		public String toString () {
 			return getURI().toString();
 		}
 		
@@ -261,6 +282,21 @@ public abstract class Fragments {
 	 * The fragment KB 
 	 */
 	static private Set<Fragment> fb = new HashSet<Fragment>();
+	
+	static private class FragmentTraverser extends TreeTraverser<Fragment> {
+
+		@Override
+		public Iterable<Fragment> children(Fragment f) {
+			return f.getParts();
+		}
+		
+	}
+	
+	static public interface FragmentVisitor<T> {
+		
+		public T visit (Fragment f);
+		
+	}
 	
 	/**
 	 * Factory method for fragments.
@@ -281,6 +317,22 @@ public abstract class Fragments {
 		fb.add(f);
 		
 		return f;
+		
+	}
+	
+	
+	
+	static public void print (Fragment f, PrintStream p) {
+		
+		FragmentTraverser t = new FragmentTraverser();
+		
+		for (Fragment ff : t.preOrderTraversal(f)) {
+			
+			for (int i=0; i < ff.depth()-f.depth(); i++)
+				p.print("  ");
+			p.println(ff);
+			
+		}
 		
 	}
 	
@@ -324,20 +376,9 @@ public abstract class Fragments {
 				.filter( f -> f.getURI().equals(uri) )
 				.findFirst();
 	}
-	
+		
 	/**
-	 * Gets the first fragment for a given artifact.
-	 * @param artifact
-	 * @return
-	 */
-	static public Optional<Fragment> fragmentOf (Artifact artifact) {
-		return fb.stream()
-				.filter( f -> f.getArtifact().equals(artifact) )
-				.findFirst();
-	}
-	
-	/**
-	 * Gets the first fragment for a given entity.
+	 * Gets the first fragment bound a given entity.
 	 * @param entity
 	 * @return
 	 */
@@ -370,7 +411,7 @@ public abstract class Fragments {
 	}
 	
 	/**
-	 * Gets all frgaments for a given entity.
+	 * Gets all fragments contained of a given entity.
 	 * @param entity
 	 * @return
 	 */

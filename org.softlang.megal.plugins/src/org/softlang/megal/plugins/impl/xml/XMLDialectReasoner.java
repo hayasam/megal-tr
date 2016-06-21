@@ -20,7 +20,7 @@ import org.softlang.megal.plugins.api.GuidedReasonerPlugin;
  * @author maxmeffert
  *
  */
-public class XMLFragmentReasoner extends GuidedReasonerPlugin {
+public class XMLDialectReasoner extends GuidedReasonerPlugin {
 
 	
 	/*
