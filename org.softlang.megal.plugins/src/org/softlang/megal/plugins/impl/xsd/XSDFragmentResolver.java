@@ -5,7 +5,7 @@ import org.softlang.megal.mi2.KB;
 import org.softlang.megal.mi2.Ref;
 import org.softlang.megal.plugins.api.GuidedReasonerPlugin;
 
-import static org.softlang.megal.plugins.util.Fragments.*;
+import static org.softlang.megal.plugins.api.fragmentation.Fragments.*;
 
 import java.util.Collection;
 import java.util.regex.Matcher;

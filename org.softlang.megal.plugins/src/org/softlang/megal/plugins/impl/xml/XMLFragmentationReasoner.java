@@ -8,15 +8,15 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
+import org.softlang.megal.plugins.api.fragmentation.Fragments;
+import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
+import org.softlang.megal.plugins.api.fragmentation.antlr.ANTLRFragmentizer;
+import org.softlang.megal.plugins.api.fragmentation.antlr.ANTLRContextFactProvider;
+import org.softlang.megal.plugins.api.fragmentation.antlr.ANTLRFragmentationListener.FragmentationRule;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLLexer;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLParser;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLParser.AttributeContext;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLParser.ElementContext;
-import org.softlang.megal.plugins.util.Fragments;
-import org.softlang.megal.plugins.util.Fragments.Fragment;
-import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationReasoner;
-import org.softlang.megal.plugins.util.antlr.ANTLRParserRuleContextFactProvider;
-import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationListener.FragmentationRule;
 
 /**
  * Disassembles every XML artifact into XML fragments, that is XMLElement and XMLAttribute.
@@ -25,9 +25,9 @@ import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationListener.Fragment
  * @author maxmeffert
  *
  */
-public class XMLFragmentationReasoner extends ANTLRFragmentationReasoner {
+public class XMLFragmentationReasoner extends ANTLRFragmentizer {
 
-	static private class ElementContextFactProvider extends ANTLRParserRuleContextFactProvider<XMLParser.ElementContext> {
+	static private class ElementContextFactProvider extends ANTLRContextFactProvider<XMLParser.ElementContext> {
 
 		public ElementContextFactProvider(ElementContext context) {
 			super(context);
@@ -43,7 +43,7 @@ public class XMLFragmentationReasoner extends ANTLRFragmentationReasoner {
 		
 	}
 	
-	static private class AttributeContextFactProvider extends ANTLRParserRuleContextFactProvider<XMLParser.AttributeContext> {
+	static private class AttributeContextFactProvider extends ANTLRContextFactProvider<XMLParser.AttributeContext> {
 
 		public AttributeContextFactProvider(AttributeContext context) {
 			super(context);

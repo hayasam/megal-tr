@@ -2,7 +2,7 @@ package org.softlang.megal.plugins.impl.xml;
 
 import static com.google.common.collect.Iterables.any;
 import static com.google.common.collect.Iterables.filter;
-import static org.softlang.megal.plugins.util.Fragments.fragmentOf;
+import static org.softlang.megal.plugins.api.fragmentation.Fragments.fragmentOf;
 import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.FragmentationPlugin;
+import org.softlang.megal.plugins.api.Fragmentizer;
 import org.softlang.megal.plugins.api.GuidedReasonerPlugin;
 
 /**

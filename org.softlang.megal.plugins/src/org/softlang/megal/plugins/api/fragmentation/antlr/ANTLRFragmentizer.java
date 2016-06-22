@@ -1,4 +1,4 @@
-package org.softlang.megal.plugins.util.antlr;
+package org.softlang.megal.plugins.api.fragmentation.antlr;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -9,16 +9,16 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.FragmentationPlugin;
-import org.softlang.megal.plugins.util.Fragments.Fragment;
-import org.softlang.megal.plugins.util.antlr.ANTLRFragmentationListener.FragmentationRule;
+import org.softlang.megal.plugins.api.Fragmentizer;
+import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
+import org.softlang.megal.plugins.api.fragmentation.antlr.ANTLRFragmentationListener.FragmentationRule;
 
 /**
  * Abstract base class for ANTLR base fragmentation reasoners
  * @author maxmeffert
  *
  */
-public abstract class ANTLRFragmentationReasoner extends FragmentationPlugin {
+public abstract class ANTLRFragmentizer extends Fragmentizer {
 
 	/**
 	 * Gets the collection for fragmentation rules

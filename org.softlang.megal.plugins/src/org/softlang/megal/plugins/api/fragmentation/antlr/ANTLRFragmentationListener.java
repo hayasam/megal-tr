@@ -1,11 +1,11 @@
-package org.softlang.megal.plugins.util.antlr;
+package org.softlang.megal.plugins.api.fragmentation.antlr;
 
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.util.Fragments.Fragment;
+import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
 
 import java.util.Collection;
 import java.util.LinkedList;

@@ -7,9 +7,9 @@ import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.any;
 import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 
-import org.softlang.megal.plugins.api.FragmentationPlugin;
+import org.softlang.megal.plugins.api.Fragmentizer;
 import org.softlang.megal.plugins.api.GuidedReasonerPlugin;
-import org.softlang.megal.plugins.util.Fragments.Fragment;
+import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
 
 /**
  * 
@@ -58,7 +58,7 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 	protected void guidedDerive(Entity entity) throws Throwable {
 		
 		// For all partial fragmentation plugins
-		for (FragmentationPlugin plugin : filter(getParts(), FragmentationPlugin.class)) {
+		for (Fragmentizer plugin : filter(getParts(), Fragmentizer.class)) {
 			
 			// If the partial fragmentation plugin does NOT realize the language of the entity
 			if (!any(plugin.getRealization(), lang -> isElementOfLanguage(entity, lang))) {

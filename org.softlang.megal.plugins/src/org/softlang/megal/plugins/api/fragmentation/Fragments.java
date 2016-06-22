@@ -1,4 +1,4 @@
-package org.softlang.megal.plugins.util;
+package org.softlang.megal.plugins.api.fragmentation;
 
 import java.io.PrintStream;
 import java.net.URI;

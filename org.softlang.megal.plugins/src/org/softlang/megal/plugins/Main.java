@@ -18,27 +18,62 @@ import org.softlang.megal.mi2.Relationship;
 import org.softlang.megal.mi2.RelationshipType;
 import org.softlang.megal.mi2.api.ModelExecutor;
 import org.softlang.megal.mi2.api.resolution.LocalResolution;
-import org.softlang.megal.plugins.util.Fragments;
+import org.softlang.megal.mi2.api.resolution.Resolution;
+import org.softlang.megal.plugins.api.fragmentation.Fragments;
 
 @SuppressWarnings("unused")
 public class Main {
 	
-	private static LocalResolution getResolution () throws IOException  {
-		
-		File root = (new File("..")).getCanonicalFile();
-		
-		return new LocalResolution() {
-			
-			@Override
-			protected File getRoot() {
-				return root;
+	static final private File root = new File("..");
+	static final private Resolution rootResolution = new LocalResolution(){
+
+		@Override
+		protected File getRoot() {
+			try {
+				return root.getCanonicalFile();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
+			return root;
+		}
+		
+	};
+		
+	static private String input = "megal/test.megal";
+	static private String output = "output/out.megal";
+	
+	static private KB load (File f) throws IOException {
+		
+		if (f.isDirectory()) {
+		
+			throw new IllegalStateException("File is a directory!");
 			
-		};
+		}
+		
+		System.out.println("Loading KB...");
+		
+		KB kb =  MegamodelKB.loadAll(Megals.load(f, f.getParentFile().listFiles()));
+		
+		System.out.println("KB loaded.");
+		
+		return kb;
 		
 	}
 	
-	private static void printTypes (KB kb, PrintStream out) {
+	static private KB evaluate (KB kb) throws IOException {
+		
+		System.out.println("Evaluating KB...");
+		
+		ModelExecutor ex = new ModelExecutor();
+		kb = ex.evaluate(rootResolution, kb).getOutput();
+		
+		System.out.println("KB evalutated.");
+		
+		return kb;
+		
+	}
+	
+	static private void printTypes (KB kb, PrintStream out) {
 		
 		out.println();
 		
@@ -58,7 +93,7 @@ public class Main {
 		
 	}
 	
-	private static void printInstances (KB kb, PrintStream out) {
+	static private void printInstances (KB kb, PrintStream out) {
 		
 		out.println();
 		
@@ -77,7 +112,7 @@ public class Main {
 					
 					out.println("/*");
 					out.println(f.get().getText());
-					Fragments.print(f.get(), out);
+//					Fragments.print(f.get(), out);
 					out.println("*/");
 					
 				}
@@ -119,24 +154,19 @@ public class Main {
 //		}
 		
 	}
-	
+		
 	public static void main(String[] args) throws IOException {
 		
 		System.out.println("Start.");
 		
-		KB kb = MegamodelKB.loadAll(Megals.load(new File("megal/test.megal"), new File("megal/Prelude.megal")));
-		
-		System.out.println("KB loaded.");
-		
-		ModelExecutor ex = new ModelExecutor();
-		kb = ex.evaluate(getResolution(), kb).getOutput();
+		KB kb = evaluate(load(new File(input)));
 		
 		printInstances(kb, System.out);
 		
-		PrintStream output = new PrintStream(new FileOutputStream("output/out.megal"));
-//		printTypes(kb,output);
-		printInstances(kb,output);
-		output.close();
+		PrintStream out = new PrintStream(new FileOutputStream(output));
+//		printTypes(kb,out);
+		printInstances(kb,out);
+		out.close();
 		
 		
 	}

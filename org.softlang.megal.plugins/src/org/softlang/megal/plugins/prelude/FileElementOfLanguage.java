@@ -6,10 +6,6 @@ import static com.google.common.collect.Iterables.filter;
 import static java.util.Collections.singleton;
 import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.Relationship;
 import org.softlang.megal.mi2.api.Artifact;
@@ -17,7 +13,6 @@ import org.softlang.megal.plugins.api.Acceptor;
 import org.softlang.megal.plugins.api.GuidedEvaluatorPlugin;
 
 import com.google.common.base.Optional;
-import com.google.common.io.Files;
 
 /**
  * <p>

@@ -1,4 +1,4 @@
-package org.softlang.megal.plugins.util.antlr;
+package org.softlang.megal.plugins.api.fragmentation.antlr;
 
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.ParserRuleContext;
