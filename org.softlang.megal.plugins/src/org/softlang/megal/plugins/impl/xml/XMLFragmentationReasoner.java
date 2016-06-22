@@ -2,21 +2,18 @@ package org.softlang.megal.plugins.impl.xml;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.tree.ParseTree;
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.antlr.ANTLRContextFactProvider;
-import org.softlang.megal.plugins.api.antlr.ANTLRFragmentizer;
-import org.softlang.megal.plugins.api.antlr.ANTLRFragmentationListener.FragmentationRule;
+import org.softlang.megal.plugins.api.antlr.ANTLRFragmentizerPlugin;
+import org.softlang.megal.plugins.api.antlr.ANTLRParserFactory;
 import org.softlang.megal.plugins.api.fragmentation.Fragments;
 import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLLexer;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLParser;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLParser.AttributeContext;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLParser.ElementContext;
+import org.softlang.megal.plugins.impl.xml.antlr.XMLParserFactory;
 
 /**
  * Disassembles every XML artifact into XML fragments, that is XMLElement and XMLAttribute.
@@ -25,9 +22,9 @@ import org.softlang.megal.plugins.impl.xml.antlr.XMLParser.ElementContext;
  * @author maxmeffert
  *
  */
-public class XMLFragmentationReasoner extends ANTLRFragmentizer {
+public class XMLFragmentationReasoner extends ANTLRFragmentizerPlugin<XMLParser, XMLLexer> {
 
-	static private class ElementContextFactProvider extends ANTLRContextFactProvider<XMLParser.ElementContext> {
+	static private class ElementContextFactProvider extends ParserContextFactProvider<XMLParser.ElementContext> {
 
 		public ElementContextFactProvider(ElementContext context) {
 			super(context);
@@ -43,7 +40,7 @@ public class XMLFragmentationReasoner extends ANTLRFragmentizer {
 		
 	}
 	
-	static private class AttributeContextFactProvider extends ANTLRContextFactProvider<XMLParser.AttributeContext> {
+	static private class AttributeContextFactProvider extends ParserContextFactProvider<XMLParser.AttributeContext> {
 
 		public AttributeContextFactProvider(AttributeContext context) {
 			super(context);
@@ -136,17 +133,11 @@ public class XMLFragmentationReasoner extends ANTLRFragmentizer {
 		return rules;
 		
 	}
+	
 
-	/**
-	 * Gets the parse tree for XML input char stream.
-	 */
 	@Override
-	public ParseTree getParseTree(CharStream input) {
-
-		XMLParser parser = new XMLParser(new CommonTokenStream(new XMLLexer(input)));
-		
-		return parser.document();
-
+	public ANTLRParserFactory<XMLParser, XMLLexer> getParserFactory() {
+		return new XMLParserFactory();
 	}
 
 }

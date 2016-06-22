@@ -3,13 +3,14 @@ public class Foo {
 	
 	class Bar {
 		
+		@SuppressWarnings("unused")
 		private void getBar () {
 			
 		}
 		
 	}
 
-	private String bar
+	private String bar;
 
 	public String getBar() {
 		return bar;

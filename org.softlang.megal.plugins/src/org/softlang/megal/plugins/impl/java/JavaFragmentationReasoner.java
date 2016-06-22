@@ -3,15 +3,12 @@ package org.softlang.megal.plugins.impl.java;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.tree.ParseTree;
+
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.antlr.ANTLRContextFactProvider;
-import org.softlang.megal.plugins.api.antlr.ANTLRFragmentizer;
-import org.softlang.megal.plugins.api.antlr.ANTLRFragmentationListener.FragmentationRule;
+import org.softlang.megal.plugins.api.antlr.ANTLRFragmentizerPlugin;
+import org.softlang.megal.plugins.api.antlr.ANTLRParserFactory;
 import org.softlang.megal.plugins.api.fragmentation.Fragments;
 import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
 import org.softlang.megal.plugins.impl.java.antlr.JavaLexer;
@@ -20,6 +17,7 @@ import org.softlang.megal.plugins.impl.java.antlr.JavaParser.ClassDeclarationCon
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.MethodDeclarationContext;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.TypeDeclarationContext;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.VariableDeclaratorContext;
+import org.softlang.megal.plugins.impl.java.antlr.JavaParserFactory;
 
 /**
  * Disassembles a Java artifact into its fragments.
@@ -27,7 +25,7 @@ import org.softlang.megal.plugins.impl.java.antlr.JavaParser.VariableDeclaratorC
  * @author maxmeffert
  *
  */
-public class JavaFragmentationReasoner extends ANTLRFragmentizer {
+public class JavaFragmentationReasoner extends ANTLRFragmentizerPlugin<JavaParser, JavaLexer> {
 	
 	/*
 	 * TODO
@@ -36,7 +34,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentizer {
 	 * 
 	 */
 	
-	static private class ClassDeclarationContextFactProvider extends ANTLRContextFactProvider<JavaParser.ClassDeclarationContext> {
+	static private class ClassDeclarationContextFactProvider extends ParserContextFactProvider<JavaParser.ClassDeclarationContext> {
 
 		public ClassDeclarationContextFactProvider(ClassDeclarationContext context) {
 			super(context);
@@ -49,7 +47,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentizer {
 		
 	}
 	
-	static private class MethodDeclarationContextFactProvider extends ANTLRContextFactProvider<JavaParser.MethodDeclarationContext> {
+	static private class MethodDeclarationContextFactProvider extends ParserContextFactProvider<JavaParser.MethodDeclarationContext> {
 
 		public MethodDeclarationContextFactProvider(MethodDeclarationContext context) {
 			super(context);
@@ -62,7 +60,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentizer {
 		
 	}
 	
-	static private class FieldDeclarationContextFactProvider extends ANTLRContextFactProvider<JavaParser.VariableDeclaratorContext> {
+	static private class FieldDeclarationContextFactProvider extends ParserContextFactProvider<JavaParser.VariableDeclaratorContext> {
 
 		public FieldDeclarationContextFactProvider(VariableDeclaratorContext context) {
 			super(context);
@@ -75,7 +73,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentizer {
 		
 	}
 	
-	static private class TypeDeclarationContextFactProvider extends ANTLRContextFactProvider<JavaParser.TypeDeclarationContext> {
+	static private class TypeDeclarationContextFactProvider extends ParserContextFactProvider<JavaParser.TypeDeclarationContext> {
 
 		public TypeDeclarationContextFactProvider(TypeDeclarationContext context) {
 			super(context);
@@ -266,17 +264,10 @@ public class JavaFragmentationReasoner extends ANTLRFragmentizer {
 		
 	}
 	
-	/**
-	 * Gets the parse tree for Java input char stream.
-	 */
+	
 	@Override
-	public ParseTree getParseTree(CharStream input) {
-		
-		JavaParser parser = new JavaParser(new CommonTokenStream(new JavaLexer(input)));
-		parser.removeErrorListeners();
-		
-		return parser.compilationUnit();
-		
+	public ANTLRParserFactory<JavaParser, JavaLexer> getParserFactory() {
+		return new JavaParserFactory();
 	}
 
 }

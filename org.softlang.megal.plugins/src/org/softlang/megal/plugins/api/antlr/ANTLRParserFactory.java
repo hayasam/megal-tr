@@ -48,4 +48,16 @@ public abstract class ANTLRParserFactory<P extends Parser, L extends Lexer> {
 		return getParser(getLexer(artifact));
 	}
 	
+	final public ParseTree getParseTree (Reader reader) throws IOException {
+		return getParseTree(getParser(reader));
+	}
+	
+	final public ParseTree getParseTree (CharSource chars) throws IOException {
+		return getParseTree(getParser(chars));
+	}
+	
+	final public ParseTree getParseTree (Artifact artifact) throws IOException {
+		return getParseTree(getParser(artifact));
+	}
+	
 }
