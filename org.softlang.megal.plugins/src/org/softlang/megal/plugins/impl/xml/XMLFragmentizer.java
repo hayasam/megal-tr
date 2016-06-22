@@ -22,7 +22,7 @@ import org.softlang.megal.plugins.impl.xml.antlr.XMLParserFactory;
  * @author maxmeffert
  *
  */
-public class XMLFragmentationReasoner extends ANTLRFragmentizerPlugin<XMLParser, XMLLexer> {
+public class XMLFragmentizer extends ANTLRFragmentizerPlugin<XMLParser, XMLLexer> {
 
 	static private class ElementContextFactProvider extends ParserContextFactProvider<XMLParser.ElementContext> {
 

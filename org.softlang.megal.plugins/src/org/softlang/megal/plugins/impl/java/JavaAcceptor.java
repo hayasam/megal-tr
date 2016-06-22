@@ -7,7 +7,7 @@ import org.softlang.megal.plugins.impl.java.antlr.JavaParser;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParserFactory;
 
 
-public class AcceptJava extends ANTLRAcceptorPlugin<JavaParser, JavaLexer> {
+public class JavaAcceptor extends ANTLRAcceptorPlugin<JavaParser, JavaLexer> {
 
 	@Override
 	public ANTLRParserFactory<JavaParser, JavaLexer> getParserFactory() {

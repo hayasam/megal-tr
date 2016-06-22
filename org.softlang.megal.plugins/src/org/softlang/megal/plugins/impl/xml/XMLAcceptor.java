@@ -6,7 +6,7 @@ import org.softlang.megal.plugins.impl.xml.antlr.XMLLexer;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLParser;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLParserFactory;
 
-public class AcceptXML extends ANTLRAcceptorPlugin<XMLParser, XMLLexer> {
+public class XMLAcceptor extends ANTLRAcceptorPlugin<XMLParser, XMLLexer> {
 	
 	@Override
 	public ANTLRParserFactory<XMLParser, XMLLexer> getParserFactory() {

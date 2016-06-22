@@ -2,7 +2,7 @@
 AcceptJava: Plugin
 AcceptJava realizationOf Java
 AcceptJava partOf FileElementOfLanguage
-AcceptJava = 'classpath:org.softlang.megal.plugins.impl.java.AcceptJava'
+AcceptJava = 'classpath:org.softlang.megal.plugins.impl.java.JavaAcceptor'
 
 aJavaFile: File
 aJavaFile elementOf Java
@@ -94,10 +94,10 @@ FileFragmentReasoner = 'classpath:org.softlang.megal.plugins.prelude.FileFragmen
 
 Java: Language
 
-JavaFragmentReasoner: Plugin
-JavaFragmentReasoner realizationOf Java
-JavaFragmentReasoner partOf FileFragmentReasoner
-JavaFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationReasoner'
+JavaFragmentizer: Plugin
+JavaFragmentizer realizationOf Java
+JavaFragmentizer partOf FileFragmentReasoner
+JavaFragmentizer = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentizer'
 
 LanguageResolver: Plugin
 LanguageResolver = 'classpath:org.softlang.megal.plugins.prelude.LanguageResolver'
@@ -152,10 +152,10 @@ xmlFile.lala#0.name#0: XMLAttribute
 xmlFile.lala#0.name#0 partOf xmlFile.lala#0
 xmlFile.lala#0.name#0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/0/name/XMLAttribute'
 
-XMLFragmentReasoner: Plugin
-XMLFragmentReasoner realizationOf XML
-XMLFragmentReasoner partOf FileFragmentReasoner
-XMLFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.xml.XMLFragmentationReasoner'
+XMLFragmentizer: Plugin
+XMLFragmentizer realizationOf XML
+XMLFragmentizer partOf FileFragmentReasoner
+XMLFragmentizer = 'classpath:org.softlang.megal.plugins.impl.xml.XMLFragmentizer'
 
 XSD: Language
 XSD subsetOf XML

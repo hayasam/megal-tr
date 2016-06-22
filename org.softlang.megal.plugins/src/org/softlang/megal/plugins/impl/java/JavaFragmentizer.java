@@ -25,7 +25,7 @@ import org.softlang.megal.plugins.impl.java.antlr.JavaParserFactory;
  * @author maxmeffert
  *
  */
-public class JavaFragmentationReasoner extends ANTLRFragmentizerPlugin<JavaParser, JavaLexer> {
+public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLexer> {
 	
 	/*
 	 * TODO
@@ -160,9 +160,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentizerPlugin<JavaParse
 		 */
 		@Override
 		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
-			
-			JavaParser.ClassDeclarationContext classContext = ((JavaParser.TypeDeclarationContext)context).classDeclaration();
-			
+						
 			// Create a new JavaClass fragment
 			return Fragments.create("JavaClass", entity, artifact, new TypeDeclarationContextFactProvider((TypeDeclarationContext) context));
 			

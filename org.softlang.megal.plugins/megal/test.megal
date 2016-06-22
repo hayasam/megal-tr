@@ -26,15 +26,15 @@ aJavaFile : File
 aJavaFile elementOf Java
 aJavaFile = 'workspace:/org.softlang.megal.plugins/input/Foo.java'
 
-JavaFragmentReasoner : Plugin
-JavaFragmentReasoner realizationOf Java
-JavaFragmentReasoner partOf FileFragmentReasoner
-JavaFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentationReasoner'
+JavaFragmentizer : Plugin
+JavaFragmentizer realizationOf Java
+JavaFragmentizer partOf FileFragmentReasoner
+JavaFragmentizer = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentizer'
 
-XMLFragmentReasoner : Plugin
-XMLFragmentReasoner realizationOf XML
-XMLFragmentReasoner partOf FileFragmentReasoner
-XMLFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.xml.XMLFragmentationReasoner'
+XMLFragmentizer : Plugin
+XMLFragmentizer realizationOf XML
+XMLFragmentizer partOf FileFragmentReasoner
+XMLFragmentizer = 'classpath:org.softlang.megal.plugins.impl.xml.XMLFragmentizer'
 
 
 XSDFragmentResolver : Plugin
