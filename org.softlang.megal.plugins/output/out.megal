@@ -1,4 +1,9 @@
 
+AcceptJava: Plugin
+AcceptJava realizationOf Java
+AcceptJava partOf FileElementOfLanguage
+AcceptJava = 'classpath:org.softlang.megal.plugins.impl.java.AcceptJava2'
+
 aJavaFile: File
 aJavaFile elementOf Java
 aJavaFile = 'workspace:/org.softlang.megal.plugins/input/Foo.java'
@@ -14,7 +19,7 @@ public class Foo {
 		
 	}
 
-	private String bar;
+	private String bar
 
 	public String getBar() {
 		return bar;
@@ -55,29 +60,22 @@ aJavaFile.Foo#0.Bar#0.getBar#0 partOf aJavaFile.Foo#0.Bar#0
 aJavaFile.Foo#0.Bar#0.getBar#0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/0/Bar/JavaInnerClass/0/getBar/JavaMethod'
 
 /*
-bar
-*/
-aJavaFile.Foo#0.bar#1: JavaField
-aJavaFile.Foo#0.bar#1 partOf aJavaFile.Foo#0
-aJavaFile.Foo#0.bar#1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/1/bar/JavaField'
-
-/*
 String getBar() {
 		return bar;
 	}
 */
-aJavaFile.Foo#0.getBar#2: JavaMethod
-aJavaFile.Foo#0.getBar#2 partOf aJavaFile.Foo#0
-aJavaFile.Foo#0.getBar#2 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/2/getBar/JavaMethod'
+aJavaFile.Foo#0.getBar#1: JavaMethod
+aJavaFile.Foo#0.getBar#1 partOf aJavaFile.Foo#0
+aJavaFile.Foo#0.getBar#1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/1/getBar/JavaMethod'
 
 /*
 void setBar(String bar) {
 		this.bar = bar;
 	}
 */
-aJavaFile.Foo#0.setBar#3: JavaMethod
-aJavaFile.Foo#0.setBar#3 partOf aJavaFile.Foo#0
-aJavaFile.Foo#0.setBar#3 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/3/setBar/JavaMethod'
+aJavaFile.Foo#0.setBar#2: JavaMethod
+aJavaFile.Foo#0.setBar#2 partOf aJavaFile.Foo#0
+aJavaFile.Foo#0.setBar#2 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/2/setBar/JavaMethod'
 
 FileElementOfLanguage: Plugin
 FileElementOfLanguage = 'classpath:org.softlang.megal.plugins.prelude.FileElementOfLanguage'
@@ -102,11 +100,6 @@ PartOfReasoner: Plugin
 PartOfReasoner = 'classpath:org.softlang.megal.plugins.prelude.PartOfReasoner'
 
 XML: Language
-
-XMLAcceptor: Plugin
-XMLAcceptor realizationOf XML
-XMLAcceptor partOf FileElementOfLanguage
-XMLAcceptor = 'classpath:plugins.jaxb.AcceptXML'
 
 xmlFile: File
 xmlFile elementOf XML
@@ -157,14 +150,6 @@ XMLFragmentReasoner = 'classpath:org.softlang.megal.plugins.impl.xml.XMLFragment
 
 XSD: Language
 XSD subsetOf XML
-
-XSDAcceptor: Plugin
-XSDAcceptor realizationOf XSD
-XSDAcceptor partOf FileElementOfLanguage
-XSDAcceptor = 'classpath:plugins.jaxb.AcceptXSD'
-
-XSDConformance: Plugin
-XSDConformance = 'classpath:plugins.jaxb.XSDConformance'
 
 xsdFile: File
 xsdFile elementOf XSD

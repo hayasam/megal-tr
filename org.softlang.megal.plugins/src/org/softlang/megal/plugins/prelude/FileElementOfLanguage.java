@@ -34,10 +34,10 @@ public class FileElementOfLanguage extends GuidedEvaluatorPlugin {
 		Entity element = relationship.getLeft();
 		
 		Iterable<Artifact> items = expandIfFolder(artifactsOf(element));
-
+		
 		boolean anyError = false;
 		for (Artifact artifact : items) {
-
+			
 			Optional<String> error = isElement(element, artifact);
 
 			if (error.isPresent()) {
@@ -58,7 +58,7 @@ public class FileElementOfLanguage extends GuidedEvaluatorPlugin {
 			if (!any(acceptor.getRealization(),
 					x -> isElementOfLanguage(element, x)))
 				continue;
-
+			
 			Optional<String> error = acceptor.accept(artifact);
 
 			if (error.isPresent())

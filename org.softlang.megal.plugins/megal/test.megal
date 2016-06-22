@@ -1,6 +1,6 @@
 model test
 import Prelude
-import XML
+import Java
 
 Java : Language
 XML: Language

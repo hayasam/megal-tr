@@ -1,18 +1,27 @@
 package org.softlang.megal.plugins.impl.java;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collection;
+
+import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.Recognizer;
+import org.antlr.v4.runtime.atn.ATNConfigSet;
+import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
+import org.softlang.megal.plugins.api.antlr.ANTLRContextFactProvider;
+import org.softlang.megal.plugins.api.antlr.ANTLRErrorCollectorListener;
+import org.softlang.megal.plugins.api.antlr.ANTLRFragmentizer;
+import org.softlang.megal.plugins.api.antlr.ANTLRFragmentationListener.FragmentationRule;
 import org.softlang.megal.plugins.api.fragmentation.Fragments;
 import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
-import org.softlang.megal.plugins.api.fragmentation.antlr.ANTLRFragmentizer;
-import org.softlang.megal.plugins.api.fragmentation.antlr.ANTLRContextFactProvider;
-import org.softlang.megal.plugins.api.fragmentation.antlr.ANTLRFragmentationListener.FragmentationRule;
 import org.softlang.megal.plugins.impl.java.antlr.JavaLexer;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.ClassDeclarationContext;
@@ -272,6 +281,7 @@ public class JavaFragmentationReasoner extends ANTLRFragmentizer {
 	public ParseTree getParseTree(CharStream input) {
 		
 		JavaParser parser = new JavaParser(new CommonTokenStream(new JavaLexer(input)));
+		parser.removeErrorListeners();
 		
 		return parser.compilationUnit();
 		

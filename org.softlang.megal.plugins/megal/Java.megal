@@ -2,11 +2,11 @@ model Java
 import Prelude
 
 Java: Language
-javaFile: File
-javaFile elementOf Java
-javaFile = 'workspace:/org.softlang.megal.examples/src/org/softlang/company/xjc/Department.java'
+// javaFile: File
+// javaFile elementOf Java
+// javaFile = 'workspace:/org.softlang.megal.examples/src/org/softlang/company/xjc/Department.java'
 
 AcceptJava: Plugin
 AcceptJava realizationOf Java
 AcceptJava partOf FileElementOfLanguage
-AcceptJava = 'classpath:plugins.jaxb.AcceptJava'
+AcceptJava = 'classpath:org.softlang.megal.plugins.impl.java.AcceptJava'
