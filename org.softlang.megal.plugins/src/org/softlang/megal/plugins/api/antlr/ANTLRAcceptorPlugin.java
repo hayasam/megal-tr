@@ -37,7 +37,7 @@ public abstract class ANTLRAcceptorPlugin<P extends Parser, L extends Lexer> ext
 	abstract public ANTLRParserFactory<P, L> getParserFactory ();
 	
 	@Override
-	public Optional<String> accept(Artifact artifact) {
+	final public Optional<String> accept(Artifact artifact) {
 		
 		ANTLRParserFactory<P, L> parserFactory = getParserFactory();
 		

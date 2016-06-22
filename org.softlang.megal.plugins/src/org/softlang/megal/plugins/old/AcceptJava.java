@@ -15,7 +15,6 @@ public class AcceptJava extends Acceptor {
 	@Override
 	public Optional<String> accept(Artifact artifact) {
 		try (Reader s = artifact.getChars().openStream()) {
-			
 			JavaParser.parse(s, false);
 			return Optional.absent();
 		} catch (ParseException e) {

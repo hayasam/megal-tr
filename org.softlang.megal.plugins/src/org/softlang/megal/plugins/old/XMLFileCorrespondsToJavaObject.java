@@ -8,7 +8,6 @@ import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 import static org.softlang.megal.plugins.util.Prelude.isInstance;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;

@@ -3,8 +3,6 @@ package org.softlang.megal.plugins.old;
 import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 
 import java.io.IOException;
-import java.io.InputStream;
-
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;

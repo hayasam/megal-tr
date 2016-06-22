@@ -27,7 +27,6 @@ import org.xml.sax.InputSource;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class XSDJavaCorrespondence extends GuidedReasonerPlugin {

@@ -2,7 +2,7 @@
 AcceptJava: Plugin
 AcceptJava realizationOf Java
 AcceptJava partOf FileElementOfLanguage
-AcceptJava = 'classpath:org.softlang.megal.plugins.impl.java.AcceptJava2'
+AcceptJava = 'classpath:org.softlang.megal.plugins.impl.java.AcceptJava'
 
 aJavaFile: File
 aJavaFile elementOf Java
