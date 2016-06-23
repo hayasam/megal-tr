@@ -23,7 +23,6 @@ import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
  * @author maxmeffert
  *
  */
-@SuppressWarnings("rawtypes")
 public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer> extends FragmentizerPlugin {
 
 	
@@ -33,9 +32,9 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 	 * @author maxmeffert
 	 *
 	 */
-	static public interface FragmentationRule<C extends ParserRuleContext> {
+	static public abstract class FragmentationRule<C extends ParserRuleContext> {
 
-		public Class<C> contextType ();
+		abstract protected Class<C> contextType ();
 		
 		/**
 		 * Whether the rule is for 'compound' fragments which contains further fragment parts.
@@ -43,7 +42,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		 * 
 		 * @return Whether the rule is for 'compound' fragments
 		 */
-		public boolean isLeaf (C context);
+		abstract protected boolean isLeaf (C context);
 		
 		/**
 		 * Tests whether the rule is applicable to the current parser rule context
@@ -51,7 +50,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		 * @param context The parser rule context to test 
 		 * @return Whether the rule is applicable to the current parser rule context
 		 */
-		public boolean test (C context);
+		abstract protected boolean test (C context);
 		
 		/**
 		 * Creates a new fragment from a parser rule context
@@ -59,8 +58,20 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		 * @param context The parser rule context from which the fragment is created
 		 * @return A new fragment
 		 */
-		public Fragment create (Entity entity, Artifact artifact, C context);
+		abstract protected Fragment createFragment (Entity entity, Artifact artifact, C context);
 		
+		final public boolean accept (ParserRuleContext context) {
+			return contextType().isInstance(context) 
+					&& test(contextType().cast(context));
+		}
+		
+		final public boolean hasParts (ParserRuleContext context) {
+			return !isLeaf(contextType().cast(context));
+		}
+		
+		final public Fragment getFragment (Entity entity, Artifact artifact, ParserRuleContext context) {
+			return createFragment(entity, artifact, contextType().cast(context));
+		}
 		
 	}
 	 
@@ -70,9 +81,6 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 	 *
 	 */
 	static public class FragmentationListener implements ParseTreeListener {
-
-		
-
 		
 		/**
 		 * The containing entity of the fragments to collect
@@ -87,7 +95,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		/**
 		 * A List of fragmentation rules
 		 */
-		private Collection<FragmentationRule> rules;
+		private Collection<FragmentationRule<? extends ParserRuleContext>> rules;
 		
 		/**
 		 * Queue for collected fragments
@@ -100,7 +108,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		 * @param artifact
 		 * @param rules
 		 */
-		public FragmentationListener (Entity entity, Artifact artifact, Collection<FragmentationRule> rules) {
+		public FragmentationListener (Entity entity, Artifact artifact, Collection<FragmentationRule<? extends ParserRuleContext>> rules) {
 			this.entity = entity;
 			this.artifact = artifact;
 			this.rules = rules;
@@ -122,25 +130,29 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		public void exitEveryRule (ParserRuleContext context) {
 			
 			// for each fragmentation rule
-			for (FragmentationRule rule : rules) {
-
+			for (FragmentationRule<?> rule : rules) {
+				
 				// if the rule is applicable
-				if (rule.contextType().isInstance(context) && rule.test(context)) {
+				if (rule.accept(context)) {
 					
 					// create a fragment from the parser rule context
-					Fragment fragment = rule.create(entity, artifact, context);
+					Fragment fragment = rule.getFragment(entity, artifact, context);
 					
 					// check whether the rule is for a leaf fragment
-					boolean isLeaf = rule.isLeaf(context);
-					
-					// while the rule is not for a leaf fragment, 
-					while(!isLeaf && !fragments.isEmpty()) {
+					if (rule.hasParts(context)) {
 						
-						// add previously collected fragments as parts 
-						// (previously collected fragments are children of the AST nodes of the current fragment)
-						fragment.addPart(fragments.remove());
+						// while the rule is not for a leaf fragment, 
+						while(!fragments.isEmpty()) {
+							
+							// add previously collected fragments as parts 
+							// (previously collected fragments are children of the AST nodes of the current fragment)
+							fragment.addPart(fragments.remove());
+							
+						}
 						
 					}
+					
+					
 					
 					// push the current fragment onto the stack
 					fragments.add(fragment);
@@ -174,7 +186,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 	 * Gets the collection for fragmentation rules
 	 * @return
 	 */
-	abstract public Collection<FragmentationRule> getRules ();
+	abstract public Collection<FragmentationRule<? extends ParserRuleContext>> getRules ();
 		
 	abstract public ANTLRParserFactory<P, L> getParserFactory ();
 	

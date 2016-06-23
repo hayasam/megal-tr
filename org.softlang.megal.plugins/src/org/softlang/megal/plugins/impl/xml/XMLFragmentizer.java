@@ -30,27 +30,27 @@ public class XMLFragmentizer extends ANTLRFragmentizerPlugin<XMLParser, XMLLexer
 	 * @author maxmeffert
 	 *
 	 */
-	static private class ElementRule implements FragmentationRule<ElementContext> {
+	static private class ElementRule extends FragmentationRule<ElementContext> {
 		
 
 		
 		@Override
-		public Class<ElementContext> contextType() {
+		protected Class<ElementContext> contextType() {
 			return ElementContext.class;
 		}
 
 		@Override
-		public boolean isLeaf(ElementContext context) {
+		protected boolean isLeaf(ElementContext context) {
 			return context.content() == null || context.content().element().isEmpty();
 		}
 
 		@Override
-		public boolean test(ElementContext context) {
+		protected boolean test(ElementContext context) {
 			return !context.Name().isEmpty();
 		}
 
 		@Override
-		public Fragment create(Entity entity, Artifact artifact, ElementContext context) {
+		protected Fragment createFragment(Entity entity, Artifact artifact, ElementContext context) {
 			
 			// Create a new XMLElement fragment
 			Fragment f = Fragments.create(
@@ -103,9 +103,9 @@ public class XMLFragmentizer extends ANTLRFragmentizerPlugin<XMLParser, XMLLexer
 	 * Gets the collection of XML fragmentation rules
 	 */
 	@Override
-	public Collection<FragmentationRule> getRules() {
+	public Collection<FragmentationRule<? extends ParserRuleContext>> getRules() {
 		
-		Collection<FragmentationRule> rules = new ArrayList<FragmentationRule>();
+		Collection<FragmentationRule<? extends ParserRuleContext>> rules = new ArrayList<FragmentationRule<? extends ParserRuleContext>>();
 		rules.add(new ElementRule());
 		
 		return rules;
