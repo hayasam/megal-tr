@@ -62,11 +62,11 @@ aJavaFile.Foo#0.Bar#0.getBar#0 partOf aJavaFile.Foo#0.Bar#0
 aJavaFile.Foo#0.Bar#0.getBar#0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/0/Bar/JavaInnerClass/0/getBar/JavaMethod'
 
 /*
-bar
+String bar;
 */
-aJavaFile.Foo#0.bar#1: JavaField
+aJavaFile.Foo#0.bar#1: JavaMethod
 aJavaFile.Foo#0.bar#1 partOf aJavaFile.Foo#0
-aJavaFile.Foo#0.bar#1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/1/bar/JavaField'
+aJavaFile.Foo#0.bar#1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/1/bar/JavaMethod'
 
 /*
 String getBar() {

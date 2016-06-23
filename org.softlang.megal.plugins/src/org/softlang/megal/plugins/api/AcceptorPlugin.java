@@ -5,7 +5,7 @@ import org.softlang.megal.mi2.api.Artifact;
 
 import com.google.common.base.Optional;
 
-public abstract class Acceptor extends AbstractPlugin {
+public abstract class AcceptorPlugin extends AbstractPlugin {
 	/**
 	 * <p>
 	 * Accepts an artifact. If the artifact is not accepted, a reason is

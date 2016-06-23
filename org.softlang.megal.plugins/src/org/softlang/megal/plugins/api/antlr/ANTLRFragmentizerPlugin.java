@@ -15,8 +15,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.Fragmentizer;
-import org.softlang.megal.plugins.api.fragmentation.Fragments.FactProvider;
+import org.softlang.megal.plugins.api.FragmentizerPlugin;
 import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
 
 /**
@@ -24,26 +23,9 @@ import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
  * @author maxmeffert
  *
  */
-public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer> extends Fragmentizer {
+@SuppressWarnings("rawtypes")
+public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer> extends FragmentizerPlugin {
 
-	static public abstract class ParserContextFactProvider<C extends ParserRuleContext> implements FactProvider {
-
-		private C context;
-		
-		public ParserContextFactProvider (C context) {
-			this.context = context;
-		}
-		
-		final protected C getContext () {
-			return context;
-		}
-
-		@Override
-		public String getText() {
-			return ANTLRUtils.originalText(context);
-		}
-
-	}
 	
 	/**
 	 * Interface for ANTLR parse tree fragmentation rules
@@ -51,8 +33,9 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 	 * @author maxmeffert
 	 *
 	 */
-	static public interface FragmentationRule {
+	static public interface FragmentationRule<C extends ParserRuleContext> {
 
+		public Class<C> contextType ();
 		
 		/**
 		 * Whether the rule is for 'compound' fragments which contains further fragment parts.
@@ -60,7 +43,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		 * 
 		 * @return Whether the rule is for 'compound' fragments
 		 */
-		public boolean isLeaf (ParserRuleContext context);
+		public boolean isLeaf (C context);
 		
 		/**
 		 * Tests whether the rule is applicable to the current parser rule context
@@ -68,7 +51,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		 * @param context The parser rule context to test 
 		 * @return Whether the rule is applicable to the current parser rule context
 		 */
-		public boolean test (ParserRuleContext context);
+		public boolean test (C context);
 		
 		/**
 		 * Creates a new fragment from a parser rule context
@@ -76,11 +59,10 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		 * @param context The parser rule context from which the fragment is created
 		 * @return A new fragment
 		 */
-		public Fragment create (Entity entity, Artifact artifact, ParserRuleContext context);
+		public Fragment create (Entity entity, Artifact artifact, C context);
 		
 		
 	}
-	
 	 
 	/**
 	 * ANTLR ParseTreeListener for code fragmentation
@@ -135,6 +117,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		/**
 		 * Collects fragments depending on fragmentation rules
 		 */
+		
 		@Override
 		public void exitEveryRule (ParserRuleContext context) {
 			
@@ -142,7 +125,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 			for (FragmentationRule rule : rules) {
 
 				// if the rule is applicable
-				if (rule.test(context)) {
+				if (rule.contextType().isInstance(context) && rule.test(context)) {
 					
 					// create a fragment from the parser rule context
 					Fragment fragment = rule.create(entity, artifact, context);
@@ -199,7 +182,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 	 * Gets the fragments of a given entity and its associated artifact
 	 */
 	@Override
-	public Collection<Fragment> getFragments(Entity entity, Artifact artifact) {
+	final public Collection<Fragment> getFragments(Entity entity, Artifact artifact) {
 		
 		// Create a new fragmentation listener
 		FragmentationListener listener = new FragmentationListener(entity, artifact, getRules());

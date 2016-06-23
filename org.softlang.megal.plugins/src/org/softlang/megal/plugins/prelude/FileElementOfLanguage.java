@@ -9,7 +9,7 @@ import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.Relationship;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.Acceptor;
+import org.softlang.megal.plugins.api.AcceptorPlugin;
 import org.softlang.megal.plugins.api.GuidedEvaluatorPlugin;
 
 import com.google.common.base.Optional;
@@ -54,7 +54,7 @@ public class FileElementOfLanguage extends GuidedEvaluatorPlugin {
 		if (!artifact.hasContent())
 			return Optional.absent();
 
-		for (Acceptor acceptor : filter(getParts(), Acceptor.class)) {
+		for (AcceptorPlugin acceptor : filter(getParts(), AcceptorPlugin.class)) {
 			if (!any(acceptor.getRealization(),
 					x -> isElementOfLanguage(element, x)))
 				continue;

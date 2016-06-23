@@ -7,13 +7,13 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.SchemaFactory;
 
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.Acceptor;
+import org.softlang.megal.plugins.api.AcceptorPlugin;
 import org.xml.sax.SAXException;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Throwables;
 
-public class AcceptXSD extends Acceptor {
+public class AcceptXSD extends AcceptorPlugin {
 	@Override
 	public Optional<String> accept(Artifact artifact) {
 		// 1. Lookup a factory for the W3C XML Schema language

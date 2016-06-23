@@ -3,17 +3,17 @@ package org.softlang.megal.plugins.impl.java;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.antlr.v4.runtime.ParserRuleContext;
-
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.api.antlr.ANTLRFragmentizerPlugin;
 import org.softlang.megal.plugins.api.antlr.ANTLRParserFactory;
+import org.softlang.megal.plugins.api.antlr.ANTLRUtils;
 import org.softlang.megal.plugins.api.fragmentation.Fragments;
 import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
 import org.softlang.megal.plugins.impl.java.antlr.JavaLexer;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser;
-import org.softlang.megal.plugins.impl.java.antlr.JavaParser.ClassDeclarationContext;
+import org.softlang.megal.plugins.impl.java.antlr.JavaParser.FieldDeclarationContext;
+import org.softlang.megal.plugins.impl.java.antlr.JavaParser.MemberDeclarationContext;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.MethodDeclarationContext;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.TypeDeclarationContext;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.VariableDeclaratorContext;
@@ -27,105 +27,38 @@ import org.softlang.megal.plugins.impl.java.antlr.JavaParserFactory;
  */
 public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLexer> {
 	
-	/*
-	 * TODO
-	 * 
-	 * Adapt rules and fact providers for a better reflection of the Java grammar
-	 * 
-	 */
-	
-	static private class ClassDeclarationContextFactProvider extends ParserContextFactProvider<JavaParser.ClassDeclarationContext> {
-
-		public ClassDeclarationContextFactProvider(ClassDeclarationContext context) {
-			super(context);
-		}
-
-		@Override
-		public String getName() {
-			return getContext().Identifier().getText();
-		}
-		
-	}
-	
-	static private class MethodDeclarationContextFactProvider extends ParserContextFactProvider<JavaParser.MethodDeclarationContext> {
-
-		public MethodDeclarationContextFactProvider(MethodDeclarationContext context) {
-			super(context);
-		}
-
-		@Override
-		public String getName() {
-			return getContext().Identifier().getText();
-		}
-		
-	}
-	
-	static private class FieldDeclarationContextFactProvider extends ParserContextFactProvider<JavaParser.VariableDeclaratorContext> {
-
-		public FieldDeclarationContextFactProvider(VariableDeclaratorContext context) {
-			super(context);
-		}
-
-		@Override
-		public String getName() {
-			return getContext().getText();
-		}
-		
-	}
-	
-	static private class TypeDeclarationContextFactProvider extends ParserContextFactProvider<JavaParser.TypeDeclarationContext> {
-
-		public TypeDeclarationContextFactProvider(TypeDeclarationContext context) {
-			super(context);
-			// TODO Auto-generated constructor stub
-		}
-
-		@Override
-		public String getName() {
-			if (getContext().classDeclaration() == null) {
-				throw new IllegalStateException("Type declaration does not provide a class declaration!");
-			}
-			return getContext().classDeclaration().Identifier().getText();
- 		}
-		
-	}
-	
 	/**
 	 * Fragmentation rule for inner classes
 	 * 
 	 * @author maxmeffert
 	 *
 	 */
-	static private class InnerClassRule implements FragmentationRule {
+	static private class InnerClassRule implements FragmentationRule<MemberDeclarationContext> {
 
-		/**
-		 * Tests whether the current context is a ClassDeclarationContext and its parent is a MemberDeclarationContext
-		 */
 		@Override
-		public boolean test(ParserRuleContext context) {
-			return context instanceof JavaParser.ClassDeclarationContext
-					&& context.getParent() instanceof JavaParser.MemberDeclarationContext;
+		public Class<MemberDeclarationContext> contextType() {
+			return MemberDeclarationContext.class;
 		}
 
-		/**
-		 * Checks whether the context is a leaf, classes are never leafs.
-		 */
 		@Override
-		public boolean isLeaf(ParserRuleContext context) {
+		public boolean isLeaf(MemberDeclarationContext context) {
 			return false;
 		}
 
-		/**
-		 * Creates a new JavaInnerClass fragment
-		 */
 		@Override
-		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
-			
-			JavaParser.ClassDeclarationContext classContext = (JavaParser.ClassDeclarationContext)context;
-			
-			// Create a new JavaInnerClass fragment
-			return Fragments.create("JavaInnerClass", entity, artifact, new ClassDeclarationContextFactProvider(classContext));
-			
+		public boolean test(MemberDeclarationContext context) {
+			return context.classDeclaration() != null;
+		}
+
+		@Override
+		public Fragment create(Entity entity, Artifact artifact, MemberDeclarationContext context) {
+			return Fragments.create(
+					context.classDeclaration().Identifier().getText(),
+					"JavaInnerClass", 
+					ANTLRUtils.originalText(context),
+					entity, 
+					artifact
+					);
 		}
 		
 	};
@@ -136,34 +69,33 @@ public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLe
 	 * @author maxmeffert
 	 *
 	 */
-	static private class ClassRule implements FragmentationRule {
+	static private class ClassRule implements FragmentationRule<TypeDeclarationContext> {
 
-		/**
-		 * Tests whether the current context is a ClassDeclarationContext and its parent is a TypeDeclarationContext
-		 */
 		@Override
-		public boolean test(ParserRuleContext context) {
-			return context instanceof JavaParser.TypeDeclarationContext
-					&& ((JavaParser.TypeDeclarationContext)context).classDeclaration() != null;
+		public Class<TypeDeclarationContext> contextType() {
+			return TypeDeclarationContext.class;
 		}
 
-		/**
-		 * Checks whether the context is a leaf, classes are never leafs.
-		 */
 		@Override
-		public boolean isLeaf(ParserRuleContext context) {
+		public boolean isLeaf(TypeDeclarationContext context) {
 			return false;
 		}
 
-		/**
-		 * Creates a new JavaClass fragment
-		 */
 		@Override
-		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
-						
+		public boolean test(TypeDeclarationContext context) {
+			return context.classDeclaration() != null;
+		}
+
+		@Override
+		public Fragment create(Entity entity, Artifact artifact, TypeDeclarationContext context) {
 			// Create a new JavaClass fragment
-			return Fragments.create("JavaClass", entity, artifact, new TypeDeclarationContextFactProvider((TypeDeclarationContext) context));
-			
+			return Fragments.create(
+					context.classDeclaration().Identifier().getText(),
+					"JavaClass", 
+					ANTLRUtils.originalText(context),
+					entity, 
+					artifact
+					);
 		}
 		
 	};
@@ -174,36 +106,36 @@ public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLe
 	 * @author maxmeffert
 	 *
 	 */
-	static private class MethodRule implements FragmentationRule {
+	static private class MethodRule implements FragmentationRule<MethodDeclarationContext> {
 		
-		/**
-		 * Tests whether the current context is a MethodDeclarationContext
-		 */
+
 		@Override
-		public boolean test(ParserRuleContext context) {
-			return context instanceof JavaParser.MethodDeclarationContext;
+		public Class<MethodDeclarationContext> contextType() {
+			return MethodDeclarationContext.class;
 		}
 
-		/**
-		 * Checks whether the context is a leaf, methods are always leafs.
-		 */
 		@Override
-		public boolean isLeaf(ParserRuleContext context) {
+		public boolean isLeaf(MethodDeclarationContext context) {
 			return true;
 		}
 
-		/**
-		 * Creates a new JavaMethod fragment
-		 */
 		@Override
-		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
-			
-			JavaParser.MethodDeclarationContext methodContext = (JavaParser.MethodDeclarationContext)context;
-			
-			// Create a new JavaMethod fragment
-			return Fragments.create("JavaMethod", entity, artifact, new MethodDeclarationContextFactProvider(methodContext));
-			
+		public boolean test(MethodDeclarationContext context) {
+			return true;
 		}
+
+		@Override
+		public Fragment create(Entity entity, Artifact artifact, MethodDeclarationContext context) {
+			return Fragments.create(
+					context.Identifier().getText(),
+					"JavaMethod", 
+					ANTLRUtils.originalText(context),
+					entity, 
+					artifact
+					);
+		}
+
+		
 		
 	};
 	
@@ -213,42 +145,46 @@ public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLe
 	 * @author maxmeffert
 	 *
 	 */
-	static private class FieldRule implements FragmentationRule {
+	static private class FieldRule implements FragmentationRule<VariableDeclaratorContext> {
 		
-		/**
-		 * Tests whether the current context is a VariableDeclaratorContext and its grandparent is a FieldDeclarationContext
-		 */
+
 		@Override
-		public boolean test(ParserRuleContext context) {
-			return context instanceof JavaParser.VariableDeclaratorContext
-					&& context.getParent().getParent() instanceof JavaParser.FieldDeclarationContext;
+		public Class<VariableDeclaratorContext> contextType() {
+			return VariableDeclaratorContext.class;
 		}
 
-		/**
-		 * Checks whether the context is a leaf, fields are always leafs.
-		 */
 		@Override
-		public boolean isLeaf(ParserRuleContext context) {
+		public boolean isLeaf(VariableDeclaratorContext context) {
 			return true;
 		}
 
-		/**
-		 * Creates a new JavaField fragment
-		 */
 		@Override
-		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
-			
-			JavaParser.VariableDeclaratorContext fieldContext = (JavaParser.VariableDeclaratorContext)context;
-			
-			// Create a new JavaField fragment
-			return Fragments.create("JavaField", entity, artifact, new FieldDeclarationContextFactProvider(fieldContext));
+		public boolean test(VariableDeclaratorContext context) {
+			return context.getParent().getParent() instanceof FieldDeclarationContext;
 		}
+
+		@Override
+		public Fragment create(Entity entity, Artifact artifact, VariableDeclaratorContext context) {
+			return Fragments.create(
+					context.getText(),
+					"JavaMethod", 
+					ANTLRUtils.originalText(context.getParent().getParent()),
+					entity, 
+					artifact
+					);
+		}
+
+		
+		
+
+		
 		
 	};
 	
 	/**
 	 * Gets the collection of Java fragmentation rules
 	 */
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Collection<FragmentationRule> getRules() {
 		

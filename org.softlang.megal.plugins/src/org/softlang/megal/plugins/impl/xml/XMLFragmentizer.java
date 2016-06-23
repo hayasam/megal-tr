@@ -7,6 +7,7 @@ import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.api.antlr.ANTLRFragmentizerPlugin;
 import org.softlang.megal.plugins.api.antlr.ANTLRParserFactory;
+import org.softlang.megal.plugins.api.antlr.ANTLRUtils;
 import org.softlang.megal.plugins.api.fragmentation.Fragments;
 import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
 import org.softlang.megal.plugins.impl.xml.antlr.XMLLexer;
@@ -23,93 +24,70 @@ import org.softlang.megal.plugins.impl.xml.antlr.XMLParserFactory;
  *
  */
 public class XMLFragmentizer extends ANTLRFragmentizerPlugin<XMLParser, XMLLexer> {
-
-	static private class ElementContextFactProvider extends ParserContextFactProvider<XMLParser.ElementContext> {
-
-		public ElementContextFactProvider(ElementContext context) {
-			super(context);
-		}
-
-		@Override
-		public String getName() {
-			if (getContext().Name().isEmpty()) {
-				throw new IllegalStateException("ElementContext does not provide a name!");
-			}
-			return getContext().Name(0).toString();
-		}
-		
-	}
-	
-	static private class AttributeContextFactProvider extends ParserContextFactProvider<XMLParser.AttributeContext> {
-
-		public AttributeContextFactProvider(AttributeContext context) {
-			super(context);
-		}
-
-		@Override
-		public String getName() {
-			return getContext().Name().toString();
-		}
-		
-	}
 	
 	/**
 	 * Fragmentation rule for XMLElements and XMLAttributes
 	 * @author maxmeffert
 	 *
 	 */
-	static private class ElementRule implements FragmentationRule {
+	static private class ElementRule implements FragmentationRule<ElementContext> {
 		
-		/**
-		 * Tests whether the current context is an ElementContext
-		 */
-		@Override
-		public boolean test(ParserRuleContext context) {
-			
-			return context instanceof XMLParser.ElementContext
-					&& ((XMLParser.ElementContext)context).Name().size() > 0;
-		}
+
 		
-		/**
-		 * Checks whether the ElementContext is a leaf, that is if it has no contents.
-		 */
 		@Override
-		public boolean isLeaf(ParserRuleContext context) {
-			
-			XMLParser.ElementContext elementContext = (XMLParser.ElementContext)context;
-						
-			return elementContext.content() == null || elementContext.content().element().isEmpty();
-			
+		public Class<ElementContext> contextType() {
+			return ElementContext.class;
 		}
 
-		/**
-		 * Creates a new XMLElement fragment with its subsequent XMLAttribute fragments.
-		 */
 		@Override
-		public Fragment create(Entity entity, Artifact artifact, ParserRuleContext context) {
-			
-			XMLParser.ElementContext elementContext = (XMLParser.ElementContext)context;
+		public boolean isLeaf(ElementContext context) {
+			return context.content() == null || context.content().element().isEmpty();
+		}
+
+		@Override
+		public boolean test(ElementContext context) {
+			return !context.Name().isEmpty();
+		}
+
+		@Override
+		public Fragment create(Entity entity, Artifact artifact, ElementContext context) {
 			
 			// Create a new XMLElement fragment
-			Fragment f = Fragments.create("XMLElement", entity, artifact, new ElementContextFactProvider(elementContext));
+			Fragment f = Fragments.create(
+					context.Name(0).toString(),
+					"XMLElement",
+					ANTLRUtils.originalText(context),
+					entity, 
+					artifact);
 			
 			// For all attribute context objects
-			for (XMLParser.AttributeContext attributeContext : elementContext.attribute()) {
+			for (AttributeContext attributeContext : context.attribute()) {
 				
 				// Create a new fact provider for the attribute context object
-				Fragments.FactProvider facts = new AttributeContextFactProvider(attributeContext);
+				String name = attributeContext.Name().toString();
+				String text = ANTLRUtils.originalText(attributeContext);
 				
 				// If the attribute is a XML namespace attribute
 				if (attributeContext.Name().toString().toLowerCase().startsWith("xmlns:")) {
 					
 					// Create a new XMLNSAttribute fragment
-					f.addPart(Fragments.create("XMLNSAttribute", entity, artifact, facts));
+					f.addPart(Fragments.create(
+							name,
+							"XMLNSAttribute",
+							text,
+							entity, 
+							artifact));
 					
 				}
 				else {
 					
 					// Create a new XMLAttribute fragment
-					f.addPart(Fragments.create("XMLAttribute", entity, artifact, facts));
+					f.addPart(Fragments.create(
+							name,
+							"XMLAttribute",
+							text,
+							entity, 
+							artifact));
 					
 				}
 				

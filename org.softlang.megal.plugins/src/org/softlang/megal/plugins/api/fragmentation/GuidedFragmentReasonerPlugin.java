@@ -9,7 +9,7 @@ import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.api.GuidedReasonerPlugin;
 import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
 
-public abstract class GuidedFragmentationReasonerPlugin extends GuidedReasonerPlugin {
+public abstract class GuidedFragmentReasonerPlugin extends GuidedReasonerPlugin {
 	
 	protected Optional<Fragment> fragmentOf (URI uri) {
 		return Fragments.fragmentOf(uri);

@@ -7,11 +7,11 @@ import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.Acceptor;
+import org.softlang.megal.plugins.api.AcceptorPlugin;
 import com.google.common.base.Optional;
 import com.google.common.base.Throwables;
 
-public abstract class ANTLRAcceptorPlugin<P extends Parser, L extends Lexer> extends Acceptor {
+public abstract class ANTLRAcceptorPlugin<P extends Parser, L extends Lexer> extends AcceptorPlugin {
 
 	static private class ParserException extends RuntimeException {
 

@@ -63,7 +63,7 @@ public class XSDFragmentResolver extends GuidedReasonerPlugin {
 	private void resolveXSDSchema (Fragment f) {
 		
 		if (matchesXSDSchema(f.getName())) {
-			setEntityType(f.getFullName(), "XSDSchema");
+			setEntityType(f.getQualifiedName(), "XSDSchema");
 		}
 		
 	}
@@ -71,7 +71,7 @@ public class XSDFragmentResolver extends GuidedReasonerPlugin {
 	private void resolveXSDElement (Fragment f) {
 		
 		if (matchesXSDElement(f.getName())) {
-			setEntityType(f.getFullName(), "XSDElement");
+			setEntityType(f.getQualifiedName(), "XSDElement");
 		}
 		
 	}
@@ -79,7 +79,7 @@ public class XSDFragmentResolver extends GuidedReasonerPlugin {
 	private void resolveXSDSequence (Fragment f) {
 		
 		if (matchesXSDSequence(f.getName())) {
-			setEntityType(f.getFullName(), "XSDSequence");
+			setEntityType(f.getQualifiedName(), "XSDSequence");
 		}
 		
 	}
@@ -87,7 +87,7 @@ public class XSDFragmentResolver extends GuidedReasonerPlugin {
 	private void resolveXSDComplexType (Fragment f) {
 		
 		if (matchesXSDComplexType(f.getName())) {
-			setEntityType(f.getFullName(), "XSDComplexType");
+			setEntityType(f.getQualifiedName(), "XSDComplexType");
 		}
 		
 	}

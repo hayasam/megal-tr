@@ -7,7 +7,7 @@ import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.any;
 import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 
-import org.softlang.megal.plugins.api.Fragmentizer;
+import org.softlang.megal.plugins.api.FragmentizerPlugin;
 import org.softlang.megal.plugins.api.GuidedReasonerPlugin;
 import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
 
@@ -41,10 +41,10 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 	private void deriveFragments (Fragment f) {
 		
 		// Create an entity for the fragment with its qualified name
-		entity(f.getFullName(), f.getType());
+		entity(f.getQualifiedName(), f.getType());
 		
 		// Bind the fragment entity to the fragment's URI
-		binding(f.getFullName(), f.getURI());
+		binding(f.getQualifiedName(), f.getURI());
 		
 		// Insert the parts of the fragments into the KB
 		deriveFragments(f.getParts());
@@ -58,7 +58,7 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 	protected void guidedDerive(Entity entity) throws Throwable {
 		
 		// For all partial fragmentation plugins
-		for (Fragmentizer plugin : filter(getParts(), Fragmentizer.class)) {
+		for (FragmentizerPlugin plugin : filter(getParts(), FragmentizerPlugin.class)) {
 			
 			// If the partial fragmentation plugin does NOT realize the language of the entity
 			if (!any(plugin.getRealization(), lang -> isElementOfLanguage(entity, lang))) {

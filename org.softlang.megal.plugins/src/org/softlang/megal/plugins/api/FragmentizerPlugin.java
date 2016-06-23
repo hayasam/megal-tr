@@ -7,7 +7,7 @@ import org.softlang.megal.mi2.api.AbstractPlugin;
 import org.softlang.megal.mi2.api.Artifact;
 import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
 
-public abstract class Fragmentizer extends AbstractPlugin {
+public abstract class FragmentizerPlugin extends AbstractPlugin {
 	
 	abstract public Collection<Fragment> getFragments (Entity entity, Artifact artifact);
 	

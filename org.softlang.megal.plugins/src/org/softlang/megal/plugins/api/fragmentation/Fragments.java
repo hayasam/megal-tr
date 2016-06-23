@@ -26,28 +26,7 @@ import java.util.Set;
  *
  */
 public abstract class Fragments {
-	
-	/**
-	 * Interface fragment fact providers
-	 * @author maxmeffert
-	 *
-	 */
-	static public interface FactProvider {
 		
-		/**
-		 * Provides the short name of the fragment
-		 * @return The short name of the fragment
-		 */
-		public String getName();
-		
-		/**
-		 * Provides the text of the fragment
-		 * @return The text of the fragment
-		 */
-		public String getText();
-		
-	}
-	
 	/**
 	 * 
 	 * @author maxmeffert
@@ -55,11 +34,14 @@ public abstract class Fragments {
 	 */
 	static final public class Fragment {
 		
+		private String name;
 		
 		/**
 		 * The entity type name of the fragment
 		 */
 		private String type;
+		
+		private String text;
 		
 		/**
 		 * The containing entity of the fragment
@@ -70,11 +52,6 @@ public abstract class Fragments {
 		 * The containing artifact of the fragment
 		 */
 		private Artifact artifact;
-		
-		/**
-		 * The fact provider of the fragment
-		 */
-		private FactProvider facts;
 		
 		/**
 		 * The parent of the fragment
@@ -94,11 +71,20 @@ public abstract class Fragments {
 		 * @param artifact
 		 * @param facts
 		 */
-		private Fragment (String type, Entity entity, Artifact artifact, FactProvider facts) {
+		private Fragment (String name, String type, String text, Entity entity, Artifact artifact) {
+			this.name = name;
 			this.type = type;
+			this.text = text;
 			this.entity = entity;
 			this.artifact = artifact;
-			this.facts = facts;
+		}
+		
+		/**
+		 * Gets the name of the fragment
+		 * @return
+		 */
+		public String getName () {
+			return name;
 		}
 		
 		/**
@@ -109,6 +95,15 @@ public abstract class Fragments {
 			return type;
 		}
 
+
+		/**
+		 * Gets the text of the fragment
+		 * @return
+		 */
+		public String getText () {
+			return text;
+		}
+		
 		/**
 		 * Gets the containing entity of the fragment
 		 * @return
@@ -125,21 +120,8 @@ public abstract class Fragments {
 			return artifact;
 		}
 		
-		/**
-		 * Gets the name of the fragment
-		 * @return
-		 */
-		public String getName () {
-			return facts.getName();
-		}
 		
-		/**
-		 * Gets the text of the fragment
-		 * @return
-		 */
-		public String getText () {
-			return facts.getText();
-		}
+		
 		
 		/**
 		 * Whether the fragment has a parent or is a child
@@ -180,7 +162,7 @@ public abstract class Fragments {
 		 * Gets the qualified name of the fragment
 		 * @return
 		 */
-		public String getFullName () {
+		public String getQualifiedName () {
 			
 			// The qualified name of the fragment
 			String name = getName() + "#" + getIndex();
@@ -189,7 +171,7 @@ public abstract class Fragments {
 			if (hasParent()) {
 				
 				// Return the qualified name of the fragment appended to its parent's qualified name
-				return getParent().getFullName() + "." + name;
+				return getParent().getQualifiedName() + "." + name;
 				
 			}
  			
@@ -281,7 +263,7 @@ public abstract class Fragments {
 	/**
 	 * The fragment KB 
 	 */
-	static private Set<Fragment> fb = new HashSet<Fragment>();
+	static private Set<Fragment> fragments = new HashSet<Fragment>();
 	
 	static private class FragmentTraverser extends TreeTraverser<Fragment> {
 
@@ -308,13 +290,13 @@ public abstract class Fragments {
 	 * @param facts
 	 * @return
 	 */
-	static public Fragment create (String type, Entity entity, Artifact artifact, FactProvider facts) {
+	static public Fragment create (String name, String type, String text, Entity entity, Artifact artifact) {
 		
 		// Create a new fragment
-		Fragment f = new Fragment(type, entity, artifact, facts);
+		Fragment f = new Fragment(name, type, text, entity, artifact);
 		
 		// Add fragment to the fragment KB
-		fb.add(f);
+		fragments.add(f);
 		
 		return f;
 		
@@ -342,7 +324,7 @@ public abstract class Fragments {
 	 * @return
 	 */
 	static public boolean exists (URI uri) {
-		return fb.stream()
+		return fragments.stream()
 				.anyMatch( f -> f.getURI().equals(uri) );
 	}
 	
@@ -352,7 +334,7 @@ public abstract class Fragments {
 	 * @return
 	 */
 	static public boolean hasFragment (Artifact artifact) {
-		return fb.stream()
+		return fragments.stream()
 				.anyMatch( f -> f.getArtifact().equals(artifact) );
 	}
 	
@@ -372,7 +354,7 @@ public abstract class Fragments {
 	 * @return
 	 */
 	static public Optional<Fragment> fragmentOf (URI uri) {
-		return fb.stream()
+		return fragments.stream()
 				.filter( f -> f.getURI().equals(uri) )
 				.findFirst();
 	}
@@ -393,10 +375,14 @@ public abstract class Fragments {
 		}
 		
 		// Return the first fragment where the string representation of the URI equals the binding
-		return fb.stream()
+		return fragments.stream()
 				.filter( f -> f.getURI().toString().equals(entity.getBinding()))
 				.findFirst();
 		
+	}
+	
+	static public Optional<Fragment> fragmentFor (URI uri) {
+		return Optional.empty();
 	}
 	
 	/**
@@ -405,7 +391,7 @@ public abstract class Fragments {
 	 * @return
 	 */
 	static public List<Fragment> fragmentsOf (Artifact artifact) {
-		return fb.stream()
+		return fragments.stream()
 				.filter( f -> f.getArtifact().equals(artifact) )
 				.collect(Collectors.toList());
 	}
@@ -416,7 +402,7 @@ public abstract class Fragments {
 	 * @return
 	 */
 	static public List<Fragment> fragmentsOf (Entity entity) {
-		return fb.stream()
+		return fragments.stream()
 				.filter( f -> f.getEntity().equals(entity) )
 				.collect(Collectors.toList());
 	}

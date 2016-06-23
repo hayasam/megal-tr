@@ -8,7 +8,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.softlang.megal.mi2.api.Artifact;
-import org.softlang.megal.plugins.api.Acceptor;
+import org.softlang.megal.plugins.api.AcceptorPlugin;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -16,7 +16,7 @@ import org.xml.sax.XMLReader;
 import com.google.common.base.Optional;
 import com.google.common.base.Throwables;
 
-public class AcceptXML extends Acceptor {
+public class AcceptXML extends AcceptorPlugin {
 	@Override
 	public Optional<String> accept(Artifact artifact) {
 		SAXParserFactory factory = SAXParserFactory.newInstance();
