@@ -119,10 +119,7 @@ public abstract class Fragments {
 		public Artifact getArtifact() {
 			return artifact;
 		}
-		
-		
-		
-		
+				
 		/**
 		 * Whether the fragment has a parent or is a child
 		 * @return
@@ -236,7 +233,7 @@ public abstract class Fragments {
 			return !hasParent();
 		}
 		
-		public boolean isLeaf () {
+		public boolean isAtom () {
 			return getParts().isEmpty();
 		}
 		

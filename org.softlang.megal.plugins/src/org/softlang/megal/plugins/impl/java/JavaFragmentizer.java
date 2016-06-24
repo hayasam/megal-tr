@@ -18,6 +18,8 @@ import org.softlang.megal.plugins.impl.java.antlr.JavaParser.MemberDeclarationCo
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.MethodDeclarationContext;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.TypeDeclarationContext;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParser.VariableDeclaratorContext;
+import org.softlang.megal.plugins.impl.java.antlr.JavaParser.ClassBodyDeclarationContext;
+import org.softlang.megal.plugins.impl.java.antlr.JavaParser.ClassDeclarationContext;
 import org.softlang.megal.plugins.impl.java.antlr.JavaParserFactory;
 
 /**
@@ -28,41 +30,6 @@ import org.softlang.megal.plugins.impl.java.antlr.JavaParserFactory;
  */
 public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLexer> {
 	
-	/**
-	 * Fragmentation rule for inner classes
-	 * 
-	 * @author maxmeffert
-	 *
-	 */
-	static private class InnerClassRule extends FragmentationRule<MemberDeclarationContext> {
-
-		@Override
-		protected Class<MemberDeclarationContext> contextType() {
-			return MemberDeclarationContext.class;
-		}
-
-		@Override
-		protected boolean isLeaf(MemberDeclarationContext context) {
-			return false;
-		}
-
-		@Override
-		protected boolean test(MemberDeclarationContext context) {
-			return context.classDeclaration() != null;
-		}
-
-		@Override
-		protected Fragment createFragment(Entity entity, Artifact artifact, MemberDeclarationContext context) {
-			return Fragments.create(
-					context.classDeclaration().Identifier().getText(),
-					"JavaInnerClass", 
-					ANTLRUtils.originalText(context),
-					entity, 
-					artifact
-					);
-		}
-		
-	};
 	
 	/**
 	 * Fragmentation rule for classes
@@ -78,13 +45,13 @@ public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLe
 		}
 
 		@Override
-		protected boolean isLeaf(TypeDeclarationContext context) {
+		protected boolean isAtom(TypeDeclarationContext context) {
 			return false;
 		}
 
 		@Override
 		protected boolean test(TypeDeclarationContext context) {
-			return context.classDeclaration() != null;
+			return context.classDeclaration() instanceof ClassDeclarationContext;
 		}
 
 		@Override
@@ -93,6 +60,44 @@ public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLe
 			return Fragments.create(
 					context.classDeclaration().Identifier().getText(),
 					"JavaClass", 
+					ANTLRUtils.originalText(context),
+					entity, 
+					artifact
+					);
+		}
+		
+	};
+	
+
+	/**
+	 * Fragmentation rule for inner classes
+	 * 
+	 * @author maxmeffert
+	 *
+	 */
+	static private class InnerClassRule extends FragmentationRule<ClassBodyDeclarationContext> {
+
+		@Override
+		protected Class<ClassBodyDeclarationContext> contextType() {
+			return ClassBodyDeclarationContext.class;
+		}
+
+		@Override
+		protected boolean isAtom(ClassBodyDeclarationContext context) {
+			return false;
+		}
+
+		@Override
+		protected boolean test(ClassBodyDeclarationContext context) {
+			return context.memberDeclaration() instanceof MemberDeclarationContext
+					&& context.memberDeclaration().classDeclaration() instanceof ClassDeclarationContext;
+		}
+
+		@Override
+		protected Fragment createFragment(Entity entity, Artifact artifact, ClassBodyDeclarationContext context) {
+			return Fragments.create(
+					context.memberDeclaration().classDeclaration().Identifier().getText(),
+					"JavaInnerClass", 
 					ANTLRUtils.originalText(context),
 					entity, 
 					artifact
@@ -116,7 +121,7 @@ public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLe
 		}
 
 		@Override
-		protected boolean isLeaf(MethodDeclarationContext context) {
+		protected boolean isAtom(MethodDeclarationContext context) {
 			return true;
 		}
 
@@ -155,7 +160,7 @@ public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLe
 		}
 
 		@Override
-		protected boolean isLeaf(VariableDeclaratorContext context) {
+		protected boolean isAtom(VariableDeclaratorContext context) {
 			return true;
 		}
 

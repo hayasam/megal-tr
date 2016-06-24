@@ -34,6 +34,18 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 	 */
 	static public abstract class FragmentationRule<C extends ParserRuleContext> {
 
+		static final public class IllegalContextException extends IllegalArgumentException {
+
+			private static final long serialVersionUID = -4814695582039036934L;
+			
+			public IllegalContextException (Class<? extends ParserRuleContext> contextType) {
+				super("Parameter 'context' must be instance of " + contextType.getName() + "! "
+					+ "Test FragmentationRule.accept(context) first!");
+			}
+			
+			
+		}
+		
 		abstract protected Class<C> contextType ();
 		
 		/**
@@ -42,7 +54,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		 * 
 		 * @return Whether the rule is for 'compound' fragments
 		 */
-		abstract protected boolean isLeaf (C context);
+		abstract protected boolean isAtom (C context);
 		
 		/**
 		 * Tests whether the rule is applicable to the current parser rule context
@@ -66,10 +78,16 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		}
 		
 		final public boolean hasParts (ParserRuleContext context) {
-			return !isLeaf(contextType().cast(context));
+			if (!contextType().isInstance(context)) {
+				throw new IllegalContextException(contextType());
+			}
+			return !isAtom(contextType().cast(context));
 		}
 		
-		final public Fragment getFragment (Entity entity, Artifact artifact, ParserRuleContext context) {
+		final public Fragment newFragment (Entity entity, Artifact artifact, ParserRuleContext context) {
+			if (!contextType().isInstance(context)) {
+				throw new IllegalContextException(contextType());
+			}
 			return createFragment(entity, artifact, contextType().cast(context));
 		}
 		
@@ -136,7 +154,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 				if (rule.accept(context)) {
 					
 					// create a fragment from the parser rule context
-					Fragment fragment = rule.getFragment(entity, artifact, context);
+					Fragment fragment = rule.newFragment(entity, artifact, context);
 					
 					// check whether the rule is for a leaf fragment
 					if (rule.hasParts(context)) {

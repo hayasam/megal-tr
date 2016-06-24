@@ -31,16 +31,14 @@ public class XMLFragmentizer extends ANTLRFragmentizerPlugin<XMLParser, XMLLexer
 	 *
 	 */
 	static private class ElementRule extends FragmentationRule<ElementContext> {
-		
-
-		
+				
 		@Override
 		protected Class<ElementContext> contextType() {
 			return ElementContext.class;
 		}
 
 		@Override
-		protected boolean isLeaf(ElementContext context) {
+		protected boolean isAtom(ElementContext context) {
 			return context.content() == null || context.content().element().isEmpty();
 		}
 

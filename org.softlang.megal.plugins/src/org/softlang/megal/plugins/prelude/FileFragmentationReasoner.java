@@ -70,11 +70,15 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 			
 			try {
 				
-				// For all artifacts bound to the entity
-				for(Artifact artifact : artifactsOf(entity)) {
+				if (entity.hasBinding()) {
 					
-					// Derive the fragments of the entity
-					deriveFragments(plugin.getFragments(entity, artifact));
+					// For all artifacts bound to the entity
+					for(Artifact artifact : artifactsOf(entity)) {
+						
+						// Derive the fragments of the entity
+						deriveFragments(plugin.getFragments(entity, artifact));
+						
+					}
 					
 				}
 				

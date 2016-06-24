@@ -25,6 +25,7 @@ partOf < JavaField * JavaClass
 aJavaFile : File
 aJavaFile elementOf Java
 aJavaFile = 'workspace:/org.softlang.megal.plugins/input/Foo.java'
+//aJavaFile = 'workspace:/org.softlang.megal.plugins/src/org/softlang/megal/plugins/impl/java/JavaFragmentizer.java'
 
 JavaFragmentizer : Plugin
 JavaFragmentizer realizationOf Java
@@ -53,8 +54,8 @@ XSDSchema < XSDFragment
 
 xmlFile: File
 xmlFile elementOf XML
-xmlFile = 'workspace:/org.softlang.megal.plugins/input/Foo.xml'
+//xmlFile = 'workspace:/org.softlang.megal.plugins/input/Foo.xml'
 
 xsdFile: File
 xsdFile elementOf XSD
-xsdFile = 'workspace:/org.softlang.megal.plugins/input/Foo.xsd'
+//xsdFile = 'workspace:/org.softlang.megal.plugins/input/Foo.xsd'

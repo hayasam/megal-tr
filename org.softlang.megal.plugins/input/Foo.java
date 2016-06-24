@@ -1,7 +1,7 @@
 
 public class Foo {
 	
-	class Bar {
+	static public class Bar {
 		
 		@SuppressWarnings("unused")
 		private void getBar () {
