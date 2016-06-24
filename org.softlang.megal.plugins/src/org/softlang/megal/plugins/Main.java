@@ -96,9 +96,15 @@ public class Main {
 	static private void printInstances (KB kb, PrintStream out) {
 		
 		out.println();
+		out.println("/*");
+		out.println("============================================");
+		out.println("   Derived Instances in Alphabetic Order.   ");
+		out.println("============================================");
+		out.println("*/");
+		out.println();
 		
 		List<Entity> es = kb.getEntities().stream()
-//				.filter( e -> e.getType() != null && !e.getType().getName().equals("Plugin")  )
+				.filter( e -> e.getType() != null && !e.getType().getName().equals("Plugin")  )
 				.sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) )
 				.collect(Collectors.toList());
 		

@@ -1,8 +1,9 @@
 
-AcceptJava: Plugin
-AcceptJava realizationOf Java
-AcceptJava partOf FileElementOfLanguage
-AcceptJava = 'classpath:org.softlang.megal.plugins.impl.java.JavaAcceptor'
+/*
+============================================
+   Derived Instances in Alphabetic Order.   
+============================================
+*/
 
 aJavaFile: File
 aJavaFile elementOf Java
@@ -86,44 +87,16 @@ aJavaFile.Foo#0.setBar#3: JavaMethod
 aJavaFile.Foo#0.setBar#3 partOf aJavaFile.Foo#0
 aJavaFile.Foo#0.setBar#3 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.java#/0/Foo/JavaClass/3/setBar/JavaMethod'
 
-FileElementOfLanguage: Plugin
-FileElementOfLanguage = 'classpath:org.softlang.megal.plugins.prelude.FileElementOfLanguage'
-
-FileFragmentReasoner: Plugin
-FileFragmentReasoner = 'classpath:org.softlang.megal.plugins.prelude.FileFragmentationReasoner'
-
 Java: Language
-
-JavaFragmentizer: Plugin
-JavaFragmentizer realizationOf Java
-JavaFragmentizer partOf FileFragmentReasoner
-JavaFragmentizer = 'classpath:org.softlang.megal.plugins.impl.java.JavaFragmentizer'
-
-LanguageResolver: Plugin
-LanguageResolver = 'classpath:org.softlang.megal.plugins.prelude.LanguageResolver'
-
-PairElementWhenComputed: Plugin
-PairElementWhenComputed = 'classpath:org.softlang.megal.plugins.prelude.PairElementWhenComputed'
-
-PartOfReasoner: Plugin
-PartOfReasoner = 'classpath:org.softlang.megal.plugins.prelude.PartOfReasoner'
 
 XML: Language
 
 xmlFile: File
 xmlFile elementOf XML
 
-XMLFragmentizer: Plugin
-XMLFragmentizer realizationOf XML
-XMLFragmentizer partOf FileFragmentReasoner
-XMLFragmentizer = 'classpath:org.softlang.megal.plugins.impl.xml.XMLFragmentizer'
-
 XSD: Language
 XSD subsetOf XML
 
 xsdFile: File
 xsdFile elementOf XSD
-
-XSDFragmentResolver: Plugin
-XSDFragmentResolver = 'classpath:org.softlang.megal.plugins.impl.xsd.XSDFragmentResolver'
 
