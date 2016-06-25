@@ -72,6 +72,9 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		 */
 		abstract protected Fragment createFragment (Entity entity, Artifact artifact, C context);
 		
+		//================================================================
+		// Hack for contra-variant method calls
+		
 		final public boolean accept (ParserRuleContext context) {
 			return contextType().isInstance(context) 
 					&& test(contextType().cast(context));

@@ -237,6 +237,10 @@ public abstract class Fragments {
 			return getParts().isEmpty();
 		}
 		
+		public boolean isCompound () {
+			return !isAtom();
+		}
+		
 		public int depth () {
 			
 			if (hasParent()) {
