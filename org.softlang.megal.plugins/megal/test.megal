@@ -48,6 +48,7 @@ XMLAttribute < XMLFragment
 XMLNSAttribute < XMLAttribute
 
 XSDFragment < XMLFragment
+XSDElement < XMLElement // or 
 XSDSchema < XSDFragment
 
 xmlFile: File
