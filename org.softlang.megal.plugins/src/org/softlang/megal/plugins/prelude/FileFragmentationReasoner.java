@@ -1,8 +1,12 @@
 package org.softlang.megal.plugins.prelude;
 
 import org.softlang.megal.mi2.Entity;
+import org.softlang.megal.mi2.KB;
+import org.softlang.megal.mi2.Ref;
 import org.softlang.megal.mi2.api.Artifact;
 
+
+import static com.google.common.collect.Maps.immutableEntry;
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.any;
 import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
@@ -19,6 +23,15 @@ import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
  *
  */
 public class FileFragmentationReasoner extends GuidedReasonerPlugin {
+	
+	private void entityAnnotation(Entity e, String name, String value) {
+		
+		KB kb = e.getKB();
+		Ref ref = kb.getRawEntities().get(e.getName());
+		
+		kb.getRawEntityAnnotations().put(immutableEntry(e.getName(), ref), immutableEntry(name, value));
+		
+	}
 	
 	/**
 	 * Inserts a bag of fragments into the KB
@@ -41,7 +54,8 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 	private void deriveFragments (Fragment f) {
 		
 		// Create an entity for the fragment with its qualified name
-		entity(f.getQualifiedName(), f.getType());
+		Entity e = entity(f.getQualifiedName(), f.getType());
+		entityAnnotation(e, "content", f.getText());
 		
 		// Bind the fragment entity to the fragment's URI
 		binding(f.getQualifiedName(), f.getURI());

@@ -223,6 +223,7 @@ public abstract class Fragments {
 			
 			} catch (URISyntaxException e) {
 			
+				System.err.println(e);
 				throw new IllegalStateException();
 				
 			}

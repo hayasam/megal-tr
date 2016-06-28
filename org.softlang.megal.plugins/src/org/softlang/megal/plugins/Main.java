@@ -39,7 +39,7 @@ public class Main {
 		
 	};
 		
-	static private String input = "megal/test.megal";
+	static private String input = "megal/bindings.megal";
 	static private String output = "output/out.megal";
 	
 	static private KB load (File f) throws IOException {
@@ -110,22 +110,29 @@ public class Main {
 		
 		for (Entity e : es) {
 			
-			if (e.getBinding() instanceof URI) {
-				
-				Optional<Fragments.Fragment> f = Fragments.fragmentOf((URI)e.getBinding());
-			
-				if (f.isPresent()) {
-					
-					out.println("/*");
-					out.println(f.get().getText());
+//			if (e.getBinding() instanceof URI) {
+//				
+//				Optional<Fragments.Fragment> f = Fragments.fragmentOf((URI)e.getBinding());
+//			
+//				if (f.isPresent()) {
+//					
+//					out.println("/*");
+//					out.println(f.get().getText());
 //					Fragments.print(f.get(), out);
-					out.println("*/");
-					
-				}
-				
-			}
+//					out.println("*/");
+//					
+//				}
+//				
+//			}
+//			
 			
-			out.println(e);
+			if (e.getAnnotation("content") != null) {
+				out.println("/*");
+				out.println(e.getAnnotation("content"));
+				out.println("*/");
+				out.println(e);
+			}	
+				
 			
 			for (Relationship rel : kb.getRelationships().stream().filter( r -> r.getLeft().equals(e)).collect(Collectors.toList())) {
 				

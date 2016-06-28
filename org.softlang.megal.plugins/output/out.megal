@@ -5,20 +5,313 @@
 ============================================
 */
 
-aJavaFile: File
 aJavaFile elementOf Java
+aJavaFile = 'workspace:/org.softlang.megal.plugins/input/Company.java'
 
-Java: Language
+/*
+public class Company {
+	
+	static public class Employee {
+		
+		private String name;
+		private int salary;
+		
+		public Employee () {
+			
+		}
+		
+		public Employee (String name, int salary) {
+			
+			setName(name);
+			setSalary(salary);
+			
+		}
+		
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getSalary() {
+			return salary;
+		}
+		public void setSalary(int salary) {
+			this.salary = salary;
+		}
+		
+		
+		
+	}
+	
+	static public class Department {
+	
+		private String name;
+		private List<Employee> employees = new ArrayList<Employee>();
+		
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public List<Employee> getEmployees() {
+			return employees;
+		}
+		public void setEmployees(List<Employee> employees) {
+			this.employees = employees;
+		}
+		
+		
+		
+	}
+
+	private String name;
+	private List<Department> departments = new ArrayList<Department>();
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public List<Department> getDepartments() {
+		return departments;
+	}
+	public void setDepartments(List<Department> departments) {
+		this.departments = departments;
+	}
+	
+	
+	
+	
+}
+*/
+aJavaFile.Company#0: JavaClass
+aJavaFile.Company#0 partOf aJavaFile
+aJavaFile.Company#0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass'
+
+/*
+static public class Department {
+	
+		private String name;
+		private List<Employee> employees = new ArrayList<Employee>();
+		
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public List<Employee> getEmployees() {
+			return employees;
+		}
+		public void setEmployees(List<Employee> employees) {
+			this.employees = employees;
+		}
+		
+		
+		
+	}
+*/
+aJavaFile.Company#0.Department#0: JavaInnerClass
+aJavaFile.Company#0.Department#0 partOf aJavaFile.Company#0
+aJavaFile.Company#0.Department#0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass'
+
+/*
+static public class Employee {
+		
+		private String name;
+		private int salary;
+		
+		public Employee () {
+			
+		}
+		
+		public Employee (String name, int salary) {
+			
+			setName(name);
+			setSalary(salary);
+			
+		}
+		
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getSalary() {
+			return salary;
+		}
+		public void setSalary(int salary) {
+			this.salary = salary;
+		}
+		
+		
+		
+	}
+*/
+aJavaFile.Company#0.Department#0.Employee#0: JavaInnerClass
+aJavaFile.Company#0.Department#0.Employee#0 partOf aJavaFile.Company#0.Department#0
+aJavaFile.Company#0.Department#0.Employee#0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass'
+
+/*
+String getName() {
+			return name;
+		}
+*/
+aJavaFile.Company#0.Department#0.Employee#0.getName#2: JavaMethod
+aJavaFile.Company#0.Department#0.Employee#0.getName#2 partOf aJavaFile.Company#0.Department#0.Employee#0
+aJavaFile.Company#0.Department#0.Employee#0.getName#2 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/2/getName/JavaMethod'
+
+/*
+int getSalary() {
+			return salary;
+		}
+*/
+aJavaFile.Company#0.Department#0.Employee#0.getSalary#4: JavaMethod
+aJavaFile.Company#0.Department#0.Employee#0.getSalary#4 partOf aJavaFile.Company#0.Department#0.Employee#0
+aJavaFile.Company#0.Department#0.Employee#0.getSalary#4 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/4/getSalary/JavaMethod'
+
+/*
+String name;
+*/
+aJavaFile.Company#0.Department#0.Employee#0.name#0: JavaField
+aJavaFile.Company#0.Department#0.Employee#0.name#0 partOf aJavaFile.Company#0.Department#0.Employee#0
+aJavaFile.Company#0.Department#0.Employee#0.name#0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/0/name/JavaField'
+
+/*
+int salary;
+*/
+aJavaFile.Company#0.Department#0.Employee#0.salary#1: JavaField
+aJavaFile.Company#0.Department#0.Employee#0.salary#1 partOf aJavaFile.Company#0.Department#0.Employee#0
+aJavaFile.Company#0.Department#0.Employee#0.salary#1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/1/salary/JavaField'
+
+/*
+void setName(String name) {
+			this.name = name;
+		}
+*/
+aJavaFile.Company#0.Department#0.Employee#0.setName#3: JavaMethod
+aJavaFile.Company#0.Department#0.Employee#0.setName#3 partOf aJavaFile.Company#0.Department#0.Employee#0
+aJavaFile.Company#0.Department#0.Employee#0.setName#3 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/3/setName/JavaMethod'
+
+/*
+void setSalary(int salary) {
+			this.salary = salary;
+		}
+*/
+aJavaFile.Company#0.Department#0.Employee#0.setSalary#5: JavaMethod
+aJavaFile.Company#0.Department#0.Employee#0.setSalary#5 partOf aJavaFile.Company#0.Department#0.Employee#0
+aJavaFile.Company#0.Department#0.Employee#0.setSalary#5 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/5/setSalary/JavaMethod'
+
+/*
+List<Employee> employees = new ArrayList<Employee>();
+*/
+aJavaFile.Company#0.Department#0.employees#2: JavaField
+aJavaFile.Company#0.Department#0.employees#2 partOf aJavaFile.Company#0.Department#0
+aJavaFile.Company#0.Department#0.employees#2 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/2/employees/JavaField'
+
+/*
+List<Employee> getEmployees() {
+			return employees;
+		}
+*/
+aJavaFile.Company#0.Department#0.getEmployees#5: JavaMethod
+aJavaFile.Company#0.Department#0.getEmployees#5 partOf aJavaFile.Company#0.Department#0
+aJavaFile.Company#0.Department#0.getEmployees#5 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/5/getEmployees/JavaMethod'
+
+/*
+String getName() {
+			return name;
+		}
+*/
+aJavaFile.Company#0.Department#0.getName#3: JavaMethod
+aJavaFile.Company#0.Department#0.getName#3 partOf aJavaFile.Company#0.Department#0
+aJavaFile.Company#0.Department#0.getName#3 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/3/getName/JavaMethod'
+
+/*
+String name;
+*/
+aJavaFile.Company#0.Department#0.name#1: JavaField
+aJavaFile.Company#0.Department#0.name#1 partOf aJavaFile.Company#0.Department#0
+aJavaFile.Company#0.Department#0.name#1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/1/name/JavaField'
+
+/*
+void setEmployees(List<Employee> employees) {
+			this.employees = employees;
+		}
+*/
+aJavaFile.Company#0.Department#0.setEmployees#6: JavaMethod
+aJavaFile.Company#0.Department#0.setEmployees#6 partOf aJavaFile.Company#0.Department#0
+aJavaFile.Company#0.Department#0.setEmployees#6 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/6/setEmployees/JavaMethod'
+
+/*
+void setName(String name) {
+			this.name = name;
+		}
+*/
+aJavaFile.Company#0.Department#0.setName#4: JavaMethod
+aJavaFile.Company#0.Department#0.setName#4 partOf aJavaFile.Company#0.Department#0
+aJavaFile.Company#0.Department#0.setName#4 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/4/setName/JavaMethod'
+
+/*
+List<Department> departments = new ArrayList<Department>();
+*/
+aJavaFile.Company#0.departments#2: JavaField
+aJavaFile.Company#0.departments#2 partOf aJavaFile.Company#0
+aJavaFile.Company#0.departments#2 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/2/departments/JavaField'
+
+/*
+List<Department> getDepartments() {
+		return departments;
+	}
+*/
+aJavaFile.Company#0.getDepartments#5: JavaMethod
+aJavaFile.Company#0.getDepartments#5 partOf aJavaFile.Company#0
+aJavaFile.Company#0.getDepartments#5 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/5/getDepartments/JavaMethod'
+
+/*
+String getName() {
+		return name;
+	}
+*/
+aJavaFile.Company#0.getName#3: JavaMethod
+aJavaFile.Company#0.getName#3 partOf aJavaFile.Company#0
+aJavaFile.Company#0.getName#3 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/3/getName/JavaMethod'
+
+/*
+String name;
+*/
+aJavaFile.Company#0.name#1: JavaField
+aJavaFile.Company#0.name#1 partOf aJavaFile.Company#0
+aJavaFile.Company#0.name#1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/1/name/JavaField'
+
+/*
+void setDepartments(List<Department> departments) {
+		this.departments = departments;
+	}
+*/
+aJavaFile.Company#0.setDepartments#6: JavaMethod
+aJavaFile.Company#0.setDepartments#6 partOf aJavaFile.Company#0
+aJavaFile.Company#0.setDepartments#6 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/6/setDepartments/JavaMethod'
+
+/*
+void setName(String name) {
+		this.name = name;
+	}
+*/
+aJavaFile.Company#0.setName#4: JavaMethod
+aJavaFile.Company#0.setName#4 partOf aJavaFile.Company#0
+aJavaFile.Company#0.setName#4 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/4/setName/JavaMethod'
+
 Java = 'http://dbpedia.org/page/Java_(programming_language)'
 
-XML: Language
 
-xmlFile: File
 xmlFile elementOf XML
 
-XSD: Language
 XSD subsetOf XML
 
-xsdFile: File
 xsdFile elementOf XSD
 
