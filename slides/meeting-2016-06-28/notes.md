@@ -2,4 +2,5 @@
 
 - The '#' in qualified fragment names may be misleading
 - No DTD support for XML plugins!
+- No further/automated fragment type specializations for XML
 - XML ```realizationOf``` is actually ```conformsTo```!
