@@ -67,15 +67,21 @@ public class LanguageResolver extends GuidedReasonerPlugin {
 		
 	}
 	
+	private String dbpdiaURl (Entity entity) {
+		
+		return "http://dbpedia.org/page/" + entity.getName() + "_(programming_language)";
+		
+	}
+	
 	/**
 	 * Binds a page from dbpedia.org to a given language entity
 	 */
 	@Override
 	protected void guidedDerive(Entity entity) {
+		
 		when(!entity.hasBinding());
 		
-		String url = "http://dbpedia.org/page/" + entity.getName()
-				+ "_(programming_language)";
+		String url = dbpdiaURl(entity);
 		
 		if (isReachable(url) && getArtifact(url).exists())
 			binding(entity.getName(), url);
