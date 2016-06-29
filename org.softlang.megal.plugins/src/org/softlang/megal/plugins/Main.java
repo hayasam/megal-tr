@@ -105,7 +105,7 @@ public class Main {
 		
 		List<Entity> es = kb.getEntities().stream()
 				.filter( e -> e.getType() != null && !e.getType().getName().equals("Plugin")  )
-				.sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) )
+//				.sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) )
 				.collect(Collectors.toList());
 		
 		for (Entity e : es) {
@@ -126,13 +126,13 @@ public class Main {
 //			}
 //			
 			
-			if (e.getAnnotation("content") != null) {
-				out.println("/*");
-				out.println(e.getAnnotation("content"));
-				out.println("*/");
-				out.println(e);
-			}	
+//			if (e.getAnnotation("content") != null) {
+//				out.println("/*");
+//				out.println(e.getAnnotation("content"));
+//				out.println("*/");
+//			}	
 				
+			out.println(e);
 			
 			for (Relationship rel : kb.getRelationships().stream().filter( r -> r.getLeft().equals(e)).collect(Collectors.toList())) {
 				

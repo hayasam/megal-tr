@@ -2,8 +2,12 @@ package org.softlang.megal.plugins.api.antlr;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
+import java.util.stream.Collectors;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.Parser;
@@ -202,6 +206,92 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		
 		
 	}
+
+	static private class FListener implements ParseTreeListener {
+
+		private Entity entity;
+		private Artifact artifact;
+		private Collection<FragmentationRule<?>> rules;
+		
+		private Stack<ParserRuleContext> stack = new Stack<ParserRuleContext>();
+		private Map<ParserRuleContext,Fragment> fragments = new HashMap<ParserRuleContext,Fragment>();
+		
+		public FListener (Entity entity, Artifact artifact, Collection<FragmentationRule<? extends ParserRuleContext>> rules) {
+			this.entity = entity;
+			this.artifact = artifact;
+			this.rules = rules;
+		}
+		
+		public Collection<Fragment> getFragments () {
+			return fragments.values().stream()
+					.filter( f -> f.isRoot() )
+					.collect(Collectors.toList());
+		}
+		
+		@Override
+		public void enterEveryRule(ParserRuleContext context) {
+			
+			for (FragmentationRule<?> rule : rules) {
+				
+				if (rule.accept(context)) {
+					
+					Fragment f = rule.newFragment(entity, artifact, context);
+
+					if (rule.hasParts(context)) {
+						
+						stack.push(context);
+						
+					}
+					
+					fragments.put(context, f);
+					
+					if (!stack.isEmpty()
+							&& fragments.containsKey(stack.peek())) {
+
+						Fragment p = fragments.get(stack.peek());
+
+						p.addPart(f);
+						
+						
+					}
+					
+					
+				}
+				
+			}
+			
+		}
+
+		@Override
+		public void exitEveryRule(ParserRuleContext context) {
+			
+			if (!stack.isEmpty() && stack.peek() == context) {
+				
+				stack.pop();
+				
+				if (!stack.isEmpty() 
+						&& fragments.containsKey(stack.peek())
+						&& fragments.containsKey(context)) {
+					
+					fragments.get(stack.peek()).addPart(fragments.get(context));
+					
+				}
+				
+			}
+			
+		}
+
+		@Override
+		public void visitErrorNode(ErrorNode arg0) {
+			// do nothing			
+		}
+
+		@Override
+		public void visitTerminal(TerminalNode arg0) {
+			// do nothing			
+		}
+		
+	}
 	
 	/**
 	 * Gets the collection for fragmentation rules
@@ -218,7 +308,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 	final public Collection<Fragment> getFragments(Entity entity, Artifact artifact) {
 		
 		// Create a new fragmentation listener
-		FragmentationListener listener = new FragmentationListener(entity, artifact, getRules());
+		FListener listener = new FListener(entity, artifact, getRules());
 		
 		// Create a new parse tree walker
 		ParseTreeWalker walker = new ParseTreeWalker();
@@ -227,12 +317,17 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 			
 			// Create a new from the input stream above
 			ParseTree parseTree = getParserFactory().getParseTree(artifact);
-
+			
 			// Walk the parse tree with the fragmentation listener to collect fragments
 			walker.walk(listener, parseTree);
 			
+				
 			
 		} catch (IOException e) {
+			
+			e.printStackTrace();
+			
+		} catch (Throwable e) {
 			
 			e.printStackTrace();
 			

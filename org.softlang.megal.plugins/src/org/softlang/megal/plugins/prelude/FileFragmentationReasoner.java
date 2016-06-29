@@ -3,12 +3,9 @@ package org.softlang.megal.plugins.prelude;
 import org.softlang.megal.mi2.Entity;
 import org.softlang.megal.mi2.KB;
 import org.softlang.megal.mi2.Ref;
-import org.softlang.megal.mi2.api.Artifact;
-
 
 import static com.google.common.collect.Maps.immutableEntry;
 import static com.google.common.collect.Iterables.filter;
-import static com.google.common.collect.Iterables.any;
 import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 
 import org.softlang.megal.plugins.api.FragmentizerPlugin;
@@ -37,11 +34,11 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 	 * Inserts a bag of fragments into the KB
 	 * @param fs
 	 */
-	private void deriveFragments (Iterable<Fragment> fs) {
+	private void deriveFragments (Iterable<Fragment> fs, String lang) {
 		
 		for (Fragment f : fs) {
 			
-			deriveFragments(f);
+			deriveFragments(f, lang);
 			
 		}
 		
@@ -51,17 +48,18 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 	 * Inserts a fragment into the KB
 	 * @param f
 	 */
-	private void deriveFragments (Fragment f) {
+	private void deriveFragments (Fragment f, String lang) {
 		
 		// Create an entity for the fragment with its qualified name
 		Entity e = entity(f.getQualifiedName(), f.getType());
 		entityAnnotation(e, "content", f.getText());
+		relationship(e.getName(), lang, "elementOf");
 		
 		// Bind the fragment entity to the fragment's URI
 		binding(f.getQualifiedName(), f.getURI());
 		
 		// Insert the parts of the fragments into the KB
-		deriveFragments(f.getParts());
+		deriveFragments(f.getParts(), lang);
 		
 	}
 	
@@ -74,35 +72,46 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 		// For all partial fragmentation plugins
 		for (FragmentizerPlugin plugin : filter(getParts(), FragmentizerPlugin.class)) {
 			
-			// If the partial fragmentation plugin does NOT realize the language of the entity
-			if (!any(plugin.getRealization(), lang -> isElementOfLanguage(entity, lang))) {
-			
-				// Skip the plugin
-				continue;
-			
-			}
-			
-			try {
+			for(Entity lang : plugin.getRealization()) {
 				
-				if (entity.hasBinding()) {
+				if (isElementOfLanguage(entity, lang)) {
 					
-					// For all artifacts bound to the entity
-					for(Artifact artifact : artifactsOf(entity)) {
-						
-						// Derive the fragments of the entity
-						deriveFragments(plugin.getFragments(entity, artifact));
-						
-					}
+					deriveFragments(plugin.getFragments(entity, artifactOf(entity)), lang.getName());
 					
 				}
 				
-			} 
-			catch(Exception e) {
-				
-				error("Fragmentation of '" + entity + "' failed!");
-				e.printStackTrace();
-				
 			}
+			
+//			// If the partial fragmentation plugin does NOT realize the language of the entity
+//			if (!any(plugin.getRealization(), lang -> isElementOfLanguage(entity, lang))) {
+//			
+//				// Skip the plugin
+//				continue;
+//			
+//			}
+//			
+//			try {
+//				
+//				if (entity.hasBinding()) {
+//					
+//					
+//					// For all artifacts bound to the entity
+//					for(Artifact artifact : artifactsOf(entity)) {
+//						
+//						// Derive the fragments of the entity
+//						deriveFragments(plugin.getFragments(entity, artifact));
+//						
+//					}
+//					
+//				}
+//				
+//			} 
+//			catch(Exception e) {
+//				
+//				error("Fragmentation of '" + entity + "' failed!");
+//				e.printStackTrace();
+//				
+//			}
 			
 		}
 		

@@ -191,11 +191,16 @@ public abstract class Fragments {
 		 */
 		public void addPart (Fragment child) {
 			
-			// Associate the child with its new parent 
-			child.parent = this;
+			// Prevent cycles
+			if (child != this) {
 			
-			// Add the child to the collection of parts
-			parts.add(child);
+				// Associate the child with its new parent 
+				child.parent = this;
+				
+				// Add the child to the collection of parts
+				parts.add(child);
+			
+			}
 			
 		}
 		

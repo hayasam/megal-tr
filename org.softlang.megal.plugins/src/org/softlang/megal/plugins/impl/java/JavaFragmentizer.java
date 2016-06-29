@@ -69,6 +69,7 @@ public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLe
 	};
 	
 
+	// PRODUCES WRONG RESULTS FOR MORE THAN 1 INNER CLASS !!!
 	/**
 	 * Fragmentation rule for inner classes
 	 * 
