@@ -162,7 +162,7 @@ public abstract class Fragments {
 		public String getQualifiedName () {
 			
 			// The qualified name of the fragment
-			String name = getName() + "#" + getIndex();
+			String name = getName() + "$" + getIndex();
 			
 			// If the fragment has parent
 			if (hasParent()) {
