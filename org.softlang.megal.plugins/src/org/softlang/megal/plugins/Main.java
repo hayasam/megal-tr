@@ -110,27 +110,19 @@ public class Main {
 		
 		for (Entity e : es) {
 			
-//			if (e.getBinding() instanceof URI) {
-//				
-//				Optional<Fragments.Fragment> f = Fragments.fragmentOf((URI)e.getBinding());
-//			
-//				if (f.isPresent()) {
-//					
-//					out.println("/*");
-//					out.println(f.get().getText());
-//					Fragments.print(f.get(), out);
-//					out.println("*/");
-//					
-//				}
-//				
-//			}
-//			
-			
-//			if (e.getAnnotation("content") != null) {
-//				out.println("/*");
-//				out.println(e.getAnnotation("content"));
-//				out.println("*/");
-//			}	
+			for (String name : e.getAnnotations().keys()) {
+				
+				String value = e.getAnnotation(name);
+				
+				if (name.equals("content")) {
+					
+					value = value.split(System.getProperty("line.separator"),2)[0] + " ...";
+				
+				}
+				
+				out.println("@" + name + " '" + value + "'");
+				
+			}
 				
 			out.println(e);
 			

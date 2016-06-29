@@ -72,6 +72,8 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 		// For all partial fragmentation plugins
 		for (FragmentizerPlugin plugin : filter(getParts(), FragmentizerPlugin.class)) {
 			
+			// WHAT TO DO IF plugin REALIZES MULTIPLE LANGUAGES ????
+			
 			for(Entity lang : plugin.getRealization()) {
 				
 				if (isElementOfLanguage(entity, lang)) {
