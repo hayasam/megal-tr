@@ -209,48 +209,93 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 
 	static private class FListener implements ParseTreeListener {
 
+		/**
+		 * The containing entity of the fragments to collect
+		 */
 		private Entity entity;
+		
+		/**
+		 * The containing artifact of the fragments to collect
+		 */
 		private Artifact artifact;
+		
+		/**
+		 * A List of fragmentation rules
+		 */
 		private Collection<FragmentationRule<?>> rules;
 		
+		/**
+		 * Stack for the ParserRuleContext of the current compound fragment.
+		 * <br>
+		 * This variable keeps track of the current scope.
+		 */
 		private Stack<ParserRuleContext> stack = new Stack<ParserRuleContext>();
+		
+		/**
+		 * Mapping between ParserRuleContexts and their respective collected fragments.
+		 */
 		private Map<ParserRuleContext,Fragment> fragments = new HashMap<ParserRuleContext,Fragment>();
 		
+		/**
+		 * Constructs a new FragmentationListener
+		 * @param entity
+		 * @param artifact
+		 * @param rules
+		 */
 		public FListener (Entity entity, Artifact artifact, Collection<FragmentationRule<? extends ParserRuleContext>> rules) {
 			this.entity = entity;
 			this.artifact = artifact;
 			this.rules = rules;
 		}
 		
+		/**
+		 * Gets the collected fragments
+		 * @return
+		 */
 		public Collection<Fragment> getFragments () {
+			
+			// Since the fragments map has entries for every collected fragment including their child nodes,
+			// only fragments without parents, i.e. root fragments, are valid results
 			return fragments.values().stream()
 					.filter( f -> f.isRoot() )
 					.collect(Collectors.toList());
 		}
 		
+		/**
+		 * Collects a new fragment for a context upon entering
+		 */
 		@Override
 		public void enterEveryRule(ParserRuleContext context) {
 			
+			// for every fragmentation rule
 			for (FragmentationRule<?> rule : rules) {
 				
+				// if the rule is applicable
 				if (rule.accept(context)) {
 					
+					// create a fragment from the parser rule context
 					Fragment f = rule.newFragment(entity, artifact, context);
 
+					// if the rule is for compound fragment
 					if (rule.hasParts(context)) {
 						
+						// push the current scope onto the stack
 						stack.push(context);
 						
 					}
 					
+					// map the fragments to its respective context/scope
 					fragments.put(context, f);
 					
+					// if the scope stack is not empty and the current scope is already mapped
 					if (!stack.isEmpty()
 							&& fragments.containsKey(stack.peek())) {
 
-						Fragment p = fragments.get(stack.peek());
+						// get the current compound fragment
+						Fragment compound = fragments.get(stack.peek());
 
-						p.addPart(f);
+						// add the new fragment to its compound
+						compound.addPart(f);
 						
 						
 					}
@@ -262,17 +307,27 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 			
 		}
 
+		/**
+		 * Cleans the scope stack up
+		 */
 		@Override
 		public void exitEveryRule(ParserRuleContext context) {
 			
+			// if the scope stack is not empty 
+			// and the current context is identical to the top of the stack
 			if (!stack.isEmpty() && stack.peek() == context) {
 				
+				// remove the current context from the stack
 				stack.pop();
 				
+				// if the scope stack is not empty then
+				// and the top of the stack and the current context is mapped
 				if (!stack.isEmpty() 
 						&& fragments.containsKey(stack.peek())
 						&& fragments.containsKey(context)) {
 					
+					// then the top of the stack is mapped to a compound fragment
+					// add the fragment mapped to the current context to this compound fragment
 					fragments.get(stack.peek()).addPart(fragments.get(context));
 					
 				}

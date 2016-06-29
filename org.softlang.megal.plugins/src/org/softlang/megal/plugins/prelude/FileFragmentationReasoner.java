@@ -52,7 +52,7 @@ public class FileFragmentationReasoner extends GuidedReasonerPlugin {
 		
 		// Create an entity for the fragment with its qualified name
 		Entity e = entity(f.getQualifiedName(), f.getType());
-		entityAnnotation(e, "content", f.getText());
+		entityAnnotation(e, "FragmentText", f.getText());
 		relationship(e.getName(), lang, "elementOf");
 		
 		// Bind the fragment entity to the fragment's URI

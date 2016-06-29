@@ -114,7 +114,7 @@ public class Main {
 				
 				String value = e.getAnnotation(name);
 				
-				if (name.equals("content")) {
+				if (name.equals("FragmentText")) {
 					
 					value = value.split(System.getProperty("line.separator"),2)[0] + " ...";
 				
