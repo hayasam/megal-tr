@@ -11,7 +11,7 @@ import org.softlang.megal.plugins.api.AcceptorPlugin;
 import com.google.common.base.Optional;
 import com.google.common.base.Throwables;
 
-public abstract class ANTLRAcceptorPlugin<P extends Parser, L extends Lexer> extends AcceptorPlugin {
+public abstract class ANTLRAcceptorPlugin<P extends Parser, L extends Lexer> extends AcceptorPlugin implements ANTLRBackedPlugin<P,L> {
 
 	static private class ParserException extends RuntimeException {
 
@@ -33,9 +33,7 @@ public abstract class ANTLRAcceptorPlugin<P extends Parser, L extends Lexer> ext
 		}
 		
 	}
-	
-	abstract public ANTLRParserFactory<P, L> getParserFactory ();
-	
+		
 	@Override
 	final public Optional<String> accept(Artifact artifact) {
 		

@@ -26,7 +26,7 @@ import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;
  * @author maxmeffert
  *
  */
-public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer> extends FragmentizerPlugin {
+public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer> extends FragmentizerPlugin implements ANTLRBackedPlugin<P,L> {
 
 	//=============================================================================
 	// Interface
@@ -143,13 +143,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 	 * @return
 	 */
 	abstract public Collection<FragmentationRule<? extends ParserRuleContext>> getRules ();
-	
-	/**
-	 * Gets a new parser factory
-	 * @return
-	 */
-	abstract public ANTLRParserFactory<P, L> getParserFactory ();
-	
+		
 	//=============================================================================
 	// Implementation
 	 
