@@ -105,109 +105,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 	 * @author maxmeffert
 	 *
 	 */
-	static public class FragmentationListener implements ParseTreeListener {
-		
-		/**
-		 * The containing entity of the fragments to collect
-		 */
-		private Entity entity;
-		
-		/**
-		 * The containing artifact of the fragments to collect
-		 */
-		private Artifact artifact;
-		
-		/**
-		 * A List of fragmentation rules
-		 */
-		private Collection<FragmentationRule<? extends ParserRuleContext>> rules;
-		
-		/**
-		 * Queue for collected fragments
-		 */
-		private Queue<Fragment> fragments = new LinkedList<Fragment>();
-		
-		/**
-		 * Constructs a new FragmentationListener
-		 * @param entity
-		 * @param artifact
-		 * @param rules
-		 */
-		public FragmentationListener (Entity entity, Artifact artifact, Collection<FragmentationRule<? extends ParserRuleContext>> rules) {
-			this.entity = entity;
-			this.artifact = artifact;
-			this.rules = rules;
-		}
-		
-		/**
-		 * Getter for collected fragments
-		 * @return The list of collected fragments
-		 */
-		public Collection<Fragment> getFragments() {
-			return fragments;
-		}
-		
-		/**
-		 * Collects fragments depending on fragmentation rules
-		 */
-		
-		@Override
-		public void exitEveryRule (ParserRuleContext context) {
-			
-			// for each fragmentation rule
-			for (FragmentationRule<?> rule : rules) {
-				
-				// if the rule is applicable
-				if (rule.accept(context)) {
-					
-					// create a fragment from the parser rule context
-					Fragment fragment = rule.newFragment(entity, artifact, context);
-					
-					// check whether the rule is for a leaf fragment
-					if (rule.hasParts(context)) {
-						
-						// while the rule is not for a leaf fragment, 
-						while(!fragments.isEmpty()) {
-							
-							// add previously collected fragments as parts 
-							// (previously collected fragments are children of the AST nodes of the current fragment)
-							fragment.addPart(fragments.remove());
-							
-						}
-						
-					}
-					
-					
-					
-					// push the current fragment onto the stack
-					fragments.add(fragment);
-					
-				}
-				
-			}
-			
-		}
-
-		@Override
-		public void enterEveryRule(ParserRuleContext arg0) {
-			// do nothing		
-		}
-
-		@Override
-		public void visitErrorNode(ErrorNode arg0) {
-			// do nothing
-		}
-
-		@Override
-		public void visitTerminal(TerminalNode arg0) {
-			// do nothing
-		}
-		
-		
-		
-	}
-
-	static private class FListener implements ParseTreeListener {
+	static private class FragmentationListener implements ParseTreeListener {
 
 		/**
 		 * The containing entity of the fragments to collect
@@ -242,7 +140,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 		 * @param artifact
 		 * @param rules
 		 */
-		public FListener (Entity entity, Artifact artifact, Collection<FragmentationRule<? extends ParserRuleContext>> rules) {
+		public FragmentationListener (Entity entity, Artifact artifact, Collection<FragmentationRule<? extends ParserRuleContext>> rules) {
 			this.entity = entity;
 			this.artifact = artifact;
 			this.rules = rules;
@@ -363,7 +261,7 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 	final public Collection<Fragment> getFragments(Entity entity, Artifact artifact) {
 		
 		// Create a new fragmentation listener
-		FListener listener = new FListener(entity, artifact, getRules());
+		FragmentationListener listener = new FragmentationListener(entity, artifact, getRules());
 		
 		// Create a new parse tree walker
 		ParseTreeWalker walker = new ParseTreeWalker();
