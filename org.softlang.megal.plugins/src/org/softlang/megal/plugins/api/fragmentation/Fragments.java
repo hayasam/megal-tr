@@ -42,7 +42,7 @@ public abstract class Fragments {
 		private String type;
 		
 		private String text;
-		
+				
 		/**
 		 * The containing entity of the fragment
 		 */

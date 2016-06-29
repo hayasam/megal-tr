@@ -6,8 +6,8 @@ import org.softlang.megal.mi2.Ref;
 
 import static com.google.common.collect.Maps.immutableEntry;
 import static com.google.common.collect.Iterables.filter;
-import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 
+import static org.softlang.megal.plugins.util.Prelude.isElementOfLanguage;
 import org.softlang.megal.plugins.api.FragmentizerPlugin;
 import org.softlang.megal.plugins.api.GuidedReasonerPlugin;
 import org.softlang.megal.plugins.api.fragmentation.Fragments.Fragment;

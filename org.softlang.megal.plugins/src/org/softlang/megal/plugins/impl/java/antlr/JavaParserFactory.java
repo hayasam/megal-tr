@@ -5,6 +5,12 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.softlang.megal.plugins.api.antlr.ANTLRParserFactory;
 
+/**
+ * ANTLR parser factory for common java
+ * 
+ * @author maxmeffert
+ *
+ */
 public class JavaParserFactory extends ANTLRParserFactory<JavaParser, JavaLexer>{
 
 	@Override
