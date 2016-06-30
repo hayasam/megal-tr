@@ -40,7 +40,7 @@ XSDFragmentResolver : Plugin
 XSDFragmentResolver = 'classpath:org.softlang.megal.plugins.impl.xsd.XSDFragmentResolver'
 
 
-@Plugin 'XSDFragmentResolver'
+//@Plugin 'XSDFragmentResolver'
 XMLFragment < Fragment
 
 XMLElement < XMLFragment

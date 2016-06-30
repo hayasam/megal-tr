@@ -18,44 +18,122 @@ aJavaFile elementOf Java
 
 xmlFile: File
 xmlFile elementOf XML
-xmlFile = 'workspace:/org.softlang.megal.plugins/input/Foo.xml'
 
 xsdFile: File
 xsdFile elementOf XSD
+xsdFile = 'workspace:/org.softlang.megal.plugins/input/Foo.xsd'
 
-@FragmentText 'bar="lala" ...'
-xmlFile.lala$0.foo$2.bar$0: XMLAttribute
-xmlFile.lala$0.foo$2.bar$0 partOf xmlFile.lala$0.foo$2
-xmlFile.lala$0.foo$2.bar$0 elementOf XML
-xmlFile.lala$0.foo$2.bar$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/2/foo/XMLElement/0/bar/XMLAttribute'
+@FragmentText 'xmlns:xs="http://www.w3.org/2001/XMLSchema" ...'
+xsdFile.xs:schema$0.xmlns:xs$0: XMLNSAttribute
+xsdFile.xs:schema$0.xmlns:xs$0 elementOf XML
+xsdFile.xs:schema$0.xmlns:xs$0 partOf xsdFile.xs:schema$0
+xsdFile.xs:schema$0.xmlns:xs$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/0/xmlns:xs/XMLNSAttribute'
 
-@FragmentText '<lala name="lulu" xmlns:asdf="asdf"> ...'
-xmlFile.lala$0: XMLElement
-xmlFile.lala$0 partOf xmlFile
-xmlFile.lala$0 elementOf XML
-xmlFile.lala$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement'
+@FragmentText 'name="to" ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.name$0: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.name$0 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.name$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.name$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/0/xs:element/XMLElement/0/name/XMLAttribute'
 
-@FragmentText '<lulu></lulu> ...'
-xmlFile.lala$0.lulu$3: XMLElement
-xmlFile.lala$0.lulu$3 elementOf XML
-xmlFile.lala$0.lulu$3 partOf xmlFile.lala$0
-xmlFile.lala$0.lulu$3 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/3/lulu/XMLElement'
+@FragmentText 'type="xs:string" ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.type$1: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.type$1 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.type$1 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0.type$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/0/xs:element/XMLElement/1/type/XMLAttribute'
 
-@FragmentText 'xmlns:asdf="asdf" ...'
-xmlFile.lala$0.xmlns:asdf$1: XMLNSAttribute
-xmlFile.lala$0.xmlns:asdf$1 elementOf XML
-xmlFile.lala$0.xmlns:asdf$1 partOf xmlFile.lala$0
-xmlFile.lala$0.xmlns:asdf$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/1/xmlns:asdf/XMLNSAttribute'
+@FragmentText 'name="from" ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.name$0: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.name$0 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.name$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.name$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/1/xs:element/XMLElement/0/name/XMLAttribute'
 
-@FragmentText 'name="lulu" ...'
-xmlFile.lala$0.name$0: XMLAttribute
-xmlFile.lala$0.name$0 elementOf XML
-xmlFile.lala$0.name$0 partOf xmlFile.lala$0
-xmlFile.lala$0.name$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/0/name/XMLAttribute'
+@FragmentText 'type="xs:string" ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.type$1: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.type$1 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.type$1 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1.type$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/1/xs:element/XMLElement/1/type/XMLAttribute'
 
-@FragmentText '<foo bar="lala"></foo> ...'
-xmlFile.lala$0.foo$2: XMLElement
-xmlFile.lala$0.foo$2 elementOf XML
-xmlFile.lala$0.foo$2 partOf xmlFile.lala$0
-xmlFile.lala$0.foo$2 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/2/foo/XMLElement'
+@FragmentText 'name="heading" ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.name$0: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.name$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.name$0 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.name$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/2/xs:element/XMLElement/0/name/XMLAttribute'
+
+@FragmentText 'version="1.0" ...'
+xsdFile.version$0: XMLAttribute
+xsdFile.version$0 elementOf XML
+xsdFile.version$0 partOf xsdFile
+xsdFile.version$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/version/XMLAttribute'
+
+@FragmentText '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"> ...'
+xsdFile.xs:schema$0: XMLElement
+xsdFile.xs:schema$0 elementOf XML
+xsdFile.xs:schema$0 partOf xsdFile
+xsdFile.xs:schema$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement'
+
+@FragmentText '<xs:element name="heading" type="xs:string"/> ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/2/xs:element/XMLElement'
+
+@FragmentText '<xs:element name="body" type="xs:string"/> ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/3/xs:element/XMLElement'
+
+@FragmentText '<xs:element name="to" type="xs:string"/> ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/0/xs:element/XMLElement'
+
+@FragmentText '<xs:element name="from" type="xs:string"/> ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/1/xs:element/XMLElement'
+
+@FragmentText 'name="note" ...'
+xsdFile.xs:schema$0.xs:element$1.name$0: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.name$0 partOf xsdFile.xs:schema$0.xs:element$1
+xsdFile.xs:schema$0.xs:element$1.name$0 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.name$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/0/name/XMLAttribute'
+
+@FragmentText 'name="body" ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.name$0: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.name$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.name$0 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.name$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/3/xs:element/XMLElement/0/name/XMLAttribute'
+
+@FragmentText 'type="xs:string" ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.type$1: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.type$1 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.type$1 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$2.type$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/2/xs:element/XMLElement/1/type/XMLAttribute'
+
+@FragmentText 'type="xs:string" ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.type$1: XMLAttribute
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.type$1 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.type$1 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0.xs:element$3.type$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement/3/xs:element/XMLElement/1/type/XMLAttribute'
+
+@FragmentText '<xs:sequence> ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0 partOf xsdFile.xs:schema$0.xs:element$1.xs:complexType$1
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1.xs:sequence$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement/0/xs:sequence/XMLElement'
+
+@FragmentText '<xs:element name="note"> ...'
+xsdFile.xs:schema$0.xs:element$1: XMLElement
+xsdFile.xs:schema$0.xs:element$1 elementOf XML
+xsdFile.xs:schema$0.xs:element$1 partOf xsdFile.xs:schema$0
+xsdFile.xs:schema$0.xs:element$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement'
+
+@FragmentText '<xs:complexType> ...'
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1: XMLElement
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1 partOf xsdFile.xs:schema$0.xs:element$1
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1 elementOf XML
+xsdFile.xs:schema$0.xs:element$1.xs:complexType$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xsd#/0/xs:schema/XMLElement/1/xs:element/XMLElement/1/xs:complexType/XMLElement'
 
