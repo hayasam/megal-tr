@@ -15,137 +15,47 @@ XSD subsetOf XML
 
 aJavaFile: File
 aJavaFile elementOf Java
-aJavaFile = 'workspace:/org.softlang.megal.plugins/input/Company.java'
 
 xmlFile: File
 xmlFile elementOf XML
+xmlFile = 'workspace:/org.softlang.megal.plugins/input/Foo.xml'
 
 xsdFile: File
 xsdFile elementOf XSD
 
-@FragmentText 'void setEmployees(List<Employee> employees) { ...'
-aJavaFile.Company$0.Department$0.setEmployees$6: JavaMethod
-aJavaFile.Company$0.Department$0.setEmployees$6 elementOf Java
-aJavaFile.Company$0.Department$0.setEmployees$6 partOf aJavaFile.Company$0.Department$0
-aJavaFile.Company$0.Department$0.setEmployees$6 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/6/setEmployees/JavaMethod'
+@FragmentText 'bar="lala" ...'
+xmlFile.lala$0.foo$2.bar$0: XMLAttribute
+xmlFile.lala$0.foo$2.bar$0 partOf xmlFile.lala$0.foo$2
+xmlFile.lala$0.foo$2.bar$0 elementOf XML
+xmlFile.lala$0.foo$2.bar$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/2/foo/XMLElement/0/bar/XMLAttribute'
 
-@FragmentText 'List<Employee> employees = new ArrayList<Employee>(); ...'
-aJavaFile.Company$0.Department$0.employees$2: JavaField
-aJavaFile.Company$0.Department$0.employees$2 elementOf Java
-aJavaFile.Company$0.Department$0.employees$2 partOf aJavaFile.Company$0.Department$0
-aJavaFile.Company$0.Department$0.employees$2 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/2/employees/JavaField'
+@FragmentText '<lala name="lulu" xmlns:asdf="asdf"> ...'
+xmlFile.lala$0: XMLElement
+xmlFile.lala$0 partOf xmlFile
+xmlFile.lala$0 elementOf XML
+xmlFile.lala$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement'
 
-@FragmentText 'String getName() { ...'
-aJavaFile.Company$0.Department$0.Employee$0.getName$2: JavaMethod
-aJavaFile.Company$0.Department$0.Employee$0.getName$2 elementOf Java
-aJavaFile.Company$0.Department$0.Employee$0.getName$2 partOf aJavaFile.Company$0.Department$0.Employee$0
-aJavaFile.Company$0.Department$0.Employee$0.getName$2 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/2/getName/JavaMethod'
+@FragmentText '<lulu></lulu> ...'
+xmlFile.lala$0.lulu$3: XMLElement
+xmlFile.lala$0.lulu$3 elementOf XML
+xmlFile.lala$0.lulu$3 partOf xmlFile.lala$0
+xmlFile.lala$0.lulu$3 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/3/lulu/XMLElement'
 
-@FragmentText 'void setDepartments(List<Department> departments) { ...'
-aJavaFile.Company$0.setDepartments$6: JavaMethod
-aJavaFile.Company$0.setDepartments$6 elementOf Java
-aJavaFile.Company$0.setDepartments$6 partOf aJavaFile.Company$0
-aJavaFile.Company$0.setDepartments$6 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/6/setDepartments/JavaMethod'
+@FragmentText 'xmlns:asdf="asdf" ...'
+xmlFile.lala$0.xmlns:asdf$1: XMLNSAttribute
+xmlFile.lala$0.xmlns:asdf$1 elementOf XML
+xmlFile.lala$0.xmlns:asdf$1 partOf xmlFile.lala$0
+xmlFile.lala$0.xmlns:asdf$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/1/xmlns:asdf/XMLNSAttribute'
 
-@FragmentText 'String name; ...'
-aJavaFile.Company$0.name$1: JavaField
-aJavaFile.Company$0.name$1 elementOf Java
-aJavaFile.Company$0.name$1 partOf aJavaFile.Company$0
-aJavaFile.Company$0.name$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/1/name/JavaField'
+@FragmentText 'name="lulu" ...'
+xmlFile.lala$0.name$0: XMLAttribute
+xmlFile.lala$0.name$0 elementOf XML
+xmlFile.lala$0.name$0 partOf xmlFile.lala$0
+xmlFile.lala$0.name$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/0/name/XMLAttribute'
 
-@FragmentText 'String getName() { ...'
-aJavaFile.Company$0.Department$0.getName$3: JavaMethod
-aJavaFile.Company$0.Department$0.getName$3 elementOf Java
-aJavaFile.Company$0.Department$0.getName$3 partOf aJavaFile.Company$0.Department$0
-aJavaFile.Company$0.Department$0.getName$3 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/3/getName/JavaMethod'
-
-@FragmentText 'void setName(String name) { ...'
-aJavaFile.Company$0.Department$0.Employee$0.setName$3: JavaMethod
-aJavaFile.Company$0.Department$0.Employee$0.setName$3 elementOf Java
-aJavaFile.Company$0.Department$0.Employee$0.setName$3 partOf aJavaFile.Company$0.Department$0.Employee$0
-aJavaFile.Company$0.Department$0.Employee$0.setName$3 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/3/setName/JavaMethod'
-
-@FragmentText 'public class Company { ...'
-aJavaFile.Company$0: JavaClass
-aJavaFile.Company$0 elementOf Java
-aJavaFile.Company$0 partOf aJavaFile
-aJavaFile.Company$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass'
-
-@FragmentText 'String name; ...'
-aJavaFile.Company$0.Department$0.name$1: JavaField
-aJavaFile.Company$0.Department$0.name$1 elementOf Java
-aJavaFile.Company$0.Department$0.name$1 partOf aJavaFile.Company$0.Department$0
-aJavaFile.Company$0.Department$0.name$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/1/name/JavaField'
-
-@FragmentText 'int getSalary() { ...'
-aJavaFile.Company$0.Department$0.Employee$0.getSalary$4: JavaMethod
-aJavaFile.Company$0.Department$0.Employee$0.getSalary$4 elementOf Java
-aJavaFile.Company$0.Department$0.Employee$0.getSalary$4 partOf aJavaFile.Company$0.Department$0.Employee$0
-aJavaFile.Company$0.Department$0.Employee$0.getSalary$4 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/4/getSalary/JavaMethod'
-
-@FragmentText 'String name; ...'
-aJavaFile.Company$0.Department$0.Employee$0.name$0: JavaField
-aJavaFile.Company$0.Department$0.Employee$0.name$0 elementOf Java
-aJavaFile.Company$0.Department$0.Employee$0.name$0 partOf aJavaFile.Company$0.Department$0.Employee$0
-aJavaFile.Company$0.Department$0.Employee$0.name$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/0/name/JavaField'
-
-@FragmentText 'List<Department> departments = new ArrayList<Department>(); ...'
-aJavaFile.Company$0.departments$2: JavaField
-aJavaFile.Company$0.departments$2 elementOf Java
-aJavaFile.Company$0.departments$2 partOf aJavaFile.Company$0
-aJavaFile.Company$0.departments$2 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/2/departments/JavaField'
-
-@FragmentText 'void setName(String name) { ...'
-aJavaFile.Company$0.Department$0.setName$4: JavaMethod
-aJavaFile.Company$0.Department$0.setName$4 elementOf Java
-aJavaFile.Company$0.Department$0.setName$4 partOf aJavaFile.Company$0.Department$0
-aJavaFile.Company$0.Department$0.setName$4 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/4/setName/JavaMethod'
-
-@FragmentText 'void setSalary(int salary) { ...'
-aJavaFile.Company$0.Department$0.Employee$0.setSalary$5: JavaMethod
-aJavaFile.Company$0.Department$0.Employee$0.setSalary$5 elementOf Java
-aJavaFile.Company$0.Department$0.Employee$0.setSalary$5 partOf aJavaFile.Company$0.Department$0.Employee$0
-aJavaFile.Company$0.Department$0.Employee$0.setSalary$5 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/5/setSalary/JavaMethod'
-
-@FragmentText 'List<Employee> getEmployees() { ...'
-aJavaFile.Company$0.Department$0.getEmployees$5: JavaMethod
-aJavaFile.Company$0.Department$0.getEmployees$5 elementOf Java
-aJavaFile.Company$0.Department$0.getEmployees$5 partOf aJavaFile.Company$0.Department$0
-aJavaFile.Company$0.Department$0.getEmployees$5 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/5/getEmployees/JavaMethod'
-
-@FragmentText 'int salary; ...'
-aJavaFile.Company$0.Department$0.Employee$0.salary$1: JavaField
-aJavaFile.Company$0.Department$0.Employee$0.salary$1 elementOf Java
-aJavaFile.Company$0.Department$0.Employee$0.salary$1 partOf aJavaFile.Company$0.Department$0.Employee$0
-aJavaFile.Company$0.Department$0.Employee$0.salary$1 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass/1/salary/JavaField'
-
-@FragmentText 'static public class Department { ...'
-aJavaFile.Company$0.Department$0: JavaInnerClass
-aJavaFile.Company$0.Department$0 elementOf Java
-aJavaFile.Company$0.Department$0 partOf aJavaFile.Company$0
-aJavaFile.Company$0.Department$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass'
-
-@FragmentText 'List<Department> getDepartments() { ...'
-aJavaFile.Company$0.getDepartments$5: JavaMethod
-aJavaFile.Company$0.getDepartments$5 elementOf Java
-aJavaFile.Company$0.getDepartments$5 partOf aJavaFile.Company$0
-aJavaFile.Company$0.getDepartments$5 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/5/getDepartments/JavaMethod'
-
-@FragmentText 'String getName() { ...'
-aJavaFile.Company$0.getName$3: JavaMethod
-aJavaFile.Company$0.getName$3 elementOf Java
-aJavaFile.Company$0.getName$3 partOf aJavaFile.Company$0
-aJavaFile.Company$0.getName$3 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/3/getName/JavaMethod'
-
-@FragmentText 'void setName(String name) { ...'
-aJavaFile.Company$0.setName$4: JavaMethod
-aJavaFile.Company$0.setName$4 elementOf Java
-aJavaFile.Company$0.setName$4 partOf aJavaFile.Company$0
-aJavaFile.Company$0.setName$4 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/4/setName/JavaMethod'
-
-@FragmentText 'static public class Employee { ...'
-aJavaFile.Company$0.Department$0.Employee$0: JavaInnerClass
-aJavaFile.Company$0.Department$0.Employee$0 elementOf Java
-aJavaFile.Company$0.Department$0.Employee$0 partOf aJavaFile.Company$0.Department$0
-aJavaFile.Company$0.Department$0.Employee$0 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Company.java#/0/Company/JavaClass/0/Department/JavaInnerClass/0/Employee/JavaInnerClass'
+@FragmentText '<foo bar="lala"></foo> ...'
+xmlFile.lala$0.foo$2: XMLElement
+xmlFile.lala$0.foo$2 elementOf XML
+xmlFile.lala$0.foo$2 partOf xmlFile.lala$0
+xmlFile.lala$0.foo$2 = 'file:/home/darjeeling/Documents/megal-tr/megal-tr/org.softlang.megal.plugins/input/Foo.xml#/0/lala/XMLElement/2/foo/XMLElement'
 
