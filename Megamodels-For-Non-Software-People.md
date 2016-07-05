@@ -6,7 +6,7 @@ This document tries to illustrate our (usually CS/Software based) understanding 
 
 ## Megamodeling in 1 Sentence
 
-*Megamodels try to broaden the understanding and insight of the modeled domain; usually an one that involves some kind of engineering.*
+*Megamodels try to broaden the understanding and insight of the internal workings of a domain; usually one that involves some kind of engineering.*
 
 ## Houses
 
