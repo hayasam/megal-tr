@@ -1,8 +1,10 @@
 # Megamodels For Non-Software People
 
-**draft!**
+**DRAFT!**
 
-# Houses
+This document tries to illustrate our (usually CS/Software based) understanding of megamodels with a real world example most people should be familliar with.
+
+## Houses
 
 Modern houses are fairly complex works of engineering.
 Their not just four walls and roof.
