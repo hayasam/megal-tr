@@ -4,6 +4,10 @@
 
 This document tries to illustrate our (usually CS/Software based) understanding of megamodels with a real world example most people should be familliar with.
 
+## Megamodeling in 1 Sentence
+
+*Megamodels try to broaden the understanding and insight of the modeled domain; usually an one that involves some kind of engineering.*
+
 ## Houses
 
 Modern houses are fairly complex works of engineering.
@@ -34,3 +38,4 @@ Here is a simple tree reperesenting all those diciplince:
     - ...
 ```
 This is actually a very primitive megamodel denoting only specialization relationships among the different engineering diciplince.
+Keep in mind we're still talking about common houses in suburbs, not high-tech facilities like concert halls, airports, industry buildings or hotels, which involve even more engineering aspects, e.g. acustics, logistics, etc.
