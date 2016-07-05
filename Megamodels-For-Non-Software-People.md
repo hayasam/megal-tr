@@ -1,6 +1,6 @@
 # Megamodels For Non-Software People
 
-**DRAFT!**
+**UNDER CONSTRUCTION!**
 
 This document tries to illustrate our (usually CS/Software based) understanding of megamodels with a real world example most people should be familliar with.
 
