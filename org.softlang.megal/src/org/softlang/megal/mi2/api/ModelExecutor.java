@@ -172,10 +172,12 @@ public class ModelExecutor {
 				for (;;) {
 					// Evaluate all the elements
 					for (Element element : current.getElements()) {
-						
+						System.err.println(element);
 						// Compose a local context
 						Context context = createContext(origin, element);
 
+						long s = System.nanoTime();
+						
 						// Get the appropriate reasoners
 						for (ReasonerPlugin plugin : select(ReasonerPlugin.class, element))
 							// Try to get the output KB, catch an exception into the error messages
@@ -185,7 +187,7 @@ public class ModelExecutor {
 								// and skip if true
 								if (!plugin.isContextBased() && !contextLocked.put(element, plugin))
 									continue;
-								
+								System.out.println(plugin.getClass().getName());
 								KB output = Plugins.apply(plugin, context, element);
 
 								// Annotate all the generated elements
@@ -200,12 +202,18 @@ public class ModelExecutor {
 								// Add the output to the reasoner
 								expansion = KBs.union(expansion, output);
 							} catch (RuntimeException t) {
+								System.err.println(t);
 								context.warning(Throwables.getStackTraceAsString(t));
 							} catch (Throwable t) {
+								System.err.println(t);
 								context.error(Throwables.getStackTraceAsString(t));
 							}
-					}
+						
 
+						long e = System.nanoTime();
+						System.err.println("reasoning cycle time: " + (e - s));
+					}
+					
 					if (KBs.difference(expansion, current).isEmpty())
 						// If expansion has no more additions, stop evaluation
 						break;
@@ -213,7 +221,7 @@ public class ModelExecutor {
 						// Else continue with greater front
 						current = KBs.union(current, expansion);
 				}
-
+				
 				for (Element element : current.getElements()) {
 					// Compose a local context
 					Context context = createContext(origin, element);
@@ -224,11 +232,17 @@ public class ModelExecutor {
 						try {
 							Plugins.apply(plugin, context, element);
 						} catch (RuntimeException t) {
+							System.err.println(t);
 							context.warning(Throwables.getStackTraceAsString(t));
 						} catch (Throwable t) {
+							System.err.println(t);
 							context.error(Throwables.getStackTraceAsString(t));
 						}
 				}
+
+				long endTime = System.nanoTime();
+				
+				System.err.println("end.");
 
 				// Return the result for the given parameters and the evaluator state
 				return Result.of(input, current, origin, valid, infos, warnings, errors);

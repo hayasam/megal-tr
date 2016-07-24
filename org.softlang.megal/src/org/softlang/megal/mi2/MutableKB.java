@@ -1,5 +1,6 @@
 package org.softlang.megal.mi2;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 

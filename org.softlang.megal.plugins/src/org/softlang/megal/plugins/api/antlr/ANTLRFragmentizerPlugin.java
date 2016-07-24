@@ -329,9 +329,13 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 			// Walk the parse tree with the fragmentation listener to collect fragments
 			walker.walk(listener, parseTree);
 			
-				
+			
 			
 		} catch (IOException e) {
+			
+			e.printStackTrace();
+			
+		} catch (Exception e) {
 			
 			e.printStackTrace();
 			
@@ -340,7 +344,8 @@ public abstract class ANTLRFragmentizerPlugin<P extends Parser, L extends Lexer>
 			e.printStackTrace();
 			
 		}
-		
+
+				
 		// Return the collected fragments
 		return listener.getFragments();
 		

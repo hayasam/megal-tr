@@ -427,7 +427,15 @@ public class KBs {
 	 * @return Returns a new knowledge base
 	 */
 	public static KB union(KB a, KB b) {
-		return KBs
+
+		System.err.println("computing union:");
+		System.err.println(a.getEntities().size() + "/" + b.getEntities().size());
+		System.err.println(a.getRelationships().size() + "/" + b.getRelationships().size());
+		System.err.println(a.getEntityTypes().size() + "/" + b.getEntityTypes().size());
+		System.err.println(a.getRelationshipTypes().size() + "/" + b.getRelationshipTypes().size());
+		long s = System.nanoTime();
+		
+		KB union = KBs
 				.builder()
 				.setTitle(a.getTitle())
 				.setRelationships(Union.union(a.getRawRelationships(), b.getRawRelationships()))
@@ -444,6 +452,11 @@ public class KBs {
 				.setTheEntityTypeAnnotations(
 						Union.union(a.getRawTheEntityTypeAnnotations(), b.getRawTheEntityTypeAnnotations()))
 				.setAnnotations(Union.union(a.getRawAnnotations(), b.getRawAnnotations())).build();
+		
+		long e = System.nanoTime();
+		System.err.println("union time: " + (e - s) + " ns");
+		
+		return union;
 	}
 
 	/**
@@ -495,6 +508,11 @@ public class KBs {
 	 * @return Returns a new knowledge base
 	 */
 	public static KB difference(KB a, KB b) {
+		System.err.println("computing difference:");
+		System.err.println(a.getEntities().size() + "/" + b.getEntities().size());
+		System.err.println(a.getRelationships().size() + "/" + b.getRelationships().size());
+		System.err.println(a.getEntityTypes().size() + "/" + b.getEntityTypes().size());
+		System.err.println(a.getRelationshipTypes().size() + "/" + b.getRelationshipTypes().size());
 		return KBs
 				.builder()
 				.setTitle(a.getTitle())

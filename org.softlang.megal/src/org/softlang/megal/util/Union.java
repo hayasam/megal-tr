@@ -4,6 +4,7 @@ import static com.google.common.base.Predicates.in;
 import static com.google.common.base.Predicates.not;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 import org.softlang.megal.mi2.util.HashMultitable;
 import org.softlang.megal.mi2.util.Multitable;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSetMultimap;
@@ -43,6 +45,7 @@ public class Union {
 	 * @return Returns the result
 	 */
 	public static <R, C, E> Multitable<R, C, E> union(Multitable<R, C, E> a, Multitable<R, C, E> b) {
+		
 		Multitable<R, C, E> result = HashMultitable.create();
 		result.putAll(a);
 		result.putAll(b);
@@ -63,6 +66,9 @@ public class Union {
 	public static <R, C, V> Table<R, C, V> union(Table<R, C, V> a, Table<R, C, V> b) {
 		ImmutableTable.Builder<R, C, V> builder = ImmutableTable.builder();
 
+//		for (Cell<R, C, V> cell : Sets.union(a.cellSet(), b.cellSet()))
+//			builder.put(cell);
+		
 		builder.putAll(a);
 		for (Cell<R, C, V> cell : b.cellSet())
 			if (!a.contains(cell.getRowKey(), cell.getColumnKey()))
@@ -70,7 +76,7 @@ public class Union {
 
 		return builder.build();
 	}
-
+	
 	/**
 	 * <p>
 	 * Applies the set union on the input.
@@ -83,12 +89,23 @@ public class Union {
 	 * @return Returns the result
 	 */
 	public static <K, V> ImmutableMultimap<K, V> union(Multimap<K, V> a, Multimap<K, V> b) {
+		
+//		Set<K> keys = Sets.union(a.keySet(), b.keySet());
+//		ImmutableMultimap.Builder<K, V> builder = ImmutableMultimap.builder();
+//		
+//		for (K key : keys) { 
+//			builder.putAll(key, Sets.union(new HashSet<V>(a.get(key)), new HashSet<V>(b.get(key))));
+//		}
+//		
+//		return builder.build();
+		
 		ImmutableMultimap.Builder<K, V> builder = ImmutableMultimap.builder();
 
 		builder.putAll(a);
 		builder.putAll(b);
 
 		return builder.build();
+		
 	}
 
 	/**
@@ -121,8 +138,9 @@ public class Union {
 	 */
 	public static <K, V> Map<K, V> union(Map<K, V> a, Map<K, V> b) {
 		if (true) {
-			Map<K, V> r = Maps.newHashMap(a);
-			r.putAll(Maps.filterKeys(b, not(in(a.keySet()))));
+//			Map<K, V> r = Maps.newHashMapWithExpectedSize(Math.max(a.size(), b.size())*2);//Maps.newHashMap(a);
+//			r.putAll(Maps.filterKeys(b, not(in(a.keySet()))));
+//			return r;
 		}
 		return new UnionMap<>(a, b);
 	}
@@ -139,8 +157,14 @@ public class Union {
 	 * @return Returns the result
 	 */
 	public static <K, V> ImmutableSetMultimap<K, V> union(SetMultimap<K, V> a, SetMultimap<K, V> b) {
+		
 		ImmutableSetMultimap.Builder<K, V> builder = ImmutableSetMultimap.builder();
-
+		
+//		Set<K> keys = Sets.union(a.keySet(), b.keySet());
+//		for (K key : keys) { 
+//			builder.putAll(key, Sets.union(new HashSet<V>(a.get(key)), new HashSet<V>(b.get(key))));
+//		}
+		
 		builder.putAll(a);
 		builder.putAll(b);
 
@@ -159,6 +183,7 @@ public class Union {
 	 * @return Returns an unmodifiable view on the collections
 	 */
 	public static <E> Collection<E> union(Collection<E> first, Collection<E> second) {
+//		return union(new HashSet<E>(first), new HashSet<E>(second));
 		return new UnionCollection<>(second, first);
 	}
 
