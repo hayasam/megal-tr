@@ -1,0 +1,19 @@
+
+javaFile : File
+javaFile elementOf Java
+javaFile = ""
+
+----------------------
+Java-Metamodel
+
+JavaClass < Fragment
+JavaMethod < Fragment
+
+partOf < JavaMethod * JavaClass
+
+--------------------------
+app-Model
+
+getName : JavaMethod
+getName partOf javaFile
+getName = "..company.java#class/getName"
