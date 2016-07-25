@@ -173,6 +173,8 @@ public abstract class GuidedReasonerPlugin extends InjectedReasonerPlugin {
 			resetResult();
 			guidedDerive(entity);
 			closeAll();
+//			System.err.println(entity.getName());
+//			System.err.println(result.getRawEntities().size());
 			return result;
 		} catch (GuidedExitException e) {
 			GuidedExitException.handleGuideException(this, e);

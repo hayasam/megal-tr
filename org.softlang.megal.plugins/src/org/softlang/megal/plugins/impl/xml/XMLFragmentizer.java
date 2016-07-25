@@ -30,7 +30,7 @@ public class XMLFragmentizer extends ANTLRFragmentizerPlugin<XMLParser, XMLLexer
 	 * @author maxmeffert
 	 *
 	 */
-	static private class ElementRule extends FragmentationRule<ElementContext> {
+	static private class XMLElementRule extends FragmentationRule<ElementContext> {
 				
 		@Override
 		protected Class<ElementContext> contextType() {
@@ -39,7 +39,7 @@ public class XMLFragmentizer extends ANTLRFragmentizerPlugin<XMLParser, XMLLexer
 
 		@Override
 		protected boolean isAtom(ElementContext context) {
-			return context.content() == null || context.content().element().isEmpty();
+			return ( context.content() == null || context.content().element().isEmpty() ) && context.attribute().isEmpty();
 		}
 
 		@Override
@@ -51,51 +51,75 @@ public class XMLFragmentizer extends ANTLRFragmentizerPlugin<XMLParser, XMLLexer
 		protected Fragment createFragment(Entity entity, Artifact artifact, ElementContext context) {
 			
 			// Create a new XMLElement fragment
-			Fragment f = Fragments.create(
+			return Fragments.create(
 					context.Name(0).toString(),
 					"XMLElement",
 					ANTLRUtils.originalText(context),
 					entity, 
 					artifact);
 			
-			// For all attribute context objects
-			for (AttributeContext attributeContext : context.attribute()) {
-				
-				// Create a new fact provider for the attribute context object
-				String name = attributeContext.Name().toString();
-				String text = ANTLRUtils.originalText(attributeContext);
-				
-				// If the attribute is a XML namespace attribute
-				if (attributeContext.Name().toString().toLowerCase().startsWith("xmlns:")) {
-					
-					// Create a new XMLNSAttribute fragment
-					f.addPart(Fragments.create(
-							name,
-							"XMLNSAttribute",
-							text,
-							entity, 
-							artifact));
-					
-				}
-				else {
-					
-					// Create a new XMLAttribute fragment
-					f.addPart(Fragments.create(
-							name,
-							"XMLAttribute",
-							text,
-							entity, 
-							artifact));
-					
-				}
-				
-			}
-			
-			return f;
-			
 		}
 		
 	}
+	
+	static private class XMLAttributeRule extends FragmentationRule<AttributeContext> {
+
+		@Override
+		protected Class<AttributeContext> contextType() {
+			return AttributeContext.class;
+		}
+
+		@Override
+		protected boolean isAtom(AttributeContext context) {
+			return true;
+		}
+
+		@Override
+		protected boolean test(AttributeContext context) {
+			return !context.Name().toString().toLowerCase().startsWith("xmlns");
+		}
+
+		@Override
+		protected Fragment createFragment(Entity entity, Artifact artifact, AttributeContext context) {
+			return Fragments.create(
+					context.Name().toString(),
+					"XMLAttribute",
+					ANTLRUtils.originalText(context),
+					entity, 
+					artifact);
+		}
+		
+	}
+	
+	static private class XMLNSAttributeRule extends FragmentationRule<AttributeContext> {
+
+		@Override
+		protected Class<AttributeContext> contextType() {
+			return AttributeContext.class;
+		}
+
+		@Override
+		protected boolean isAtom(AttributeContext context) {
+			return true;
+		}
+
+		@Override
+		protected boolean test(AttributeContext context) {
+			return context.Name().toString().toLowerCase().startsWith("xmlns");
+		}
+
+		@Override
+		protected Fragment createFragment(Entity entity, Artifact artifact, AttributeContext context) {
+			return Fragments.create(
+					context.Name().toString(),
+					"XMLNSAttribute",
+					ANTLRUtils.originalText(context),
+					entity, 
+					artifact);
+		}
+		
+	}
+	
 	
 	/**
 	 * Gets the collection of XML fragmentation rules
@@ -104,7 +128,9 @@ public class XMLFragmentizer extends ANTLRFragmentizerPlugin<XMLParser, XMLLexer
 	public Collection<FragmentationRule<? extends ParserRuleContext>> getRules() {
 		
 		Collection<FragmentationRule<? extends ParserRuleContext>> rules = new ArrayList<FragmentationRule<? extends ParserRuleContext>>();
-		rules.add(new ElementRule());
+		rules.add(new XMLElementRule());
+		rules.add(new XMLAttributeRule());
+		rules.add(new XMLNSAttributeRule());
 		
 		return rules;
 		

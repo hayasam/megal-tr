@@ -1,4 +1,4 @@
-<lala name="lulu">
-	<lulu bar="lala"></lulu>
+<lala name="lulu" xmlns:asdf="asdf">
+	<foo bar="lala"></foo>
 	<lulu></lulu>
 </lala>

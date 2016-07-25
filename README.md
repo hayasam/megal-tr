@@ -1,4 +1,5 @@
-# megal-tr : Traceability Recovery for MegaL
+# Megamodel Driven Traceability Recovery
+## megal-tr : Traceability Recovery for MegaL
 
 ## Disclaimer
 **This porject is part of my BSc-Thesis in Computer Science (Informatik).**

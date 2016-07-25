@@ -39,7 +39,7 @@ public class Main {
 		
 	};
 		
-	static private String input = "megal/test.megal";
+	static private String input = "megal/bindings.megal";
 	static private String output = "output/out.megal";
 	
 	static private KB load (File f) throws IOException {
@@ -105,26 +105,25 @@ public class Main {
 		
 		List<Entity> es = kb.getEntities().stream()
 				.filter( e -> e.getType() != null && !e.getType().getName().equals("Plugin")  )
-				.sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) )
+//				.sorted( (a,b) -> a.getName().compareToIgnoreCase(b.getName()) )
 				.collect(Collectors.toList());
 		
 		for (Entity e : es) {
 			
-			if (e.getBinding() instanceof URI) {
+			for (String name : e.getAnnotations().keys()) {
 				
-				Optional<Fragments.Fragment> f = Fragments.fragmentOf((URI)e.getBinding());
-			
-				if (f.isPresent()) {
+				String value = e.getAnnotation(name);
+				
+				if (name.equals("FragmentText")) {
 					
-					out.println("/*");
-					out.println(f.get().getText());
-//					Fragments.print(f.get(), out);
-					out.println("*/");
-					
+					value = value.split(System.getProperty("line.separator"),2)[0] + " ...";
+				
 				}
 				
+				out.println("@" + name + " '" + value + "'");
+				
 			}
-			
+				
 			out.println(e);
 			
 			for (Relationship rel : kb.getRelationships().stream().filter( r -> r.getLeft().equals(e)).collect(Collectors.toList())) {

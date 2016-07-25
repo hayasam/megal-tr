@@ -42,7 +42,7 @@ public abstract class Fragments {
 		private String type;
 		
 		private String text;
-		
+				
 		/**
 		 * The containing entity of the fragment
 		 */
@@ -162,7 +162,7 @@ public abstract class Fragments {
 		public String getQualifiedName () {
 			
 			// The qualified name of the fragment
-			String name = getName() + "#" + getIndex();
+			String name = getName() + "$" + getIndex();
 			
 			// If the fragment has parent
 			if (hasParent()) {
@@ -191,11 +191,16 @@ public abstract class Fragments {
 		 */
 		public void addPart (Fragment child) {
 			
-			// Associate the child with its new parent 
-			child.parent = this;
+			// Prevent cycles
+			if (child != this) {
 			
-			// Add the child to the collection of parts
-			parts.add(child);
+				// Associate the child with its new parent 
+				child.parent = this;
+				
+				// Add the child to the collection of parts
+				parts.add(child);
+			
+			}
 			
 		}
 		
@@ -223,6 +228,7 @@ public abstract class Fragments {
 			
 			} catch (URISyntaxException e) {
 			
+				System.err.println(e);
 				throw new IllegalStateException();
 				
 			}

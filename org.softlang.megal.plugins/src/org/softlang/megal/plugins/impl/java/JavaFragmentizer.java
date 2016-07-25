@@ -69,6 +69,7 @@ public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLe
 	};
 	
 
+	// PRODUCES WRONG RESULTS FOR MORE THAN 1 INNER CLASS !!!
 	/**
 	 * Fragmentation rule for inner classes
 	 * 
@@ -172,7 +173,7 @@ public class JavaFragmentizer extends ANTLRFragmentizerPlugin<JavaParser, JavaLe
 		@Override
 		protected Fragment createFragment(Entity entity, Artifact artifact, VariableDeclaratorContext context) {
 			return Fragments.create(
-					context.getText(),
+					context.variableDeclaratorId().getText(),
 					"JavaField", 
 					ANTLRUtils.originalText(context.getParent().getParent()),
 					entity, 
